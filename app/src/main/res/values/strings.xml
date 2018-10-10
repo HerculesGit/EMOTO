@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">E-MOTO</string>
+    <string name="login">Login</string>
+
+    <string-array name="planets_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+    </string-array>
+
+
+</resources>

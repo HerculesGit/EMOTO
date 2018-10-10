@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="tipo_frete">
+        <item>Normal</item>
+        <item>Rápido</item>
+        <item>Express</item>
+    </array>
+
+</resources>
