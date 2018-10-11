@@ -4,14 +4,17 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 
 import java.util.Random;
 
 public class ConfirmacaoPiloto extends AppCompatActivity {
 
-    private ConstraintLayout layoutCarregamento, layoutInformacoesPiloto;
+    private ImageView imagemMoto;
     private ProgressBar progressBar;
+    private ScrollView scrollInformaCoesPiloto;
     private int progresso = 0;
 
     @Override
@@ -21,11 +24,9 @@ public class ConfirmacaoPiloto extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        layoutCarregamento = findViewById(R.id.layout_carregamento);
-        //layoutInformacoesPiloto = findViewById(R.id.layout_carregamento_piloto);
-
         progressBar = findViewById(R.id.progressBar);
-
+        imagemMoto = findViewById(R.id.imagemLogoMoto);
+        scrollInformaCoesPiloto = findViewById(R.id.scrollInformacoesPiloto);
     }
 
     @Override
@@ -57,11 +58,9 @@ public class ConfirmacaoPiloto extends AppCompatActivity {
 
                             // fazer algo
                             if (progresso == 100){
-                                // carregar tela com informações sobre o piloto
-                                layoutCarregamento.setVisibility(View.GONE);
-
-                                //layoutInformacoesPiloto.setVisibility(View.VISIBLE);
-
+                                imagemMoto.setVisibility(View.GONE);
+                                progressBar.setVisibility(View.GONE);
+                                scrollInformaCoesPiloto.setVisibility(View.VISIBLE);
 
                             }
                         }

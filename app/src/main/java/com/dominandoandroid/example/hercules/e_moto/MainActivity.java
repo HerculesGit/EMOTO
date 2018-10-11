@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
                                 getApplicationContext(),
 
                                 // activity que queremos ir
-                                TipoServico.class
+                                //TipoServico.class
+                                ConfirmacaoPiloto.class
 
                         );
                         startActivity(intent);
