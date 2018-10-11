@@ -1,6 +1,7 @@
 package com.dominandoandroid.example.hercules.e_moto;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -73,11 +74,20 @@ public class Encomenda extends AppCompatActivity {
 
                         // dispensar
                         dialogInterface.dismiss();
+
+                        //
+                        Intent intent = new Intent(getApplicationContext(), ConfirmacaoPiloto.class);
+                        startActivity(intent);
+
+
                     }
                 });
 
         AlertDialog dialog = builder.create();
         dialog.show();
+
+
+
     }
 
 }

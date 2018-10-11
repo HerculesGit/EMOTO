@@ -19,8 +19,8 @@
         <activity android:name=".TipoServico" />
         <activity android:name=".LeveMe" />
         <activity android:name=".Encomenda" />
-        <activity android:name=".ConfirugacaoViagem" />
-        <activity android:name=".ProcurarPiloto"></activity>
+        <activity android:name=".ConfiguracaoViagem" />
+        <activity android:name=".ConfirmacaoPiloto"></activity>
     </application>
 
 </manifest>
