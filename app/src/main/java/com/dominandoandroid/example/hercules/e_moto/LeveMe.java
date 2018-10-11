@@ -1,6 +1,7 @@
 package com.dominandoandroid.example.hercules.e_moto;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,10 @@ public class LeveMe extends AppCompatActivity {
 
 
     public void avancar(View v){
+        Intent intent = new Intent(getApplicationContext(), ConfirmacaoPiloto.class);
+        startActivity(intent);
+
+
         /*
         Resources res = getResources();
         String[] itensPreferecia = res.getStringArray(R.array.tipo_frete);

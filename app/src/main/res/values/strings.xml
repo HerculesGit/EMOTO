@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">E-MOTO</string>
     <string name="login">Login</string>
-    <string name="confirmacao">Confirmação</string>
+    <string name="confirmacao">CONFIRMAR</string>
     <string name="imagem_moto">Imagem moto flat design</string>
 
     <string-array name="planets_array">
