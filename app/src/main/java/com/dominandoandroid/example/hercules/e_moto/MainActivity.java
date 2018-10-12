@@ -8,16 +8,23 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.dominandoandroid.example.hercules.e_moto.dao.BDHelper;
+import com.dominandoandroid.example.hercules.e_moto.dao.MotoTaxiDAO;
+import com.dominandoandroid.example.hercules.e_moto.model.MotoTaxi;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button buttonLogin, buttonCreate;
     private RadioGroup radioGroup;
     private RadioButton radioUsuario, radioMotoTaxi;
+    private EditText txtTelefone, txtCpf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,50 +37,14 @@ public class MainActivity extends AppCompatActivity {
         radioMotoTaxi = findViewById(R.id.radioButtonMotoTaxi);
         buttonCreate = findViewById(R.id.buttonCreate);
 
+        txtTelefone = findViewById(R.id.editText_login_telefone);
+        txtCpf = findViewById(R.id.editText_login_cpf);
 
         this.verificaRadioButton();
 
         BDHelper db = new BDHelper(getApplicationContext());
         //db.createTable();
 
-        // adicionando o click no botão - quando o usuário clicar no botão
-        buttonLogin.setOnClickListener(
-                // new em uma interface -> classe anônima
-                new View.OnClickListener() {
-
-                    // ações para quando o usuário clicar no botão
-                    @Override
-                    public void onClick(View view) {
-
-                        if (radioMotoTaxi.isChecked()){
-                            Intent intent =  new Intent(
-                                    getApplicationContext(),
-
-                                    // activity que queremos ir
-                                    //TipoServico.class
-                                    MotoTaxista.class);
-
-                            startActivity(intent);
-                        } else{
-                            Intent intent = new Intent(
-                                    getApplicationContext(), TipoServico.class);
-
-                            startActivity(intent);
-                        }
-                    }
-                }
-        );
-
-        // Criar usuário
-        buttonCreate.setOnClickListener(
-                new View.OnClickListener(){
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), CadastroTaxi.class);
-                        startActivity(intent);
-                    }
-                }
-        );
 
 
         /*
@@ -237,6 +208,62 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+    private boolean verificaMotoTaxista(){
+
+        MotoTaxiDAO  motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());
+        List<MotoTaxi> lista = motoTaxiDAO.listar();
+
+        for (MotoTaxi m: lista){
+            if (m.getDadosPessoais().getTelefone().equals( txtTelefone.getText().toString())
+                    && m.getDadosPessoais().getCpf().equals(txtCpf.getText().toString())){
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void clickCreateAvancar(View view){
+        // Logar
+        if (view.getId() == buttonLogin.getId()){
+
+            // se for mototaxista e os dados estiverem OK
+            if (radioMotoTaxi.isChecked()){
+
+                // os dados estiverem OK
+                if (verificaMotoTaxista()){
+                    Intent intent =  new Intent(
+                            getApplicationContext(),
+
+                            // activity que queremos ir
+                            //TipoServico.class
+                            MotoTaxista.class);
+
+                    startActivity(intent);
+                    finish();               // finalizar activity
+
+                } else {    // senao
+                    Toast.makeText(getApplicationContext(), "Telefone ou CPF não encontrado",Toast.LENGTH_LONG).show();
+                }
+
+            } else{     // É cliente
+                Intent intent = new Intent(
+                        getApplicationContext(), TipoServico.class);
+
+                startActivity(intent);
+                finish();               // finalizar activity
+            }
+
+            // Criar conta
+        } else if (view.getId() == buttonCreate.getId()){
+            Intent intent = new Intent(getApplicationContext(), CadastroTaxi.class);
+            startActivity(intent);
+
+        }
+
     }
 
 }

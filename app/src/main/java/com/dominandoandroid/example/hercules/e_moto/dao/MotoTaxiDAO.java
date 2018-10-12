@@ -149,7 +149,6 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
                     dados
             );
             lista.add(mototaxista);
-
         }
 
         return lista;

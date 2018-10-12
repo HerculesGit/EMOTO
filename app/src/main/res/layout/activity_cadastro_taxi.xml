@@ -73,7 +73,7 @@
       </android.support.design.widget.TextInputLayout>
 
       <android.support.design.widget.TextInputLayout
-          android:id="@+id/input3"
+          android:id="@+id/editText_login_cpf"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginEnd="16dp"
@@ -104,7 +104,7 @@
           android:layout_marginTop="16dp"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/input3">
+          app:layout_constraintTop_toBottomOf="@+id/editText_login_cpf">
 
          <android.support.design.widget.TextInputEditText
              android:id="@+id/dados_rg"
@@ -197,7 +197,7 @@
 
 
       <android.support.design.widget.TextInputLayout
-          android:id="@+id/input8"
+          android:id="@+id/editText_login_telefone"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginEnd="16dp"
@@ -233,7 +233,7 @@
           android:textStyle="bold"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/input8" />
+          app:layout_constraintTop_toBottomOf="@+id/editText_login_telefone" />
 
       <android.support.design.widget.TextInputLayout
           android:id="@+id/input9"
