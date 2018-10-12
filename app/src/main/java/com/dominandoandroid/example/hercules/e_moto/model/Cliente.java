@@ -1,31 +1,20 @@
 package com.dominandoandroid.example.hercules.e_moto.model;
 
 public class Cliente {
-    private String nome, sobrenome, telefone;
-    private int qtdEncomendas, qtdViagens;
+    private String cpf,telefone;
 
-    public Cliente(String nome, String sobrenome, String telefone, int qtdEncomendas, int qtdViagens) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
+
+    public Cliente(String cpf, String telefone) {
+        this.cpf = cpf;
         this.telefone = telefone;
-        this.qtdEncomendas = qtdEncomendas;
-        this.qtdViagens = qtdViagens;
     }
 
-    public String getNome() {
-        return nome;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getTelefone() {
@@ -36,26 +25,8 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public int getQtdEncomendas() {
-        return qtdEncomendas;
-    }
-
-    public void setQtdEncomendas(int qtdEncomendas) {
-        this.qtdEncomendas = qtdEncomendas;
-    }
-
-    public int getQtdViagens() {
-        return qtdViagens;
-    }
-
-    public void setQtdViagens(int qtdViagens) {
-        this.qtdViagens = qtdViagens;
-    }
-
     @Override
     public String toString() {
-        return "nome:"+getNome() +" sobrenome:"+ getSobrenome() + " telefone: "+getTelefone() +
-                " viagens:" +getQtdViagens()+
-                " encomendas:"+getQtdEncomendas();
+        return "cpf:"+getCpf() + " telefone:"+getTelefone();
     }
 }
