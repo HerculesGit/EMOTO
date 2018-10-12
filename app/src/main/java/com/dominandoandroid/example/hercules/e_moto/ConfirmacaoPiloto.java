@@ -15,9 +15,9 @@ public class ConfirmacaoPiloto extends AppCompatActivity {
 
     private ImageView imagemMoto;
     private ProgressBar progressBar;
-    private ScrollView scrollInformaCoesPiloto;
-    private Button buttonConfirmar;
     private int progresso = 0;
+    private ConstraintLayout constraintInformacoesPiloto;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +26,7 @@ public class ConfirmacaoPiloto extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressBar);
         imagemMoto = findViewById(R.id.imagemLogoMoto);
-        scrollInformaCoesPiloto = findViewById(R.id.scrollInformacoesPiloto);
-        buttonConfirmar = findViewById(R.id.buttonConfirmar);
+        constraintInformacoesPiloto = findViewById(R.id.layout_carregamento_piloto);
     }
 
     @Override
@@ -61,9 +60,7 @@ public class ConfirmacaoPiloto extends AppCompatActivity {
                             if (progresso == 100){
                                 imagemMoto.setVisibility(View.GONE);
                                 progressBar.setVisibility(View.GONE);
-                                scrollInformaCoesPiloto.setVisibility(View.VISIBLE);
-                                buttonConfirmar.setVisibility(View.VISIBLE);
-
+                                constraintInformacoesPiloto.setVisibility(View.VISIBLE);
                             }
                         }
                     });

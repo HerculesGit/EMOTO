@@ -10,15 +10,18 @@
     android:layout_height="wrap_content"
     android:fillViewport="true"
     >
+
+
 <android.support.constraint.ConstraintLayout
     android:id="@+id/layout_carregamento"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="8dp"
     tools:context=".ConfirmacaoPiloto">
 
         <android.support.constraint.ConstraintLayout
         android:id="@+id/layout_carregamento_piloto"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
