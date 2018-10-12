@@ -5,11 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Encomenda">
+    android:fillViewport="true"
+    tools:context=".Encomenda"
+    android:padding="8dp"
+    >
 
     <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
 
         <TextView
@@ -23,9 +26,8 @@
             android:layout_marginTop="18dp"
 
             android:text="ENDEREÇO"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,15 +40,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3">
 
             <android.support.design.widget.TextInputEditText
-                android:inputType="text"
+                android:id="@+id/cep_da_encomenda"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="CEP/ sua localização" />
+                android:hint="CEP da encomenda"
+                android:inputType="number" />
         </android.support.design.widget.TextInputLayout>
 
 
@@ -56,34 +63,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextPartida">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/referencia_da_encomenda"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Seu ponto de Referência"
-                android:inputType="text"/>
+                android:hint="Ponto de Referência da Encomenda"
+                android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
-
-
-        <!--Divisor -->
-        <View
-            android:id="@+id/disivor"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:background="#ff5100"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextReferenciaPartida" />
 
         <!--cep encomenda-->
         <android.support.design.widget.TextInputLayout
@@ -91,21 +85,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginBottom="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/disivor">
+            app:layout_constraintTop_toBottomOf="@+id/editTextReferenciaPartida">
 
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/cep_do_destino"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="CEP / Localização encomenda"
 
-                />
+                android:hint="CEP / Destino"
+                android:inputType="number" />
         </android.support.design.widget.TextInputLayout>
 
 
@@ -115,17 +109,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextEncomenda">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/referencia_do_destino"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ponto de Referência da encomenda"
-                android:inputType="text"
-                />
+                android:hint="Ponto de Referência do Destino"
+                android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
 
         <RadioGroup
@@ -143,51 +141,51 @@
             app:layout_constraintTop_toBottomOf="@+id/editTextReferenciaEncomenda">
 
             <RadioButton
-                android:checked="true"
                 android:id="@+id/radioButtonLevar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Levar" />
+                android:checked="true"
+                android:text="Leve" />
 
             <RadioButton
                 android:id="@+id/radioButtonBuscar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Buscar" />
+                android:text="Busque" />
         </RadioGroup>
 
         <EditText
-            android:inputType="text"
-            android:id="@+id/editText5"
+            android:id="@+id/txtComentarios"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
 
             android:hint="Cometário para o taxista"
+
+            android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/buttonAvancaTipoFrete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
 
-            android:onClick="avancaTipoFrete"
+            android:onClick="avancaTipoEntrega"
             android:text="Avançar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText5" />
+            app:layout_constraintTop_toBottomOf="@+id/txtComentarios" />
 
 
     </android.support.constraint.ConstraintLayout>
