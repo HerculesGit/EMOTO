@@ -22,7 +22,8 @@
         <activity android:name=".ConfiguracaoViagem" />
         <activity android:name=".ConfirmacaoPiloto" />
         <activity android:name=".CadastroTaxi" />
-        <activity android:name=".Status"></activity>
+        <activity android:name=".Status" />
+        <activity android:name=".CadastroVeiculo"></activity>
     </application>
 
 </manifest>

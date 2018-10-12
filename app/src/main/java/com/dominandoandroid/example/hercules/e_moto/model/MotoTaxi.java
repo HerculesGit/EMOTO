@@ -1,6 +1,7 @@
 package com.dominandoandroid.example.hercules.e_moto.model;
 
 public class MotoTaxi {
+    private long id;
     private  DadosPessoais dadosPessoais;
     private boolean disponivel;
     private int qtdViagensDiaria;
@@ -18,6 +19,19 @@ public class MotoTaxi {
         this.qtdEncomendas = qtdEncomendas;
         this.dinheiro = dinheiro;
         this.valorViagem = valorViagem;
+        this.veiculo = veiculo;
+        this.id = 0;
+    }
+
+    public MotoTaxi() {
+        this.id = 0;
+        this.dadosPessoais = new DadosPessoais("","");
+        this.disponivel = false;
+        this.qtdViagensDiaria = 0;
+        this.qtdEncomendas = 0;
+        this.dinheiro = 0.0;
+        this.valorViagem = 0.0;
+        this.veiculo = new Veiculo("","","");
     }
 
     public DadosPessoais getDadosPessoais() {
@@ -76,9 +90,17 @@ public class MotoTaxi {
         this.veiculo = veiculo;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        return "Dados pessoais ["+getDadosPessoais().toString()+"]"+
+        return "id:"+getId()+" Dados pessoais ["+getDadosPessoais().toString()+"]"+
                 " disponivel: "+isDisponivel()+ " viagem hoje:"+getQtdViagensDiaria() +
                 " quantidade viagens encomendas:" + getQtdEncomendas() + " dinheiro:"+getDinheiro()+
                 " valor viagem:" + getValorViagem()+

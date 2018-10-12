@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.dominandoandroid.example.hercules.e_moto.dao.BDHelper;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button buttonLogin, buttonCreate;
@@ -28,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
         radioMotoTaxi = findViewById(R.id.radioButtonMotoTaxi);
         buttonCreate = findViewById(R.id.buttonCreate);
 
+
+        this.verificaRadioButton();
+
+        BDHelper db = new BDHelper(getApplicationContext());
+        //db.createTable();
 
         // adicionando o click no botão - quando o usuário clicar no botão
         buttonLogin.setOnClickListener(
@@ -69,17 +76,31 @@ public class MainActivity extends AppCompatActivity {
         );
 
 
-        this.verificaRadioButton();
+        /*
+        BDHelper db = new BDHelper(this);
+        //db.onCreate(null);
+
+
 
         // banco de dados
         SQLiteDatabase bancoDados = openOrCreateDatabase(
 
-                "dataBase",      //nome
+                "mototaxi",      //nome
                 MODE_PRIVATE,           // apenas o
                 null
         );
+        try {
+            bancoDados.execSQL(
+                    "CREATE TABLE IF NOT EXISTS mototaxi(nome VARCHAR, sobrenome VARCHAR," +
+                            " rg VARCHAR, cpf VARCHAR, telefone CHAR(11), email VARCHAR," +
+                            " senha VARCHAR, dinheiro DOUBLE(6), marca VARCHAR, modelo VARCHAR," +
+                            " placa VARCHAR, disponivel INT(1), qtdviagens INT(3), qtdencomendas INT(3) )");
+            Log.i("Showww", "google" );
+        } catch ( Exception e){
+            Log.i("ERRO", e.getMessage() );
+        }*/
 /*
-*  private  DadosPessoais dadosPessoais;
+ private  DadosPessoais dadosPessoais;
     private boolean disponivel;
     private int qtdViagensDiaria;
     private int qtdEncomendas;
@@ -88,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
     private Double valorViagem;
     private Veiculo veiculo;
 * */
+/*
         try{
 
 
@@ -99,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                             " placa VARCHAR, disponivel INT(1), qtdviagens INT(3), qtdencomendas INT(3) )"
             );
 
-            /*
+
             // inserir dados/registros
             bancoDados.execSQL("INSERT INTO mototaxi(nome, sobrenome, rg, cpf, telefone," +
                     " email, senha," +
@@ -119,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                     " VALUES ('Maria', 'Souza', '1111', '1092222', '83999999999', 'email@email.com', '123senha'," +
                     " 0.00,'honda', 'fan 150','mno4545', " +
                     " 0, 0, 0) ");
-            */
+
 
             // recuperar pessoas - percorrer um a um
             String consulta = "SELECT nome, sobrenome FROM mototaxi";
@@ -159,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                     // WHERE usado para limitar, senao colocaria Joao em todos os nomes
                     " WHERE nome='Maria' ";
             bancoDados.execSQL(update);
-            */
+
 
             // Alterando estrututa da do banco de dados
                 // deletando tabela
@@ -195,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e){
             e.printStackTrace();
         }
-
+*/
     }
     /**
      * Verificação do radioButton
