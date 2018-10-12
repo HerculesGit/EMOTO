@@ -4,6 +4,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
@@ -15,6 +16,7 @@ public class ConfirmacaoPiloto extends AppCompatActivity {
     private ImageView imagemMoto;
     private ProgressBar progressBar;
     private ScrollView scrollInformaCoesPiloto;
+    private Button buttonConfirmar;
     private int progresso = 0;
 
     @Override
@@ -22,11 +24,10 @@ public class ConfirmacaoPiloto extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmacao_piloto);
 
-        getSupportActionBar().hide();
-
         progressBar = findViewById(R.id.progressBar);
         imagemMoto = findViewById(R.id.imagemLogoMoto);
         scrollInformaCoesPiloto = findViewById(R.id.scrollInformacoesPiloto);
+        buttonConfirmar = findViewById(R.id.buttonConfirmar);
     }
 
     @Override
@@ -61,6 +62,7 @@ public class ConfirmacaoPiloto extends AppCompatActivity {
                                 imagemMoto.setVisibility(View.GONE);
                                 progressBar.setVisibility(View.GONE);
                                 scrollInformaCoesPiloto.setVisibility(View.VISIBLE);
+                                buttonConfirmar.setVisibility(View.VISIBLE);
 
                             }
                         }

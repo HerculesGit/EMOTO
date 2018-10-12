@@ -20,7 +20,8 @@
         <activity android:name=".LeveMe" />
         <activity android:name=".Encomenda" />
         <activity android:name=".ConfiguracaoViagem" />
-        <activity android:name=".ConfirmacaoPiloto"></activity>
+        <activity android:name=".ConfirmacaoPiloto" />
+        <activity android:name=".CadastroTaxi"></activity>
     </application>
 
 </manifest>

@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-
-<android.support.constraint.ConstraintLayout
-    android:id="@+id/layout_carregamento"
+<!--Segunda a ser carregada-->
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollInformacoesPiloto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    >
+<android.support.constraint.ConstraintLayout
+    android:id="@+id/layout_carregamento"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ConfirmacaoPiloto">
-
-
-
-    <!--Segunda a ser carregada-->
-    <ScrollView
-        android:id="@+id/scrollInformacoesPiloto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        >
-
         <android.support.constraint.ConstraintLayout
         android:id="@+id/layout_carregamento_piloto"
         android:visibility="visible"
@@ -158,9 +152,48 @@
             app:layout_constraintStart_toStartOf="@+id/imageView3"
             app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
+            <TextView
+                android:id="@+id/texViewMarcaModelo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:text="Marca/Modelo"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/nome" />
+
+            <TextView
+                android:id="@+id/textViewPlaca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:text="Placa"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/texViewMarcaModelo" />
+
+
+            <Button
+                android:id="@+id/buttonConfirmar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/confirmacao"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView14" />
+
         </android.support.constraint.ConstraintLayout>
 
-    </ScrollView>
+
 
     <!--Primeiros elementos a serem carregados -->
     <ImageView
@@ -198,18 +231,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imagemLogoMoto"
         app:layout_constraintVertical_bias="0.02" />
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
 
 </android.support.constraint.ConstraintLayout>
+</ScrollView>
 
 
