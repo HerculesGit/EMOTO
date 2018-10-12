@@ -51,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
                                     // activity que queremos ir
                                     //TipoServico.class
-                                    Status.class);
+                                    MotoTaxista.class);
 
                             startActivity(intent);
                         } else{
                             Intent intent = new Intent(
-                                    getApplicationContext(), ConfirmacaoPiloto.class);
+                                    getApplicationContext(), TipoServico.class);
 
                             startActivity(intent);
                         }

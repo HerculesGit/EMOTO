@@ -23,7 +23,9 @@
         <activity android:name=".ConfirmacaoPiloto" />
         <activity android:name=".CadastroTaxi" />
         <activity android:name=".Status" />
-        <activity android:name=".CadastroVeiculo"></activity>
+        <activity android:name=".CadastroVeiculo" />
+        <activity android:name=".MotoTaxista" />
+        <activity android:name=".EditarMotoTaxista"></activity>
     </application>
 
 </manifest>

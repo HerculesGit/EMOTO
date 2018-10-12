@@ -15,6 +15,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ConfirmacaoPiloto">
+
         <android.support.constraint.ConstraintLayout
         android:id="@+id/layout_carregamento_piloto"
         android:visibility="visible"
