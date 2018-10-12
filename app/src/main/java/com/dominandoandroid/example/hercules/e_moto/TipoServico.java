@@ -56,7 +56,7 @@ public class TipoServico extends AppCompatActivity {
 
                         // ir para a tela de LEVE-ME
                         if (position == 0){
-                            Toast.makeText(getApplicationContext(),"Clicou em leve-me " + position,Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(),"Clicou em leve-me " + position,Toast.LENGTH_SHORT).show();
 
                             //
                             Intent intent = new Intent(
@@ -67,7 +67,7 @@ public class TipoServico extends AppCompatActivity {
 
                         } else {
                             // ir para a tela de ENCOMENDA
-                            Toast.makeText(getApplicationContext(),"Clicou em enconmenda " + position,Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(),"Clicou em enconmenda " + position,Toast.LENGTH_SHORT).show();
 
                             Intent intent = new Intent(
                                     getApplicationContext(),

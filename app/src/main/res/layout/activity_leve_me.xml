@@ -27,20 +27,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/cepHorigem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:ems="10"
             android:hint="CEP"
-            android:inputType="textPersonName"
+            android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 
         <Button
-            android:id="@+id/buttonAvancar"
+            android:id="@+id/avancarConfirmacao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -49,12 +49,12 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
+            android:onClick="avancar"
             android:text="Avançar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:onClick="avancar"
 
             />
 
@@ -68,15 +68,15 @@
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText">
+            app:layout_constraintTop_toBottomOf="@+id/cepHorigem">
 
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Ponto de Referência da sua localização"
-                android:inputType="text"
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/meleve_ponto_referencia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ponto de Referência da sua localização"
 
-                />
+                    android:inputType="text" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -93,13 +93,13 @@
             app:layout_constraintTop_toBottomOf="@+id/editTextReferencia" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/cepDestino"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:ems="10"
             android:hint="CEP"
-            android:inputType="text"
+            android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
