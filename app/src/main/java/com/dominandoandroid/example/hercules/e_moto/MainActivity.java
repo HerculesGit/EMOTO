@@ -35,18 +35,26 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-                        Intent intent = new Intent(
-                                getApplicationContext(),
+                        if (radioMotoTaxi.isChecked()){
+                            Intent intent =  new Intent(
+                                    getApplicationContext(),
 
-                                // activity que queremos ir
-                                //TipoServico.class
-                                ConfirmacaoPiloto.class
-                        );
-                        startActivity(intent);
+                                    // activity que queremos ir
+                                    //TipoServico.class
+                                    Status.class);
+
+                            startActivity(intent);
+                        } else{
+                            Intent intent = new Intent(
+                                    getApplicationContext(), ConfirmacaoPiloto.class);
+
+                            startActivity(intent);
+                        }
                     }
                 }
         );
 
+        // Criar usuário
         buttonCreate.setOnClickListener(
                 new View.OnClickListener(){
                     @Override

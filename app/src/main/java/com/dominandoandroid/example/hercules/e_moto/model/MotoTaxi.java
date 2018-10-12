@@ -8,9 +8,10 @@ public class MotoTaxi {
 
     private Double dinheiro;
     private Double valorViagem;
+    private Veiculo veiculo;
 
     public MotoTaxi(DadosPessoais dadosPessoais, boolean disponivel, int qtdViagensDiaria,
-                    int qtdEncomendas, Double dinheiro, Double valorViagem) {
+                    int qtdEncomendas, Double dinheiro, Double valorViagem, Veiculo veiculo) {
         this.dadosPessoais = dadosPessoais;
         this.disponivel = disponivel;
         this.qtdViagensDiaria = qtdViagensDiaria;
@@ -67,11 +68,20 @@ public class MotoTaxi {
         this.valorViagem = valorViagem;
     }
 
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
+
     @Override
     public String toString() {
         return "Dados pessoais ["+getDadosPessoais().toString()+"]"+
                 " disponivel: "+isDisponivel()+ " viagem hoje:"+getQtdViagensDiaria() +
                 " quantidade viagens encomendas:" + getQtdEncomendas() + " dinheiro:"+getDinheiro()+
-                " valor viagem:" + getValorViagem();
+                " valor viagem:" + getValorViagem()+
+                " veiculo:["+getVeiculo().toString()+"]";
     }
 }

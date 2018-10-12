@@ -21,7 +21,8 @@
         <activity android:name=".Encomenda" />
         <activity android:name=".ConfiguracaoViagem" />
         <activity android:name=".ConfirmacaoPiloto" />
-        <activity android:name=".CadastroTaxi"></activity>
+        <activity android:name=".CadastroTaxi" />
+        <activity android:name=".Status"></activity>
     </application>
 
 </manifest>
