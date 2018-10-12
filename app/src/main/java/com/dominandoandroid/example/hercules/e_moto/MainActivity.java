@@ -226,6 +226,14 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    private boolean temCamposVazios(){
+        if (txtTelefone.getText().length() == 0
+                || txtCpf.getText().length() == 0){
+            return true;
+        }
+        return false;
+    }
+
     public void clickCreateAvancar(View view){
         // Logar
         if (view.getId() == buttonLogin.getId()){
@@ -250,11 +258,19 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             } else{     // É cliente
-                Intent intent = new Intent(
-                        getApplicationContext(), TipoServico.class);
 
-                startActivity(intent);
-                finish();               // finalizar activity
+                // se nao tiver campo vazio
+                if (!temCamposVazios()){
+
+                    Intent intent = new Intent(
+                            getApplicationContext(), TipoServico.class);
+
+                    startActivity(intent);
+                    finish();               // finalizar activity
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "Informe o Telefone e CPF",Toast.LENGTH_LONG).show();
+                }
             }
 
             // Criar conta
