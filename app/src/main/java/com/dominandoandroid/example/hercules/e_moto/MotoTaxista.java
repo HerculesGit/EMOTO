@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,7 +59,6 @@ public class MotoTaxista extends AppCompatActivity {
                 }else {
                     textAtivo.setText("Não");
                 }
-
                 break;
             }
         }
@@ -71,9 +71,11 @@ public class MotoTaxista extends AppCompatActivity {
 
         // editar
         if (view.getId() == btEditar.getId()) {
+
             Intent intent = new Intent(getApplicationContext(), EditarMotoTaxista.class);
 
-            intent .putExtra("objeto", taxista);
+            //System.out.println("Objeto " + taxista.toString());
+            intent.putExtra("cpf", taxista.getDadosPessoais().getCpf());
             startActivity(intent);
         } else {
             //motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());

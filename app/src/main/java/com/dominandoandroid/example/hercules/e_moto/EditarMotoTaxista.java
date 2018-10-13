@@ -37,10 +37,20 @@ public class EditarMotoTaxista extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_moto_taxista);
 
+        ctx = getApplication();
         Bundle dados = getIntent().getExtras();
 
         motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());
-        motoTaxi = (MotoTaxi) dados.getSerializable("objeto");
+        String cpf = dados.getString("cpf");
+
+        for(MotoTaxi o : motoTaxiDAO.listar()){
+
+            if (o.getDadosPessoais().getCpf().equals(cpf)){
+                motoTaxi = o;
+                break;
+            }
+        }
+
 
         buttonAlterarDados = findViewById(R.id.buttonAlterarDados);
         editTextNome = findViewById(R.id.dados_nome);
@@ -53,11 +63,23 @@ public class EditarMotoTaxista extends AppCompatActivity {
         editTextSenha = findViewById(R.id.dados_senha);
 
         inputEditTextMarca = findViewById(R.id.dados_marca);
-        inputEditTextModelo= findViewById(R.id.dados_modelo);
+        inputEditTextModelo = findViewById(R.id.dados_modelo);
         inputEditTextPlaca = findViewById(R.id.dados_placa);
 
-        motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());
-
+        carregaDadosNosCampos();
+    }
+    private void carregaDadosNosCampos(){
+        editTextNome.setText(motoTaxi.getDadosPessoais().getNome());
+        editTextSobrenome.setText(motoTaxi.getDadosPessoais().getSobrenome());
+        editTextRg.setText(motoTaxi.getDadosPessoais().getRg());
+        editTextCpf.setText(motoTaxi.getDadosPessoais().getCpf());
+        editTextCidade.setText(motoTaxi.getDadosPessoais().getCidade());
+        editTextTelefone.setText(motoTaxi.getDadosPessoais().getTelefone());
+        editTextEmail.setText(motoTaxi.getDadosPessoais().getEmail());
+        editTextSenha.setText(motoTaxi.getDadosPessoais().getSenha());
+        inputEditTextMarca.setText(motoTaxi.getVeiculo().getMarca());
+        inputEditTextModelo.setText(motoTaxi.getVeiculo().getModelo());
+        inputEditTextPlaca.setText(motoTaxi.getVeiculo().getPlaca());
     }
 
     private static MotoTaxi recuperaDados(){
@@ -83,7 +105,6 @@ public class EditarMotoTaxista extends AppCompatActivity {
 
         return motoTaxi;
     }
-
 
     private boolean camposEstaoVazios(){
         if (editTextNome.getText().toString().length() == 0){
@@ -134,15 +155,11 @@ public class EditarMotoTaxista extends AppCompatActivity {
         return false;
     }
 
-    public void cadastrarMotoTaxi(View view){
+    public void alterarMotoTaxi(View view){
 
-        List<MotoTaxi> listaMotoTaxistas = new ArrayList<>();
-
-        listaMotoTaxistas = motoTaxiDAO.listar();
-        //System.out.println("LISTA");
-        for (MotoTaxi m: listaMotoTaxistas){
-            System.out.println(m.toString());
-        }
+//        List<MotoTaxi> listaMotoTaxistas = new ArrayList<>();
+//
+//        listaMotoTaxistas = motoTaxiDAO.listar();
 
         // validacao dos campos
         if (!camposEstaoVazios()){
@@ -150,17 +167,6 @@ public class EditarMotoTaxista extends AppCompatActivity {
             // pergunta se deseja salvar realmente
             desejaAlterar();
         }
-
-    }
-
-    public void atualizarMotoTaxista(View view) {
-
-        if (motoTaxiDAO.atualizar(motoTaxi)){
-            Toast.makeText(getApplicationContext(),"Alterado com sucesso ", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getApplicationContext(),"Erro ao alterar mototaxista", Toast.LENGTH_LONG).show();
-        }
-
     }
 
     private void desejaAlterar(){
@@ -186,10 +192,20 @@ public class EditarMotoTaxista extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //Toast.makeText(getApplicationContext(),"Foi em Sim",Toast.LENGTH_SHORT).show();
 
-                        // vai para outra tela
-                        Intent intent = new Intent(getApplicationContext(), MotoTaxista.class);
-                        startActivity(intent);
-                        finish();
+                        motoTaxi = recuperaDados();
+                        if (motoTaxiDAO.atualizar(motoTaxi)){
+                            Toast.makeText(getApplicationContext(),"Alterado com sucesso ", Toast.LENGTH_LONG).show();
+
+                            // vai para outra tela
+                            Intent intent = new Intent(getApplicationContext(), MotoTaxista.class);
+
+                            intent.putExtra("cpf",motoTaxi.getDadosPessoais().getCpf());
+                            startActivity(intent);
+                            finish();
+
+                        } else {
+                            Toast.makeText(getApplicationContext(),"Erro ao alterar mototaxista", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
         );

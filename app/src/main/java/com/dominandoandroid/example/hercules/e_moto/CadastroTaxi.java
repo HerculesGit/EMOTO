@@ -113,10 +113,6 @@ public class CadastroTaxi extends AppCompatActivity {
         List<MotoTaxi> listaMotoTaxistas = new ArrayList<>();
 
         listaMotoTaxistas = motoTaxiDAO.listar();
-        System.out.println("LISTA");
-        for (MotoTaxi m: listaMotoTaxistas){
-            System.out.println(m.toString());
-        }
 
         // validacao dos campos
         if (!camposEstaoVazios()){
