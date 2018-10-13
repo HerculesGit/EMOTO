@@ -250,8 +250,12 @@ public class MainActivity extends AppCompatActivity {
                             //TipoServico.class
                             MotoTaxista.class);
 
+                    // o name é o indice, como uma chave
+                    //
+                    intent.putExtra("telefone",txtTelefone.getText().toString());
+                    intent.putExtra("cpf", txtCpf.getText().toString());
                     startActivity(intent);
-                    finish();               // finalizar activity
+                    finish();                   // finalizar activity
 
                 } else {    // senao
                     Toast.makeText(getApplicationContext(), "Telefone ou CPF não encontrado",Toast.LENGTH_LONG).show();
