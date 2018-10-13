@@ -1,7 +1,10 @@
 package com.dominandoandroid.example.hercules.e_moto;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,15 +21,16 @@ import java.util.List;
 
 public class CadastroTaxi extends AppCompatActivity {
 
-    private MotoTaxiDAO motoTaxiDAO;
+    private static MotoTaxiDAO motoTaxiDAO;
+    private static Context ctx;
 
-    private MotoTaxi motoTaxi;
-    private DadosPessoais dadosPessoais;
-    private Veiculo veiculo;
+    private static MotoTaxi motoTaxi;
+    private static DadosPessoais dadosPessoais;
+    private static Veiculo veiculo;
 
 
-    private Button btConfirmar;
-    private TextInputEditText editTextNome, editTextSobrenome, editTextCpf, editTextRg,
+    private static Button btConfirmar;
+    private static TextInputEditText editTextNome, editTextSobrenome, editTextCpf, editTextRg,
             editTextCidade, editTextTelefone, editTextEmail, editTextSenha,
             inputEditTextMarca, inputEditTextModelo, inputEditTextPlaca;
 
@@ -50,6 +54,9 @@ public class CadastroTaxi extends AppCompatActivity {
         inputEditTextPlaca = findViewById(R.id.dados_placa);
 
         motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());
+
+
+
     }
 
     private boolean camposEstaoVazios(){
@@ -103,60 +110,75 @@ public class CadastroTaxi extends AppCompatActivity {
 
     public void cadastrarMotoTaxi(View view){
 
+        List<MotoTaxi> listaMotoTaxistas = new ArrayList<>();
+
+        listaMotoTaxistas = motoTaxiDAO.listar();
+        System.out.println("LISTA");
+        for (MotoTaxi m: listaMotoTaxistas){
+            System.out.println(m.toString());
+        }
+
         // validacao dos campos
         if (!camposEstaoVazios()){
 
-
-            //Toast.makeText(getApplicationContext(),">>" + camposEstaoVazios(),Toast.LENGTH_LONG).show();
-
             // pergunta se deseja salvar realmente
-
-            // salvar
-            //motoTaxiDAO.salvar(this.recuperaDados());
-
-            // ir para tela de informacao do taxista
-            Intent intent = new Intent(getApplicationContext(), MotoTaxista.class);
-            startActivity(intent);
-
+            desejaSalvar();
         }
 
     }
 
-    private void onClickConfirmar(){
+    private void desejaSalvar(){
 
+        /**
+         * Criar AlertDialog
+         * */
+        AlertDialog.Builder dialog  = new AlertDialog.Builder(
+                this
+        );
 
+        // configura titulo e mensagem
+        dialog.setTitle("Quase lá");
+        dialog.setMessage("Deseja Salvar?");
 
+        //configura acoes para botao sim
+        dialog.setPositiveButton(
+                // sim/ aceito
+                "Sim",
+                //
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getApplicationContext(),"Foi em Sim",Toast.LENGTH_SHORT).show();
 
+                        // vai para outra tela
+                        Intent intent = new Intent(getApplicationContext(), MotoTaxista.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+        );
 
-                        /*if (salvo){
-                            Toast.makeText(getApplicationContext(),"Cadastrado com sucesso ["+nome +"]",Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(),"Erro ao cadastar mototaxi ["+nome+"]",Toast.LENGTH_LONG).show();
-                        }*/
+        // configura botao nao
+        dialog.setNegativeButton(
+                // nao/ negacao
+                "Não",
+                //
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
 
-                        // abrir tela para cadastrar Veiculo
-                        //Intent intent = new Intent(getApplicationContext(), CadastroVeiculo.class);
-                        //startActivity(intent);
+                    }
+                }
+        );
 
-
-                        /*
-                        List<MotoTaxi> listaMotoTaxistas = new ArrayList<>();
-
-                        listaMotoTaxistas = motoTaxiDAO.listar();
-
-                        System.out.println("LISTA");
-                        for (MotoTaxi m: listaMotoTaxistas){
-                            System.out.println(m.toString());
-                        }
-                        */
-
-
-
+        // criar e exibir
+        dialog.create();
+        dialog.show();
     }
 
-    private MotoTaxi recuperaDados(){
+    private static MotoTaxi recuperaDados(){
 
-        motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());
+        motoTaxiDAO = new MotoTaxiDAO(ctx);
         // pegar dados
         String nome = editTextNome.getText().toString();
         String sobrenome = editTextSobrenome.getText().toString();

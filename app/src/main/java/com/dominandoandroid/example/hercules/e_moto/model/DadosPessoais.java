@@ -80,7 +80,7 @@ public class DadosPessoais {
     @Override
     public String toString(){
         return "nome:"+getNome() +" sobrenome:"+ getSobrenome() +
-                " cpf:"+ getCpf() + " rg:" +getRg() +" telefone:"+getTelefone()+" email"+getEmail() +" senha:"+getSenha();
+                " cpf:"+ getCpf() + " rg:" +getRg() +" telefone:"+getTelefone()+" email: "+getEmail() +" senha:"+getSenha();
     }
 
 }

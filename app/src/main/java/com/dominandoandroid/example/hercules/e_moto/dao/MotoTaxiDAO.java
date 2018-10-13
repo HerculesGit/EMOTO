@@ -43,14 +43,14 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
         this.dadosPessoais = dadosPessoais;*/
 
         /*public DadosPessoais(String nome, String sobrenome, String cpf, String rg, String telefone, String senha, String email) {*/
-        motoTaxi = new MotoTaxi(new DadosPessoais("Hercules", "Silva",
-                "109","333","83999999999","herco123","email@email")
-                , true, 0, 0, 0.0,
-                0.0,
-                new Veiculo("Honda", "fan 150", "mno4545")
-
-        );
-        System.out.println(motoTaxi.toString());
+//        motoTaxi = new MotoTaxi(new DadosPessoais("Hercules", "Silva",
+//                "109","333","83999999999","herco123","email@email")
+//                , true, 0, 0, 0.0,
+//                0.0,
+//                new Veiculo("Honda", "fan 150", "mno4545")
+//
+//        );
+//        System.out.println(motoTaxi.toString());
 
         ContentValues cv = new ContentValues();
 
