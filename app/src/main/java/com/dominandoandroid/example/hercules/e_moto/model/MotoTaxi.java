@@ -1,6 +1,9 @@
 package com.dominandoandroid.example.hercules.e_moto.model;
 
-public class MotoTaxi {
+import java.io.Serializable;
+
+// implementou para transverir de uma activity para outra
+public class MotoTaxi implements Serializable {
     private long id;
     private  DadosPessoais dadosPessoais;
     private boolean disponivel;

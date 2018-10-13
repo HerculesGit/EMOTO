@@ -99,6 +99,52 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
 
     @Override
     public boolean atualizar(MotoTaxi motoTaxi) {
+        ContentValues cv = new ContentValues();
+        // nome do campo e valor para o campo
+        cv.put("nome",motoTaxi.getDadosPessoais().getNome());
+        cv.put("sobrenome",motoTaxi.getDadosPessoais().getSobrenome());
+        cv.put("rg",motoTaxi.getDadosPessoais().getRg());
+        cv.put("cpf",motoTaxi.getDadosPessoais().getCpf());
+        cv.put("telefone",motoTaxi.getDadosPessoais().getTelefone());
+        cv.put("email",motoTaxi.getDadosPessoais().getEmail());
+        cv.put("senha",motoTaxi.getDadosPessoais().getSenha());
+        //cv.put("dinheiro",motoTaxi.getDinheiro());
+        cv.put("marca",motoTaxi.getVeiculo().getMarca());
+        cv.put("modelo",motoTaxi.getVeiculo().getModelo());
+        cv.put("placa",motoTaxi.getVeiculo().getPlaca());
+
+        //int disponivel = 0;             // nao disponivel
+        //if (motoTaxi.isDisponivel()){
+        //    disponivel = 1;             // disponivel
+        //}
+        //cv.put("disponivel", disponivel);
+        //cv.put("qtdviagens",motoTaxi.getQtdViagensDiaria());
+        //cv.put("qtdencomendas",motoTaxi.getQtdEncomendas());
+
+        try{
+
+            String[] argumentos = {
+              motoTaxi.getDadosPessoais().getCpf()
+            };
+            escreve.update(
+                    BDHelper.TABELA_MOTOTAXI,
+                    cv,
+
+                    // clausula where - caracter coringa
+                    "cpf=?",
+
+                    // argumentos
+                    argumentos
+            );
+
+            Log.i("INFO", "Exito ao atualizar usuário ");
+
+        } catch (Exception e){
+            Log.i("INFO", "Erro ao atualizar mototaxi: "+e.getMessage());
+            return false;           // indica se houve problema
+        }
+
+
         return false;
     }
 

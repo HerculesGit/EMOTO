@@ -15,6 +15,7 @@ import java.util.List;
 
 public class MotoTaxista extends AppCompatActivity {
 
+    private MotoTaxi taxista;
     private MotoTaxiDAO motoTaxiDAO;
     private Button btEditar, btExcluirConta;
     private TextView textNome, textSobrenome, textAtivo, textDinheiro, qtdViagens;
@@ -47,6 +48,7 @@ public class MotoTaxista extends AppCompatActivity {
         for(MotoTaxi m: lista){
             if (m.getDadosPessoais().getCpf().equals(cpf)){
 
+                taxista = m;
                 textNome.setText(m.getDadosPessoais().getNome());
                 textSobrenome.setText(m.getDadosPessoais().getSobrenome());
                 textDinheiro.setText(String.valueOf(m.getDinheiro()));
@@ -70,6 +72,8 @@ public class MotoTaxista extends AppCompatActivity {
         // editar
         if (view.getId() == btEditar.getId()) {
             Intent intent = new Intent(getApplicationContext(), EditarMotoTaxista.class);
+
+            intent .putExtra("objeto", taxista);
             startActivity(intent);
         } else {
             //motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());

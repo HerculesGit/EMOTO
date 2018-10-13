@@ -193,7 +193,7 @@ public class CadastroTaxi extends AppCompatActivity {
         String placa = inputEditTextPlaca.getText().toString();
 
         //String nome, String sobrenome, String cpf, String rg, String telefone, String senha, String email
-        dadosPessoais = new DadosPessoais(nome, sobrenome,cpf,rg,telefone,senha,email);
+        dadosPessoais = new DadosPessoais(nome, sobrenome,cpf,rg,telefone,senha,email,cidade);
         veiculo = new Veiculo(marca,modelo,placa);
         motoTaxi = new MotoTaxi(dadosPessoais,true,0,0, 0.0, 0.0, veiculo);
 

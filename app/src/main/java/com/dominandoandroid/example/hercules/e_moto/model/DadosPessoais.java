@@ -1,7 +1,7 @@
 package com.dominandoandroid.example.hercules.e_moto.model;
 
 public class DadosPessoais {
-    private String nome, sobrenome, cpf, rg, senha, telefone, email;
+    private String nome, sobrenome, cpf, rg, senha, telefone, email, cidade;
 
     public DadosPessoais(String nome, String sobrenome) {
         this.nome = nome;
@@ -11,7 +11,7 @@ public class DadosPessoais {
         this.senha = "";
     }
 
-    public DadosPessoais(String nome, String sobrenome, String cpf, String rg, String telefone, String senha, String email) {
+    public DadosPessoais(String nome, String sobrenome, String cpf, String rg, String telefone, String senha, String email, String cidade) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.cpf = cpf;
@@ -77,10 +77,18 @@ public class DadosPessoais {
         this.email = email;
     }
 
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
     @Override
     public String toString(){
         return "nome:"+getNome() +" sobrenome:"+ getSobrenome() +
-                " cpf:"+ getCpf() + " rg:" +getRg() +" telefone:"+getTelefone()+" email: "+getEmail() +" senha:"+getSenha();
+                " cpf:"+ getCpf() + " rg:" +getRg() +" telefone:"+getTelefone()+" email: "+getEmail() +" senha:"+getSenha() + " cidade:"+getCidade();
     }
 
 }
