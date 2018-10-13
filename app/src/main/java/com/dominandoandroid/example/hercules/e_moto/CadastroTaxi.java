@@ -1,5 +1,6 @@
 package com.dominandoandroid.example.hercules.e_moto;
 
+import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,63 +37,95 @@ public class CadastroTaxi extends AppCompatActivity {
 
         btConfirmar = findViewById(R.id.buttonConfirmarCadastro);
         editTextNome = findViewById(R.id.dados_nome);
-        editTextSobrenome = findViewById(R.id.dados_nome);
-        editTextRg = findViewById(R.id.dados_nome);
-        editTextCpf = findViewById(R.id.dados_nome);
-        editTextCidade = findViewById(R.id.dados_nome);
-        editTextTelefone = findViewById(R.id.dados_nome);
-        editTextEmail = findViewById(R.id.dados_nome);
-        editTextSenha = findViewById(R.id.dados_nome);
+        editTextSobrenome = findViewById(R.id.dados_sobrenome);
+        editTextRg = findViewById(R.id.dados_rg);
+        editTextCpf = findViewById(R.id.dados_cpf);
+        editTextCidade = findViewById(R.id.dados_cidade);
+        editTextTelefone = findViewById(R.id.dados_telefone);
+        editTextEmail = findViewById(R.id.dados_email);
+        editTextSenha = findViewById(R.id.dados_senha);
 
-        inputEditTextMarca = findViewById(R.id.dados_nome);
-        inputEditTextModelo= findViewById(R.id.dados_nome);
-        inputEditTextPlaca = findViewById(R.id.dados_nome);
+        inputEditTextMarca = findViewById(R.id.dados_marca);
+        inputEditTextModelo= findViewById(R.id.dados_modelo);
+        inputEditTextPlaca = findViewById(R.id.dados_placa);
 
-        onClickConfirmar();
+        motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());
     }
 
-    private void verificaCampos(){
+    private boolean camposEstaoVazios(){
+        if (editTextNome.getText().toString().length() == 0){
+            editTextNome.setError("Campo obrigatório");
+            return true;
+        }
+        if (editTextSobrenome.getText().toString().length() == 0){
+            editTextSobrenome.setError("Campo obrigatório");
+            return true;
+        }
+        if (editTextRg.getText().toString().length() == 0){
+            editTextRg.setError("Campo obrigatório");
+            return true;
+        }
+        if (editTextCpf.getText().toString().length() == 0){
+            editTextCpf.setError("Campo obrigatório");
+            return true;
+        }
+        if (editTextCidade.getText().toString().length() == 0){
+            editTextCidade.setError("Campo obrigatório");
+            return true;
+        }
+        if (editTextTelefone.getText().toString().length() == 0){
+            editTextTelefone.setError("Campo obrigatório");
+            return true;
+        }
+        if (editTextEmail.getText().toString().length() == 0){
+            editTextEmail.setError("Campo obrigatório");
+            return true;
+        }
+        if (editTextSenha.getText().toString().length() == 0){
+            editTextSenha.setError("Campo obrigatório");
+            return true;
+        }
+        if (inputEditTextMarca.getText().toString().length() == 0){
+            inputEditTextMarca.setError("Campo obrigatório");
+            return true;
+        }
+        if (inputEditTextModelo.getText().toString().length() == 0){
+            inputEditTextModelo.setError("Campo obrigatório");
+            return true;
+        }
+        if (inputEditTextPlaca.getText().toString().length() == 0){
+            inputEditTextPlaca.setError("Campo obrigatório");
+            return true;
+        }
+
+        return false;
+    }
+
+    public void cadastrarMotoTaxi(View view){
+
+        // validacao dos campos
+        if (!camposEstaoVazios()){
+
+
+            //Toast.makeText(getApplicationContext(),">>" + camposEstaoVazios(),Toast.LENGTH_LONG).show();
+
+            // pergunta se deseja salvar realmente
+
+            // salvar
+            //motoTaxiDAO.salvar(this.recuperaDados());
+
+            // ir para tela de informacao do taxista
+            Intent intent = new Intent(getApplicationContext(), MotoTaxista.class);
+            startActivity(intent);
+
+        }
 
     }
 
     private void onClickConfirmar(){
-        btConfirmar.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
 
-                        Toast.makeText(getApplicationContext(),"Cadastrado com sucesso "+editTextNome.getText().toString(),Toast.LENGTH_LONG).show();
-                        // perguntar se quer confirmar
 
-                        // verifica campos
 
-                        // recuperar dados
-                        motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());
-                        // pegar dados
-                        String nome = editTextNome.getText().toString();
-                        String sobrenome = editTextSobrenome.getText().toString();
-                        String rg = editTextRg.getText().toString();
-                        String cpf = editTextCpf.getText().toString();
-                        String cidade = editTextCidade.getText().toString();
-                        String telefone = editTextTelefone.getText().toString();
-                        String email = editTextEmail.getText().toString();
-                        String senha = editTextSenha.getText().toString();
-                        String marca = inputEditTextMarca.getText().toString();
-                        String modelo = inputEditTextModelo.getText().toString();
-                        String placa = inputEditTextPlaca.getText().toString();
-
-                        //String nome, String sobrenome, String cpf, String rg, String telefone, String senha, String email
-                        dadosPessoais = new DadosPessoais(nome, sobrenome,cpf,rg,telefone,senha,email);
-                        veiculo = new Veiculo(marca,modelo,placa);
-                        motoTaxi = new MotoTaxi(dadosPessoais,true,0,0, 0.0, 0.0, veiculo);
-
-                        //motoTaxiDAO.salvar(null);
-
-                        //System.out.println(motoTaxi.toString());
-                        // / salvar dados
-                        //boolean salvo = motoTaxiDAO.salvar(
-                        //        motoTaxi
-                        //);
 
 
                         /*if (salvo){
@@ -118,12 +151,11 @@ public class CadastroTaxi extends AppCompatActivity {
                         */
 
 
-                    }
-                }
-        );
+
     }
 
-    private void recuperaDados(){
+    private MotoTaxi recuperaDados(){
+
         motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());
         // pegar dados
         String nome = editTextNome.getText().toString();
@@ -142,6 +174,8 @@ public class CadastroTaxi extends AppCompatActivity {
         dadosPessoais = new DadosPessoais(nome, sobrenome,cpf,rg,telefone,senha,email);
         veiculo = new Veiculo(marca,modelo,placa);
         motoTaxi = new MotoTaxi(dadosPessoais,true,0,0, 0.0, 0.0, veiculo);
+
+        return motoTaxi;
 
     }
 
