@@ -183,6 +183,7 @@
              android:layout_marginLeft="16dp"
              android:layout_marginRight="16dp"
              android:layout_marginStart="16dp"
+             android:layout_marginTop="8dp"
              app:layout_constraintEnd_toEndOf="parent"
              app:layout_constraintStart_toStartOf="parent"
              app:layout_constraintTop_toBottomOf="@+id/input6">
@@ -216,38 +217,87 @@
                 android:hint="Bairro" />
          </android.support.design.widget.TextInputLayout>
 
-         <TextView
-             android:id="@+id/textView"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:text="Imagem de perfil" />
 
          <TextView
              android:id="@+id/textView2"
-             android:layout_width="match_parent"
+             android:layout_width="wrap_content"
              android:layout_height="wrap_content"
+             android:layout_marginEnd="8dp"
+             android:layout_marginLeft="16dp"
+             android:layout_marginRight="8dp"
+             android:layout_marginStart="16dp"
+             android:layout_marginTop="16dp"
+             android:text="Imagem de perfil"
+             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+             android:textSize="18sp"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.0"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/editText_login_telefone" />
+
+         <Button
+             android:id="@+id/button_selecionar_imagem_perfil"
+             android:layout_width="wrap_content"
+             android:layout_height="20dp"
+             android:layout_marginEnd="24dp"
+             android:layout_marginRight="24dp"
+             android:layout_marginTop="16dp"
+             android:background="@drawable/buttons_foto_gray_black"
+             android:text="Selecionar"
+             android:textColor="#ffffff"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/editText_login_telefone" />
+
+         <TextView
+             android:id="@+id/textView"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginEnd="8dp"
+             android:layout_marginLeft="16dp"
+             android:layout_marginRight="8dp"
+             android:layout_marginStart="16dp"
+             android:layout_marginTop="16dp"
              android:text="Imagem de fundo"
-             tools:layout_editor_absoluteX="49dp"
-             tools:layout_editor_absoluteY="498dp" />
+             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+             android:textSize="18sp"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.0"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+
+         <Button
+             android:id="@+id/button_selecionar_imagem_fundo"
+             android:layout_width="wrap_content"
+             android:layout_height="20dp"
+             android:layout_marginEnd="24dp"
+             android:layout_marginRight="24dp"
+             android:layout_marginTop="16dp"
+             android:background="@drawable/buttons_foto_gray_black"
+             android:text="Selecionar"
+             android:textColor="#ffffff"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
 
          <Button
              android:id="@+id/buttonConfirmarCadastro"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_marginBottom="16dp"
-             android:layout_marginEnd="16dp"
-             android:layout_marginRight="16dp"
-             android:layout_marginTop="8dp"
+             android:layout_marginEnd="24dp"
+             android:layout_marginRight="24dp"
+             android:layout_marginTop="16dp"
              android:layout_weight="1"
              android:background="@drawable/buttons_gray_black"
              android:onClick="cadastrarMotoTaxi"
-             android:text="Cadastrar"
-             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+             android:text="Avancar"
 
+             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
              android:textColor="#ffffff"
              app:layout_constraintBottom_toBottomOf="parent"
              app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintTop_toBottomOf="@+id/editText_login_telefone"
+             app:layout_constraintTop_toBottomOf="@+id/textView"
              app:layout_constraintVertical_bias="0.0" />
 
 
