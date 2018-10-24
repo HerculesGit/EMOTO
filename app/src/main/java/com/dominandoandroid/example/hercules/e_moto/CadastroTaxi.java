@@ -23,7 +23,6 @@ public class CadastroTaxi extends AppCompatActivity {
 
     private static MotoTaxiDAO motoTaxiDAO;
     private static Context ctx;
-
     private static MotoTaxi motoTaxi;
     private static DadosPessoais dadosPessoais;
     private static Veiculo veiculo;
@@ -37,6 +36,7 @@ public class CadastroTaxi extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide(); //aqui a mágica
         setContentView(R.layout.activity_cadastro_taxi);
 
         btConfirmar = findViewById(R.id.buttonConfirmarCadastro);
@@ -115,11 +115,11 @@ public class CadastroTaxi extends AppCompatActivity {
         listaMotoTaxistas = motoTaxiDAO.listar();
 
         // validacao dos campos
-        if (!camposEstaoVazios()){
+        //if (!camposEstaoVazios()){
 
             // pergunta se deseja salvar realmente
             desejaSalvar();
-        }
+        //}
 
     }
 
@@ -148,10 +148,22 @@ public class CadastroTaxi extends AppCompatActivity {
 
                         // vai para outra tela
                         Intent intent = new Intent(getApplicationContext(), MotoTaxista.class);
+
+                        motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());
+                        // setando dados para a variavel motoTaxi
+                        motoTaxi = recuperaDados();
+
+                        // salvar no banco de dados
+                        motoTaxiDAO.salvar(motoTaxi);
+
+                        // mandar  dados para a a proxima tela
+                        intent.putExtra("cpf", motoTaxi.getDadosPessoais().getCpf());
                         startActivity(intent);
                         finish();
                     }
                 }
+
+
         );
 
         // configura botao nao
@@ -174,7 +186,7 @@ public class CadastroTaxi extends AppCompatActivity {
 
     private static MotoTaxi recuperaDados(){
 
-        motoTaxiDAO = new MotoTaxiDAO(ctx);
+        //motoTaxiDAO = new MotoTaxiDAO(ctx);
         // pegar dados
         String nome = editTextNome.getText().toString();
         String sobrenome = editTextSobrenome.getText().toString();
@@ -192,7 +204,7 @@ public class CadastroTaxi extends AppCompatActivity {
         dadosPessoais = new DadosPessoais(nome, sobrenome,cpf,rg,telefone,senha,email,cidade);
         veiculo = new Veiculo(marca,modelo,placa);
         motoTaxi = new MotoTaxi(dadosPessoais,true,0,0, 0.0, 0.0, veiculo);
-
+        motoTaxi.setDisponivel(true);
         return motoTaxi;
 
     }

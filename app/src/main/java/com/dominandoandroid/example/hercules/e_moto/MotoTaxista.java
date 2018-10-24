@@ -39,7 +39,7 @@ public class MotoTaxista extends AppCompatActivity {
         // Recuperar todos os dados enviados - é como recuperar um array de dados
         Bundle dados = getIntent().getExtras();
 
-        // pegar
+        // pegar dados de
         String cpf = dados.getString("cpf");
         //String telefone = dados.getString("telefone");
 
