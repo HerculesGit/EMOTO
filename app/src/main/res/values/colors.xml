@@ -7,6 +7,12 @@
     <!--<color name="colorAccent">#FF4081</color>-->
     <color name="colorAccent">#ff0400</color>
 
+    <color name="CorPrimaria">#795548</color>
+    <color name="white">#ffffff</color>
+    <color name="CorPrimariaEscura">#5D4037</color>
+    <color name="CorAcentuada">#FF4081</color>
+    <color name="darkgray">#6c6c6c</color>
+
     <!--
     <color name="colorPrimary">#F50057</color>
     <color name="colorPrimaryDark">#F50057</color>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--Determina o que tem nos 3 pontinhos que fica na parte superior direita-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<item android:id="@+id/db" android:title="Dashboard" android:icon="@d"/>-->
+    <item android:id="@+id/nav_concluidas" android:title="Concluídas" android:icon="@drawable/ic_done_cinzapadrao_24dp"/>
+    <item android:id="@+id/nav_canceladas" android:title="Canceladas" android:icon="@drawable/ic_nao_concluida_cinza_24dp"/>
+    <item android:id="@+id/nav_lista" android:title="Lista" android:icon="@drawable/ic_list_cinza_24dp"/>
+    <item android:id="@+id/nav_configuracoes" android:title="Configurações" android:icon="@drawable/ic_configuracao_cinza_24dp"/>
+    <item android:id="@+id/nav_sair" android:title="Sair" android:icon="@drawable/ic_sair_cinza_24dp"/>
+
+</menu>

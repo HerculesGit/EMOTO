@@ -264,17 +264,17 @@ public class MainActivity extends AppCompatActivity {
             } else{     // É cliente
 
                 // se nao tiver campo vazio
-                if (!temCamposVazios()){
+                //if (!temCamposVazios()){
 
                     Intent intent = new Intent(
-                            getApplicationContext(), TipoServico.class);
+                            getApplicationContext(), HomeActivity.class);
 
                     startActivity(intent);
-                    finish();               // finalizar activity
+                    //finish();               // finalizar activity
 
-                } else {
-                    Toast.makeText(getApplicationContext(), "Informe o Telefone e CPF",Toast.LENGTH_LONG).show();
-                }
+                //} else {
+                //    Toast.makeText(getApplicationContext(), "Informe o Telefone e CPF",Toast.LENGTH_LONG).show();
+                //}
             }
 
             // Criar conta
