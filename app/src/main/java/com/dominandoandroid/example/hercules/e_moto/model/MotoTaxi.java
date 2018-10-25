@@ -4,37 +4,74 @@ import java.io.Serializable;
 
 // implementou para transverir de uma activity para outra
 public class MotoTaxi implements Serializable {
-    private long id;
-    private  DadosPessoais dadosPessoais;
-    private boolean disponivel;
-    private int qtdViagensDiaria;
-    private int qtdEncomendas;
 
-    private Double dinheiro;
-    private Double valorViagem;
-    private Veiculo veiculo;
-
-    public MotoTaxi(DadosPessoais dadosPessoais, boolean disponivel, int qtdViagensDiaria,
-                    int qtdEncomendas, Double dinheiro, Double valorViagem, Veiculo veiculo) {
-        this.dadosPessoais = dadosPessoais;
-        this.disponivel = disponivel;
-        this.qtdViagensDiaria = qtdViagensDiaria;
-        this.qtdEncomendas = qtdEncomendas;
-        this.dinheiro = dinheiro;
-        this.valorViagem = valorViagem;
-        this.veiculo = veiculo;
-        this.id = 0;
-    }
+    private int idMototaxista;
+    private String email, senha;
+    private Endereco endereco;
+    private Veiculo moto;
+    private DadosPessoais dadosPessoais;
+    private Viagens viagens;
+    private int disponivel;
 
     public MotoTaxi() {
-        this.id = 0;
-        this.dadosPessoais = new DadosPessoais("","");
-        this.disponivel = false;
-        this.qtdViagensDiaria = 0;
-        this.qtdEncomendas = 0;
-        this.dinheiro = 0.0;
-        this.valorViagem = 0.0;
-        this.veiculo = new Veiculo("","","");
+        this.idMototaxista = 0;
+        this.email = "";
+        this.senha = "";
+        this.endereco = new Endereco();
+        this.moto = new Veiculo();
+        this.dadosPessoais = new DadosPessoais();
+        this.disponivel = 0;
+        this.viagens = new Viagens();
+    }
+
+    public MotoTaxi(int idMototaxista, String email, String senha, Endereco endereco, Veiculo moto, DadosPessoais dadosPessoais, int disponivel) {
+        this.idMototaxista = idMototaxista;
+        this.email = email;
+        this.senha = senha;
+        this.endereco = endereco;
+        this.moto = moto;
+        this.dadosPessoais = dadosPessoais;
+        this.disponivel = disponivel;
+    }
+
+    public int getIdMototaxista() {
+        return idMototaxista;
+    }
+
+    public void setIdMototaxista(int idMototaxista) {
+        this.idMototaxista = idMototaxista;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public Veiculo getMoto() {
+        return moto;
+    }
+
+    public void setMoto(Veiculo moto) {
+        this.moto = moto;
     }
 
     public DadosPessoais getDadosPessoais() {
@@ -45,68 +82,27 @@ public class MotoTaxi implements Serializable {
         this.dadosPessoais = dadosPessoais;
     }
 
-    public boolean isDisponivel() {
+    public Viagens getViagens() {
+        return viagens;
+    }
+
+    public void setViagens(Viagens viagens) {
+        this.viagens = viagens;
+    }
+
+    public int getDisponivel() {
         return disponivel;
     }
 
-    public void setDisponivel(boolean disponivel) {
+    public void setDisponivel(int disponivel) {
         this.disponivel = disponivel;
-    }
-
-    public int getQtdViagensDiaria() {
-        return qtdViagensDiaria;
-    }
-
-    public void setQtdViagensDiaria(int qtdViagensDiaria) {
-        this.qtdViagensDiaria = qtdViagensDiaria;
-    }
-
-    public int getQtdEncomendas() {
-        return qtdEncomendas;
-    }
-
-    public void setQtdEncomendas(int qtdEncomendas) {
-        this.qtdEncomendas = qtdEncomendas;
-    }
-
-    public Double getDinheiro() {
-        return dinheiro;
-    }
-
-    public void setDinheiro(Double dinheiro) {
-        this.dinheiro = dinheiro;
-    }
-
-    public Double getValorViagem() {
-        return valorViagem;
-    }
-
-    public void setValorViagem(Double valorViagem) {
-        this.valorViagem = valorViagem;
-    }
-
-    public Veiculo getVeiculo() {
-        return veiculo;
-    }
-
-    public void setVeiculo(Veiculo veiculo) {
-        this.veiculo = veiculo;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     @Override
     public String toString() {
-        return "id:"+getId()+" Dados pessoais ["+getDadosPessoais().toString()+"]"+
-                " disponivel: "+isDisponivel()+ " viagem hoje:"+getQtdViagensDiaria() +
-                " quantidade viagens encomendas:" + getQtdEncomendas() + " dinheiro:"+getDinheiro()+
-                " valor viagem:" + getValorViagem()+
-                " veiculo:["+getVeiculo().toString()+"]";
+        return "idMototaxista: "+getIdMototaxista()+" email:"+getEmail()+ " senha:"+getSenha()+"\nDados pessoais ["+getDadosPessoais().toString()+"]\n"
+                +" Endereco["+getEndereco().toString()+"]\n"
+                +" Moto["+getMoto().toString()+"]"
+                +" disponivel: "+getDisponivel() + " viagens "+getViagens().toString();
     }
 }

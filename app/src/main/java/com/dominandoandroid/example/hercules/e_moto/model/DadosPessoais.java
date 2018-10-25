@@ -1,24 +1,40 @@
 package com.dominandoandroid.example.hercules.e_moto.model;
 
 public class DadosPessoais {
-    private String nome, sobrenome, cpf, rg, senha, telefone, email, cidade;
+
+    private int idDadosPessoais;
+    private String nome, sobrenome, cpf, rg;
+
+    public DadosPessoais(){
+        this.idDadosPessoais = 0;
+        this.nome = "";
+        this.sobrenome = "";
+        this.cpf = "";
+        this.rg = "";
+    }
 
     public DadosPessoais(String nome, String sobrenome) {
+        this.idDadosPessoais = 0;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.cpf = "";
         this.rg = "";
-        this.senha = "";
     }
 
-    public DadosPessoais(String nome, String sobrenome, String cpf, String rg, String telefone, String senha, String email, String cidade) {
+    public DadosPessoais(int idDadosPessoais, String nome, String sobrenome, String cpf, String rg) {
+        this.idDadosPessoais = idDadosPessoais;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.cpf = cpf;
         this.rg = rg;
-        this.senha = senha;
-        this.telefone = telefone;
-        this.email = email;
+    }
+
+    public int getIdDadosPessoais() {
+        return idDadosPessoais;
+    }
+
+    public void setIdDadosPessoais(int idDadosPessoais) {
+        this.idDadosPessoais = idDadosPessoais;
     }
 
     public String getNome() {
@@ -53,42 +69,10 @@ public class DadosPessoais {
         this.rg = rg;
     }
 
-    public void setTelefone(String telefone){
-        this.telefone = telefone;
-    }
-
-    public String getTelefone(){
-        return telefone;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
     @Override
     public String toString(){
         return "nome:"+getNome() +" sobrenome:"+ getSobrenome() +
-                " cpf:"+ getCpf() + " rg:" +getRg() +" telefone:"+getTelefone()+" email: "+getEmail() +" senha:"+getSenha() + " cidade:"+getCidade();
+                " cpf:"+ getCpf() + " rg:" +getRg();
     }
 
 }

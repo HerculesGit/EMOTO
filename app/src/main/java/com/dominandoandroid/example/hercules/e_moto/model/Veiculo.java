@@ -1,12 +1,29 @@
 package com.dominandoandroid.example.hercules.e_moto.model;
 
 public class Veiculo {
+    private int idVeiculo;
     private String marca, modelo, placa;
 
-    public Veiculo(String marca, String modelo, String placa) {
+    public Veiculo(){
+        this.idVeiculo = 0;
+        this.marca = "";
+        this.modelo = "";
+        this.placa = "";
+    }
+
+    public Veiculo(int id,String marca, String modelo, String placa) {
+        this.idVeiculo = id;
         this.marca = marca;
         this.modelo = modelo;
         this.placa = placa;
+    }
+
+    public int getIdVeiculo() {
+        return idVeiculo;
+    }
+
+    public void setIdVeiculo(int idVeiculo) {
+        this.idVeiculo = idVeiculo;
     }
 
     public String getMarca() {
