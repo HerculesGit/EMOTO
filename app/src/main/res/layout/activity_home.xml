@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,33 +8,86 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <!--<ScrollView
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        -->
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
         <!--Apos ter colocado o linearlayout
-        comecou a ficar escuro atraz quando o drawer era exibido-->
-        <LinearLayout
-
+            comecou a ficar escuro atraz quando o drawer era exibido-->
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
 
-        </LinearLayout>
-    <!--</ScrollView>-->
+            >
 
+            <TextView
+                android:id="@+id/home_text_saudacoes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Bom dia!"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/include_informacoes"
+                app:layout_constraintTop_toTopOf="@+id/include_informacoes" />
+
+
+            <include
+                android:id="@+id/include_informacoes"
+                layout="@layout/layout_home_quadrado_informacoes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginTop="8dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/mapsicon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include_informacoes" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/include_rua"
+            layout="@layout/layout_home_quadrado_rua"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_navigation_view"
-        app:headerLayout="@layout/header"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        app:itemTextColor="@color/darkgray"
-        app:itemIconTint="@color/darkgray"
-        app:menu="@menu/drawer_menu"
         android:layout_gravity="start"
-
-        >
+        android:background="@color/white"
+        app:headerLayout="@layout/header"
+        app:itemIconTint="@color/darkgray"
+        app:itemTextColor="@color/darkgray"
+        app:menu="@menu/drawer_menu">
 
     </android.support.design.widget.NavigationView>
 

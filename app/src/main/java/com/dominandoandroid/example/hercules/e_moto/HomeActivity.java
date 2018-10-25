@@ -1,5 +1,6 @@
 package com.dominandoandroid.example.hercules.e_moto;
 
+import android.app.Dialog;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +17,8 @@ public class HomeActivity extends AppCompatActivity
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mToggle;
+    private  NavigationView navigationView;
+    private Dialog customDialog;
 
 
     @Override
@@ -33,8 +36,10 @@ public class HomeActivity extends AppCompatActivity
 
 
         // eventos de click
-        NavigationView navigationView = findViewById(R.id.nav_navigation_view);
+        navigationView = findViewById(R.id.nav_navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
 
     }
 
@@ -53,6 +58,7 @@ public class HomeActivity extends AppCompatActivity
 
         if (id == R.id.nav_concluidas) {
             Toast.makeText(getApplicationContext(), "concluida", Toast.LENGTH_SHORT).show();
+            //showCustomDialog();
         } else if (id == R.id.nav_canceladas) {
             Toast.makeText(getApplicationContext(), "canceladas", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_lista) {
@@ -76,6 +82,16 @@ public class HomeActivity extends AppCompatActivity
         } else{
             super.onBackPressed();
         }
+    }
+
+    public void showCustomDialog(){
+        customDialog = new Dialog(HomeActivity.this);
+        customDialog.setContentView(R.layout.layout_customdialog);
+        customDialog.setTitle("Aceitar Corrida");
+        customDialog.show();
+        //customDialog.
+
+        //customDialog.cancel();
     }
 
 }

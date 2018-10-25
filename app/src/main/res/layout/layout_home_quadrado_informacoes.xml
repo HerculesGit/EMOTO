@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/textViewFundo"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Chamada de "
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewFundo"
+        app:layout_constraintTop_toTopOf="@+id/textViewFundo" />
+
+    <!--Nome-->
+    <TextView
+        android:id="@+id/home_nome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="10dp"
+        android:text="Wanessa"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toTopOf="@+id/textViewFundo" />
+
+    <!--Telefone-->
+    <TextView
+        android:id="@+id/dialog_telefone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+
+        android:text="(83)9 9999-9999"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="@+id/textViewFundo"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+
+        android:text="Tipo entrega"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewFundo"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_telefone" />
+
+    <!--Tipo de viagem-->
+    <TextView
+        android:id="@+id/home_tipo_viagem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+
+        android:text="Viagem - Rápida"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_telefone" />
+
+    <!--Valor da corrida-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="R$ 20,00"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="@+id/textViewFundo"
+        app:layout_constraintStart_toStartOf="@+id/textViewFundo"
+        app:layout_constraintTop_toBottomOf="@id/textView14" />
+
+</android.support.constraint.ConstraintLayout>

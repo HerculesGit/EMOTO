@@ -12,6 +12,8 @@
     <color name="CorPrimariaEscura">#5D4037</color>
     <color name="CorAcentuada">#FF4081</color>
     <color name="darkgray">#6c6c6c</color>
+    <color name="red">#FF0000</color>
+    <color name="black">#000000</color>
 
     <!--
     <color name="colorPrimary">#F50057</color>
