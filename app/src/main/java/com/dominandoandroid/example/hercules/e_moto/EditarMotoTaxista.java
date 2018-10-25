@@ -26,8 +26,10 @@ public class EditarMotoTaxista extends AppCompatActivity {
     private Button buttonAlterarDados;
     private static MotoTaxiDAO motoTaxiDAO;
     private static TextInputEditText editTextNome, editTextSobrenome, editTextCpf, editTextRg,
-            editTextCidade, editTextTelefone, editTextEmail, editTextSenha,
-            inputEditTextMarca, inputEditTextModelo, inputEditTextPlaca;
+            editTextCidade, editTextTelefone, editTextEmail;
+
+//    , editTextSenha,
+//            inputEditTextMarca, inputEditTextModelo, inputEditTextPlaca;
 
     private static DadosPessoais dadosPessoais;
     private static Veiculo veiculo;
@@ -53,18 +55,13 @@ public class EditarMotoTaxista extends AppCompatActivity {
 
 
         buttonAlterarDados = findViewById(R.id.buttonAlterarDados);
-        editTextNome = findViewById(R.id.dados_nome);
-        editTextSobrenome = findViewById(R.id.dados_sobrenome);
-        editTextRg = findViewById(R.id.dados_rg);
-        editTextCpf = findViewById(R.id.dados_cpf);
-        editTextCidade = findViewById(R.id.dados_cidade);
-        editTextTelefone = findViewById(R.id.dados_telefone);
-        editTextEmail = findViewById(R.id.dados_email);
-        editTextSenha = findViewById(R.id.dados_senha);
-
-        inputEditTextMarca = findViewById(R.id.dados_marca);
-        inputEditTextModelo = findViewById(R.id.dados_modelo);
-        inputEditTextPlaca = findViewById(R.id.dados_placa);
+        editTextNome = findViewById(R.id.editar_dados_nome);
+        editTextSobrenome = findViewById(R.id.editar_dados_sobrenome);
+        editTextRg = findViewById(R.id.editar_dados_rg);
+        editTextCpf = findViewById(R.id.editar_dados_cpf);
+        editTextCidade = findViewById(R.id.editar_dados_cidade);
+        editTextTelefone = findViewById(R.id.editar_dados_telefone);
+        editTextEmail = findViewById(R.id.editar_dados_email);
 
         carregaDadosNosCampos();
     }
@@ -76,10 +73,10 @@ public class EditarMotoTaxista extends AppCompatActivity {
         editTextCidade.setText(motoTaxi.getDadosPessoais().getCidade());
         editTextTelefone.setText(motoTaxi.getDadosPessoais().getTelefone());
         editTextEmail.setText(motoTaxi.getDadosPessoais().getEmail());
-        editTextSenha.setText(motoTaxi.getDadosPessoais().getSenha());
-        inputEditTextMarca.setText(motoTaxi.getVeiculo().getMarca());
-        inputEditTextModelo.setText(motoTaxi.getVeiculo().getModelo());
-        inputEditTextPlaca.setText(motoTaxi.getVeiculo().getPlaca());
+//        editTextSenha.setText(motoTaxi.getDadosPessoais().getSenha());
+//        inputEditTextMarca.setText(motoTaxi.getVeiculo().getMarca());
+//        inputEditTextModelo.setText(motoTaxi.getVeiculo().getModelo());
+//        inputEditTextPlaca.setText(motoTaxi.getVeiculo().getPlaca());
     }
 
     private static MotoTaxi recuperaDados(){
@@ -93,15 +90,15 @@ public class EditarMotoTaxista extends AppCompatActivity {
         String cidade = editTextCidade.getText().toString();
         String telefone = editTextTelefone.getText().toString();
         String email = editTextEmail.getText().toString();
-        String senha = editTextSenha.getText().toString();
-        String marca = inputEditTextMarca.getText().toString();
-        String modelo = inputEditTextModelo.getText().toString();
-        String placa = inputEditTextPlaca.getText().toString();
+//        String senha = editTextSenha.getText().toString();
+//        String marca = inputEditTextMarca.getText().toString();
+//        String modelo = inputEditTextModelo.getText().toString();
+//        String placa = inputEditTextPlaca.getText().toString();
 
         //String nome, String sobrenome, String cpf, String rg, String telefone, String senha, String email
-        dadosPessoais = new DadosPessoais(nome, sobrenome,cpf,rg,telefone,senha,email,cidade);
-        veiculo = new Veiculo(marca,modelo,placa);
-        motoTaxi = new MotoTaxi(dadosPessoais,true,0,0, 0.0, 0.0, veiculo);
+//        dadosPessoais = new DadosPessoais(nome, sobrenome,cpf,rg,telefone,senha,email,cidade);
+//        veiculo = new Veiculo(marca,modelo,placa);
+//        motoTaxi = new MotoTaxi(dadosPessoais,true,0,0, 0.0, 0.0, veiculo);
 
         return motoTaxi;
     }
@@ -135,22 +132,22 @@ public class EditarMotoTaxista extends AppCompatActivity {
             editTextEmail.setError("Campo obrigatório");
             return true;
         }
-        if (editTextSenha.getText().toString().length() == 0){
-            editTextSenha.setError("Campo obrigatório");
-            return true;
-        }
-        if (inputEditTextMarca.getText().toString().length() == 0){
-            inputEditTextMarca.setError("Campo obrigatório");
-            return true;
-        }
-        if (inputEditTextModelo.getText().toString().length() == 0){
-            inputEditTextModelo.setError("Campo obrigatório");
-            return true;
-        }
-        if (inputEditTextPlaca.getText().toString().length() == 0){
-            inputEditTextPlaca.setError("Campo obrigatório");
-            return true;
-        }
+//        if (editTextSenha.getText().toString().length() == 0){
+//            editTextSenha.setError("Campo obrigatório");
+//            return true;
+//        }
+//        if (inputEditTextMarca.getText().toString().length() == 0){
+//            inputEditTextMarca.setError("Campo obrigatório");
+//            return true;
+//        }
+//        if (inputEditTextModelo.getText().toString().length() == 0){
+//            inputEditTextModelo.setError("Campo obrigatório");
+//            return true;
+//        }
+//        if (inputEditTextPlaca.getText().toString().length() == 0){
+//            inputEditTextPlaca.setError("Campo obrigatório");
+//            return true;
+//        }
 
         return false;
     }

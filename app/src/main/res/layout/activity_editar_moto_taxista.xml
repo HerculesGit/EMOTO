@@ -22,13 +22,12 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/dados_nome"
+                android:id="@+id/editar_dados_nome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nome"
@@ -37,15 +36,19 @@
 
         <TextView
             android:id="@+id/textView6"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Editar Dados Pessoais"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="Alterar dados"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textSize="24sp"
-            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,13 +60,12 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/input1">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/dados_sobrenome"
+                android:id="@+id/editar_dados_sobrenome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Sobrenome"
@@ -78,13 +80,12 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/input2">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/dados_cpf"
+                android:id="@+id/editar_dados_cpf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="CPF"
@@ -99,13 +100,12 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText_login_cpf">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/dados_rg"
+                android:id="@+id/editar_dados_rg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="RG"
@@ -116,25 +116,45 @@
             android:id="@+id/input5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewLocal">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/editar_dados_estado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Estado"
+                android:inputType="text" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputcidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input4">
+            app:layout_constraintTop_toBottomOf="@+id/input5">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/dados_cidade"
+                android:id="@+id/editar_dados_cidade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Cidade"
                 android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
 
+
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/textViewLocal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -142,173 +162,95 @@
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Editar Dados de Acesso"
+            android:text="Localização"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textSize="24sp"
-            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input5" />
+            app:layout_constraintTop_toBottomOf="@+id/input4" />
+
+
+
+
+        <TextView
+            android:id="@+id/textAcesso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Dados de Acesso"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputcidade" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView13">
+            app:layout_constraintStart_toStartOf="@id/textAcesso"
+            app:layout_constraintTop_toBottomOf="@+id/textAcesso">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/dados_email"
+                android:id="@+id/editar_dados_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
                 android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/input7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+
+        <Button
+            android:id="@+id/buttonAlterarDados"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/buttons_gray_black"
+            android:onClick="alterarMotoTaxi"
+
+            android:text="Alterar"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input6">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/dados_senha"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Senha"
-                android:inputType="text" />
-
-        </android.support.design.widget.TextInputLayout>
-
+            app:layout_constraintTop_toBottomOf="@+id/editText_login_telefone"
+            app:layout_constraintVertical_bias="0.0" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/editText_login_telefone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input7">
+            app:layout_constraintTop_toBottomOf="@+id/input6">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/dados_telefone"
+                android:id="@+id/editar_dados_telefone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Telefone" />
+                android:hint="Telefone"
+                android:inputType="phone"
+                />
         </android.support.design.widget.TextInputLayout>
-
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Editar Informações da Moto"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText_login_telefone" />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/input9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/dados_marca"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Marca" />
-        </android.support.design.widget.TextInputLayout>
-
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/input10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input9">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/dados_modelo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Modelo" />
-        </android.support.design.widget.TextInputLayout>
-
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/input11"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input10">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/dados_placa"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Placa" />
-        </android.support.design.widget.TextInputLayout>
-
-        <Button
-            android:id="@+id/buttonAlterarDados"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_weight="1"
-            android:text="Alterar"
-            android:onClick="alterarMotoTaxi"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input11"
-            app:layout_constraintVertical_bias="0.0" />
 
 
 

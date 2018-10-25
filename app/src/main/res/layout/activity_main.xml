@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#19746464"
     tools:context=".MainActivity">
 
     <EditText
@@ -84,13 +83,14 @@
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:padding="16dp"
         android:onClick="clickCreateAvancar"
         android:text="Avancar"
         android:textAllCaps="false"
-        android:background="@drawable/background_login"
-        android:textColor="#f16f7d"
-        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:background="@drawable/buttons_gray_black"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />

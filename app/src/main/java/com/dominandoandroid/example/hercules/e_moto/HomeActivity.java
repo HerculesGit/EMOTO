@@ -67,6 +67,8 @@ public class HomeActivity extends AppCompatActivity
             Toast.makeText(getApplicationContext(), "configuracoes", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_sair) {
             Toast.makeText(getApplicationContext(), "sair", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_seguranca) {
+
         }
 
         // fechar o navigation quando clicar

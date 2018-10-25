@@ -40,18 +40,18 @@ public class CadastroTaxi extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_taxi);
 
         btConfirmar = findViewById(R.id.buttonConfirmarCadastro);
-        editTextNome = findViewById(R.id.dados_nome);
-        editTextSobrenome = findViewById(R.id.dados_sobrenome);
-        editTextRg = findViewById(R.id.dados_rg);
-        editTextCpf = findViewById(R.id.dados_cpf);
-        editTextCidade = findViewById(R.id.dados_cidade);
-        editTextTelefone = findViewById(R.id.dados_telefone);
-        editTextEmail = findViewById(R.id.dados_email);
-        editTextSenha = findViewById(R.id.dados_senha);
-
-        inputEditTextMarca = findViewById(R.id.dados_marca);
-        inputEditTextModelo= findViewById(R.id.dados_modelo);
-        inputEditTextPlaca = findViewById(R.id.dados_placa);
+        editTextNome = findViewById(R.id.cadastro_dados_nome);
+        editTextSobrenome = findViewById(R.id.cadastro_dados_sobrenome);
+        editTextRg = findViewById(R.id.cadastro_dados_rg);
+        editTextCpf = findViewById(R.id.cadastro_dados_cpf);
+//        editTextCidade = findViewById(R.id.dados_cidade);
+//        editTextTelefone = findViewById(R.id.cadastro_dados_telefone);
+//        editTextEmail = findViewById(R.id.cadastro_dados_email);
+//        editTextSenha = findViewById(R.id.dados_senha);
+//
+//        inputEditTextMarca = findViewById(R.id.dados_marca);
+//        inputEditTextModelo= findViewById(R.id.dados_modelo);
+//        inputEditTextPlaca = findViewById(R.id.dados_placa);
 
         motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());
 
