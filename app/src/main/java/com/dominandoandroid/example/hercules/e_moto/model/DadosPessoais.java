@@ -1,30 +1,29 @@
 package com.dominandoandroid.example.hercules.e_moto.model;
 
-public class DadosPessoais {
+import java.io.Serializable;
+
+public class DadosPessoais implements Serializable {
 
     private int idDadosPessoais;
-    private String nome, sobrenome, cpf, rg;
+    private String nome, cpf, rg;
 
     public DadosPessoais(){
         this.idDadosPessoais = 0;
         this.nome = "";
-        this.sobrenome = "";
         this.cpf = "";
         this.rg = "";
     }
 
-    public DadosPessoais(String nome, String sobrenome) {
+    public DadosPessoais(String nome) {
         this.idDadosPessoais = 0;
         this.nome = nome;
-        this.sobrenome = sobrenome;
         this.cpf = "";
         this.rg = "";
     }
 
-    public DadosPessoais(int idDadosPessoais, String nome, String sobrenome, String cpf, String rg) {
+    public DadosPessoais(int idDadosPessoais, String nome, String cpf, String rg) {
         this.idDadosPessoais = idDadosPessoais;
         this.nome = nome;
-        this.sobrenome = sobrenome;
         this.cpf = cpf;
         this.rg = rg;
     }
@@ -45,13 +44,6 @@ public class DadosPessoais {
         this.nome = nome;
     }
 
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
 
     public String getCpf() {
         return cpf;
@@ -71,7 +63,7 @@ public class DadosPessoais {
 
     @Override
     public String toString(){
-        return "nome:"+getNome() +" sobrenome:"+ getSobrenome() +
+        return "nome:"+getNome() +
                 " cpf:"+ getCpf() + " rg:" +getRg();
     }
 

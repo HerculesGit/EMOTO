@@ -21,17 +21,11 @@ import java.util.List;
 
 public class CadastroTaxi extends AppCompatActivity {
 
-    private static MotoTaxiDAO motoTaxiDAO;
-    private static Context ctx;
-    private static MotoTaxi motoTaxi;
-    private static DadosPessoais dadosPessoais;
-    private static Veiculo veiculo;
-
-
-    private static Button btConfirmar;
-    private static TextInputEditText editTextNome, editTextSobrenome, editTextCpf, editTextRg,
-            editTextCidade, editTextTelefone, editTextEmail, editTextSenha,
-            inputEditTextMarca, inputEditTextModelo, inputEditTextPlaca;
+    private Button btAvancar;
+    private TextInputEditText editTextNome, editTextSobrenome, editTextCpf, editTextRg,
+            editTextEstado, editTextCidade, editTextRua, editTextNumero, editTextBairro;
+    private MotoTaxiDAO motoTaxiDAO;
+    private MotoTaxi motoTaxi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,22 +33,35 @@ public class CadastroTaxi extends AppCompatActivity {
         getSupportActionBar().hide(); //aqui a mágica
         setContentView(R.layout.activity_cadastro_taxi);
 
-        btConfirmar = findViewById(R.id.buttonConfirmarCadastro);
+        btAvancar = findViewById(R.id.bt_cadastro_Avancar);
         editTextNome = findViewById(R.id.cadastro_dados_nome);
         editTextSobrenome = findViewById(R.id.cadastro_dados_sobrenome);
         editTextRg = findViewById(R.id.cadastro_dados_rg);
         editTextCpf = findViewById(R.id.cadastro_dados_cpf);
-//        editTextCidade = findViewById(R.id.dados_cidade);
-//        editTextTelefone = findViewById(R.id.cadastro_dados_telefone);
-//        editTextEmail = findViewById(R.id.cadastro_dados_email);
-//        editTextSenha = findViewById(R.id.dados_senha);
-//
-//        inputEditTextMarca = findViewById(R.id.dados_marca);
-//        inputEditTextModelo= findViewById(R.id.dados_modelo);
-//        inputEditTextPlaca = findViewById(R.id.dados_placa);
+        editTextEstado = findViewById(R.id.cadastro_dados_estado);
+        editTextCidade = findViewById(R.id.cadastro_dados_cidade);
+        editTextRua = findViewById(R.id.cadastro_dados_rua);
+        editTextNumero = findViewById(R.id.cadastro_dados_numero);
+        editTextBairro = findViewById(R.id.cadastro_dados_bairro);
 
-        motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());
+        // listener
+        btAvancar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // validacao dos campos
+                //if (!camposEstaoVazios()){
 
+                // pegar os dados das editText's
+                motoTaxi = pegarDasEditText();
+                Intent intencao = new Intent(CadastroTaxi.this, CadastroVeiculo.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("mototaxi", motoTaxi);
+                intencao.putExtras(bundle);
+                startActivity(intencao);
+
+                //}
+            }
+        });
 
 
     }
@@ -76,32 +83,24 @@ public class CadastroTaxi extends AppCompatActivity {
             editTextCpf.setError("Campo obrigatório");
             return true;
         }
+        if (editTextEstado.getText().toString().length() == 0){
+            editTextEstado.setError("Campo obrigatório");
+            return true;
+        }
         if (editTextCidade.getText().toString().length() == 0){
             editTextCidade.setError("Campo obrigatório");
             return true;
         }
-        if (editTextTelefone.getText().toString().length() == 0){
-            editTextTelefone.setError("Campo obrigatório");
+        if (editTextRua.getText().toString().length() == 0){
+            editTextRua.setError("Campo obrigatório");
             return true;
         }
-        if (editTextEmail.getText().toString().length() == 0){
-            editTextEmail.setError("Campo obrigatório");
+        if (editTextNumero.getText().toString().length() == 0){
+            editTextNumero.setError("Campo obrigatório");
             return true;
         }
-        if (editTextSenha.getText().toString().length() == 0){
-            editTextSenha.setError("Campo obrigatório");
-            return true;
-        }
-        if (inputEditTextMarca.getText().toString().length() == 0){
-            inputEditTextMarca.setError("Campo obrigatório");
-            return true;
-        }
-        if (inputEditTextModelo.getText().toString().length() == 0){
-            inputEditTextModelo.setError("Campo obrigatório");
-            return true;
-        }
-        if (inputEditTextPlaca.getText().toString().length() == 0){
-            inputEditTextPlaca.setError("Campo obrigatório");
+        if (editTextBairro.getText().toString().length() == 0){
+            editTextBairro.setError("Campo obrigatório");
             return true;
         }
 
@@ -118,11 +117,12 @@ public class CadastroTaxi extends AppCompatActivity {
         //if (!camposEstaoVazios()){
 
             // pergunta se deseja salvar realmente
-            desejaSalvar();
+            //desejaSalvar();
         //}
 
     }
 
+    @Deprecated
     private void desejaSalvar(){
 
         /**
@@ -147,14 +147,12 @@ public class CadastroTaxi extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Foi em Sim",Toast.LENGTH_SHORT).show();
 
                         // vai para outra tela
-                        Intent intent = new Intent(getApplicationContext(), MotoTaxista.class);
+                        Intent intent = new Intent(getApplicationContext(), MotoTaxistaActivity.class);
 
                         motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());
-                        // setando dados para a variavel motoTaxi
-                        motoTaxi = recuperaDados();
 
-                        // salvar no banco de dados
-                        motoTaxiDAO.salvar(motoTaxi);
+                        // setando dados para a variavel motoTaxi
+                        motoTaxi = pegarDasEditText();
 
                         // mandar  dados para a a proxima tela
                         intent.putExtra("cpf", motoTaxi.getDadosPessoais().getCpf());
@@ -162,8 +160,6 @@ public class CadastroTaxi extends AppCompatActivity {
                         finish();
                     }
                 }
-
-
         );
 
         // configura botao nao
@@ -184,27 +180,25 @@ public class CadastroTaxi extends AppCompatActivity {
         dialog.show();
     }
 
-    private static MotoTaxi recuperaDados(){
+    /**
+     * Recupera das editText
+     * */
+    private MotoTaxi pegarDasEditText(){
 
-        //motoTaxiDAO = new MotoTaxiDAO(ctx);
         // pegar dados
         String nome = editTextNome.getText().toString();
         String sobrenome = editTextSobrenome.getText().toString();
         String rg = editTextRg.getText().toString();
         String cpf = editTextCpf.getText().toString();
+        String estado = editTextEstado.getText().toString();
         String cidade = editTextCidade.getText().toString();
-        String telefone = editTextTelefone.getText().toString();
-        String email = editTextEmail.getText().toString();
-        String senha = editTextSenha.getText().toString();
-        String marca = inputEditTextMarca.getText().toString();
-        String modelo = inputEditTextModelo.getText().toString();
-        String placa = inputEditTextPlaca.getText().toString();
+        String rua= editTextRua.getText().toString();
+        String numero = editTextNumero.getText().toString();
+        String bairro = editTextBairro.getText().toString();
 
         //String nome, String sobrenome, String cpf, String rg, String telefone, String senha, String email
-        dadosPessoais = new DadosPessoais(nome, sobrenome,cpf,rg,telefone,senha,email,cidade);
-        veiculo = new Veiculo(marca,modelo,placa);
-        motoTaxi = new MotoTaxi(dadosPessoais,true,0,0, 0.0, 0.0, veiculo);
-        motoTaxi.setDisponivel(true);
+        DadosPessoais dadosPessoais = new DadosPessoais();
+        motoTaxi.setDisponivel(1);
         return motoTaxi;
 
     }

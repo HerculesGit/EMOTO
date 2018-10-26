@@ -24,7 +24,7 @@
         <activity android:name=".CadastroTaxi" />
         <activity android:name=".Status" />
         <activity android:name=".CadastroVeiculo" />
-        <activity android:name=".MotoTaxista" />
+        <activity android:name=".MotoTaxistaActivity" />
         <activity android:name=".EditarMotoTaxista" />
         <activity android:name=".HomeActivity"></activity>
     </application>

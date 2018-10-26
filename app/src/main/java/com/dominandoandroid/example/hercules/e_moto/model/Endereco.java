@@ -1,6 +1,8 @@
 package com.dominandoandroid.example.hercules.e_moto.model;
 
-public class Endereco {
+import java.io.Serializable;
+
+public class Endereco implements Serializable {
     private int idEndereco;
     private String estado, cidade, rua, numero, bairro;
 

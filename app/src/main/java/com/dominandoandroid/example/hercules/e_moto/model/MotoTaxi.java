@@ -12,6 +12,7 @@ public class MotoTaxi implements Serializable {
     private DadosPessoais dadosPessoais;
     private Viagens viagens;
     private int disponivel;
+    private String numeroCelular;
 
     public MotoTaxi() {
         this.idMototaxista = 0;
@@ -22,9 +23,11 @@ public class MotoTaxi implements Serializable {
         this.dadosPessoais = new DadosPessoais();
         this.disponivel = 0;
         this.viagens = new Viagens();
+        this.numeroCelular = "";
     }
 
-    public MotoTaxi(int idMototaxista, String email, String senha, Endereco endereco, Veiculo moto, DadosPessoais dadosPessoais, int disponivel) {
+    public MotoTaxi(int idMototaxista, String email, String senha, Endereco endereco, Veiculo moto, DadosPessoais dadosPessoais, int disponivel,
+                    String numeroCelular) {
         this.idMototaxista = idMototaxista;
         this.email = email;
         this.senha = senha;
@@ -32,6 +35,7 @@ public class MotoTaxi implements Serializable {
         this.moto = moto;
         this.dadosPessoais = dadosPessoais;
         this.disponivel = disponivel;
+        this.numeroCelular = numeroCelular;
     }
 
     public int getIdMototaxista() {
@@ -98,11 +102,19 @@ public class MotoTaxi implements Serializable {
         this.disponivel = disponivel;
     }
 
+    public String getNumeroCelular() {
+        return numeroCelular;
+    }
+
+    public void setNumeroCelular(String numeroCelular) {
+        this.numeroCelular = numeroCelular;
+    }
+
     @Override
     public String toString() {
         return "idMototaxista: "+getIdMototaxista()+" email:"+getEmail()+ " senha:"+getSenha()+"\nDados pessoais ["+getDadosPessoais().toString()+"]\n"
                 +" Endereco["+getEndereco().toString()+"]\n"
                 +" Moto["+getMoto().toString()+"]"
-                +" disponivel: "+getDisponivel() + " viagens "+getViagens().toString();
+                +" disponivel: "+getDisponivel() +" numeroCell:"+getNumeroCelular()+ " viagens "+getViagens().toString();
     }
 }

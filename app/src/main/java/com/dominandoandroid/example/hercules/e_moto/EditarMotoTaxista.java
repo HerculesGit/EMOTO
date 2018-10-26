@@ -16,9 +16,6 @@ import com.dominandoandroid.example.hercules.e_moto.model.DadosPessoais;
 import com.dominandoandroid.example.hercules.e_moto.model.MotoTaxi;
 import com.dominandoandroid.example.hercules.e_moto.model.Veiculo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class EditarMotoTaxista extends AppCompatActivity {
 
     private static Context ctx;
@@ -70,9 +67,9 @@ public class EditarMotoTaxista extends AppCompatActivity {
         editTextSobrenome.setText(motoTaxi.getDadosPessoais().getSobrenome());
         editTextRg.setText(motoTaxi.getDadosPessoais().getRg());
         editTextCpf.setText(motoTaxi.getDadosPessoais().getCpf());
-        editTextCidade.setText(motoTaxi.getDadosPessoais().getCidade());
-        editTextTelefone.setText(motoTaxi.getDadosPessoais().getTelefone());
-        editTextEmail.setText(motoTaxi.getDadosPessoais().getEmail());
+        //editTextCidade.setText(motoTaxi.getDadosPessoais().getCidade());
+        //editTextTelefone.setText(motoTaxi.getDadosPessoais().getTelefone());
+        //editTextEmail.setText(motoTaxi.getDadosPessoais().getEmail());
 //        editTextSenha.setText(motoTaxi.getDadosPessoais().getSenha());
 //        inputEditTextMarca.setText(motoTaxi.getVeiculo().getMarca());
 //        inputEditTextModelo.setText(motoTaxi.getVeiculo().getModelo());
@@ -194,7 +191,7 @@ public class EditarMotoTaxista extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),"Alterado com sucesso ", Toast.LENGTH_LONG).show();
 
                             // vai para outra tela
-                            Intent intent = new Intent(getApplicationContext(), MotoTaxista.class);
+                            Intent intent = new Intent(getApplicationContext(), MotoTaxistaActivity.class);
 
                             intent.putExtra("cpf",motoTaxi.getDadosPessoais().getCpf());
                             startActivity(intent);

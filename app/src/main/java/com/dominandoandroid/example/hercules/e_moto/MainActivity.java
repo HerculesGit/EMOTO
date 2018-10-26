@@ -1,11 +1,8 @@
 package com.dominandoandroid.example.hercules.e_moto;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,10 +18,11 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private MotoTaxi motoTaxi;
     private Button buttonLogin, buttonCreate;
     private RadioGroup radioGroup;
     private RadioButton radioUsuario, radioMotoTaxi;
-    private EditText txtTelefone, txtCpf;
+    private EditText txtTelefone, textSenhaCpf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +35,120 @@ public class MainActivity extends AppCompatActivity {
         radioMotoTaxi = findViewById(R.id.radioButtonMotoTaxi);
         buttonCreate = findViewById(R.id.buttonCreate);
 
-        txtTelefone = findViewById(R.id.editText_login_telefone);
-        txtCpf = findViewById(R.id.editText_login_cpf);
+        txtTelefone = findViewById(R.id.id_txt_login_telefone);
+        textSenhaCpf = findViewById(R.id.id_txt_login_senha_cpf);
 
         this.verificaRadioButton();
 
         BDHelper db = new BDHelper(getApplicationContext());
-        //db.createTable();
+
+        // nao apagar esta linha. Codigos comentados daqui e colocado la embaixo
+
+    }
+    /**
+     * Verificação do radioButton
+     *
+     * */
+    private void verificaRadioButton(){
+        radioGroup.setOnCheckedChangeListener(
+                new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup radioGroup, int idClicado) {
+
+                        if(R.id.radioButtonMotoTaxi == idClicado){
+                            buttonCreate.setVisibility(View.VISIBLE);
+                            textSenhaCpf.setHint("Senha");
+                        } else {
+                            buttonCreate.setVisibility(View.GONE);
+                            textSenhaCpf.setHint("CPF");
+                        }
+                    }
+                }
+        );
+    }
+
+    /**
+     * Verifica se o mototaxi estah cadastrado
+     * */
+    private boolean verificaMotoTaxista(){
+
+        MotoTaxiDAO  motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());
+        List<MotoTaxi> lista = motoTaxiDAO.listar();
+
+        for (MotoTaxi m: lista){
+            if (m.getNumeroCelular().equals(txtTelefone.getText().toString())
+                    && m.getSenha().equals(textSenhaCpf.getText().toString())){
+
+                motoTaxi = m;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Verifica se tem campos vazios
+     * */
+    private boolean temCamposVazios(){
+        if (txtTelefone.getText().length() == 0
+                || textSenhaCpf.getText().length() == 0){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Quando clicar em criar usuario-mototaxista
+     * */
+    public void clickCreateAvancar(View view){
+        // Logar
+        if (view.getId() == buttonLogin.getId()){
+
+            // se for mototaxista e os dados estiverem OK
+            if (radioMotoTaxi.isChecked()){
+                if (verificaMotoTaxista()) { // os dados estiverem OK
+
+                    // .class eh a activity que desejamos ir
+                    Intent intencao = new Intent(MainActivity.this, HomeActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("mototaxi", motoTaxi);
+                    intencao.putExtras(bundle);
+
+                    startActivity(intencao);
+                    finish();                   // finalizar activity
+
+                } else {    // senao
+                    Toast.makeText(getApplicationContext(), "Telefone ou CPF não encontrado",Toast.LENGTH_LONG).show();
+                }
+
+            } else{     // É cliente
+
+                // se nao tiver campo vazio
+                //if (!temCamposVazios()){
+
+                    Intent intent = new Intent(
+                            getApplicationContext(), HomeActivity.class);
+
+                    startActivity(intent);
+                    //finish();               // finalizar activity
+
+                //} else {
+                //    Toast.makeText(getApplicationContext(), "Informe o Telefone e CPF",Toast.LENGTH_LONG).show();
+                //}
+            }
+
+            // Criar conta
+        } else if (view.getId() == buttonCreate.getId()){
+            Intent intent = new Intent(getApplicationContext(), CadastroTaxi.class);
+            startActivity(intent);
+
+        }
+
+    }
+
+}
+
+//db.createTable();
 
 
 
@@ -127,27 +232,27 @@ public class MainActivity extends AppCompatActivity {
             /*consulta = "SELECT nome, sobrenome FROM mototaxi " +
                     "WHERE nome IN('Maria', 'Hércules')";*/
 
-            // entre o intervalo - ex: produtos maior que 30,00 e maior que 4
+// entre o intervalo - ex: produtos maior que 30,00 e maior que 4
             /*consulta = "SELECT nome, sobrenome FROM mototaxi " +
                     "WHERE idade BETWEEN 30 AND 50 ";*/
 
-            // LIKE ou seja, como. O nome é como "Hercules"
+// LIKE ou seja, como. O nome é como "Hercules"
             /*consulta = "SELECT nome, sobrenome FROM mototaxi " +
                     "WHERE nome LIKE 'Hér%'";*/ // usando a % seria, qualquer coisa após o informado
 
-            // LIKE ou seja, como. O nome é como "Hercules"
+// LIKE ou seja, como. O nome é como "Hercules"
             /*consulta = "SELECT nome, sobrenome FROM mototaxi " +
                     "WHERE nome LIKE '%Hér%'";*/ // usando a % seria, qualquer coisa antes ou após o informado
 
-            // SELECT * FROM nome_tabela
+// SELECT * FROM nome_tabela
 
-            // pegando da tela/ componentes
+// pegando da tela/ componentes
            /* String filtro = "mar";
             consulta = "SELECT nome, sobrenome FROM mototaxi " +
                     "WHERE nome LIKE '%"+filtro+"%' ";*/
 
 
-           // Atualizar registro
+// Atualizar registro
            /* String update = " UPDATE mototaxi SET nome = 'Joao'" +
                     // WHERE usado para limitar, senao colocaria Joao em todos os nomes
                     " WHERE nome='Maria' ";
@@ -189,101 +294,3 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 */
-    }
-    /**
-     * Verificação do radioButton
-     *
-     * */
-    private void verificaRadioButton(){
-        radioGroup.setOnCheckedChangeListener(
-                new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup radioGroup, int idClicado) {
-
-                        if(R.id.radioButtonMotoTaxi == idClicado){
-                            buttonCreate.setVisibility(View.VISIBLE);
-                        } else {
-                            buttonCreate.setVisibility(View.GONE);
-                        }
-                    }
-                }
-        );
-    }
-
-    private boolean verificaMotoTaxista(){
-
-        MotoTaxiDAO  motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());
-        List<MotoTaxi> lista = motoTaxiDAO.listar();
-
-        for (MotoTaxi m: lista){
-            if (m.getDadosPessoais().getTelefone().equals( txtTelefone.getText().toString())
-                    && m.getDadosPessoais().getCpf().equals(txtCpf.getText().toString())){
-
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private boolean temCamposVazios(){
-        if (txtTelefone.getText().length() == 0
-                || txtCpf.getText().length() == 0){
-            return true;
-        }
-        return false;
-    }
-
-    public void clickCreateAvancar(View view){
-        // Logar
-        if (view.getId() == buttonLogin.getId()){
-
-            // se for mototaxista e os dados estiverem OK
-            if (radioMotoTaxi.isChecked()){
-
-                // os dados estiverem OK
-                if (verificaMotoTaxista()){
-                    Intent intent =  new Intent(
-                            getApplicationContext(),
-
-                            // activity que queremos ir
-                            //TipoServico.class
-                            MotoTaxista.class);
-
-                    // o name é o indice, como uma chave
-                    //
-                    intent.putExtra("telefone",txtTelefone.getText().toString());
-                    intent.putExtra("cpf", txtCpf.getText().toString());
-                    startActivity(intent);
-                    finish();                   // finalizar activity
-
-                } else {    // senao
-                    Toast.makeText(getApplicationContext(), "Telefone ou CPF não encontrado",Toast.LENGTH_LONG).show();
-                }
-
-            } else{     // É cliente
-
-                // se nao tiver campo vazio
-                //if (!temCamposVazios()){
-
-                    Intent intent = new Intent(
-                            getApplicationContext(), HomeActivity.class);
-
-                    startActivity(intent);
-                    //finish();               // finalizar activity
-
-                //} else {
-                //    Toast.makeText(getApplicationContext(), "Informe o Telefone e CPF",Toast.LENGTH_LONG).show();
-                //}
-            }
-
-            // Criar conta
-        } else if (view.getId() == buttonCreate.getId()){
-            Intent intent = new Intent(getApplicationContext(), CadastroTaxi.class);
-            startActivity(intent);
-
-        }
-
-    }
-
-}

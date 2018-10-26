@@ -17,6 +17,7 @@
         android:layout_height="75dp"/>
 
     <TextView
+        android:id="@+id/id_nome_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sarrah Eren"
@@ -24,12 +25,10 @@
         android:textStyle="bold"
         android:layout_marginTop="5dp" />
     <TextView
+        android:id="@+id/id_telefone_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SarrahEren@gmail.com"
-        android:textColor="@color/white" />
-
-
-
+        android:textColor="@color/white"/>
 
 </LinearLayout>

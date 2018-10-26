@@ -1,6 +1,8 @@
 package com.dominandoandroid.example.hercules.e_moto.model;
 
-public class Veiculo {
+import java.io.Serializable;
+
+public class Veiculo implements Serializable {
     private int idVeiculo;
     private String marca, modelo, placa;
 

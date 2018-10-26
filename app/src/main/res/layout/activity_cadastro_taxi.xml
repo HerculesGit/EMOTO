@@ -283,7 +283,7 @@
 
 
          <Button
-             android:id="@+id/buttonConfirmarCadastro"
+             android:id="@+id/bt_cadastro_Avancar"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_marginBottom="16dp"
@@ -292,7 +292,6 @@
              android:layout_marginTop="16dp"
              android:layout_weight="1"
              android:background="@drawable/buttons_gray_black"
-             android:onClick="cadastrarMotoTaxi"
              android:text="Avancar"
 
              android:textAppearance="@style/TextAppearance.AppCompat.Body1"

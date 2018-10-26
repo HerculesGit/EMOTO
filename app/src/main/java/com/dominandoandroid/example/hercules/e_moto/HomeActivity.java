@@ -10,11 +10,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.dominandoandroid.example.hercules.e_moto.model.MotoTaxi;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private MotoTaxi motoTaxi;
+    private TextView txtNomeHeader, textTelefoneHeader;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mToggle;
     private  NavigationView navigationView;
@@ -34,12 +39,18 @@ public class HomeActivity extends AppCompatActivity
         // apareceu as 3 barrinhas para abrir o menu
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // recuperando dados passado da outra tela
+        Bundle objetoEnviado = getIntent().getExtras();
+        if (objetoEnviado != null){
+            motoTaxi = (MotoTaxi) objetoEnviado.getSerializable("mototaxi");
+        }
 
         // eventos de click
         navigationView = findViewById(R.id.nav_navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        txtNomeHeader = findViewById(R.id.id_nome_header);
+        textTelefoneHeader = findViewById(R.id.id_telefone_header);
 
     }
 
@@ -68,7 +79,7 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_sair) {
             Toast.makeText(getApplicationContext(), "sair", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_seguranca) {
-
+            Toast.makeText(getApplicationContext(), "Segurança", Toast.LENGTH_SHORT).show();
         }
 
         // fechar o navigation quando clicar
@@ -95,5 +106,11 @@ public class HomeActivity extends AppCompatActivity
 
         //customDialog.cancel();
     }
+
+    private void adicionarInformacoesAoTextView(){
+        txtNomeHeader.setText(motoTaxi.getDadosPessoais().getNome());
+        textTelefoneHeader.setText(motoTaxi.getNumeroCelular());
+    }
+
 
 }
