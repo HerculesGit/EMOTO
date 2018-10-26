@@ -110,7 +110,7 @@ public class ViagensDAO implements IViagensDAO {
 
     public Viagens listarDe(int idMototaxista) {
 
-        String sql = "SELECT * FROM " + BDHelper.TABELA_VIAGENS;
+        String sql = "SELECT * FROM " + BDHelper.TABELA_VIAGENS+";";
         Cursor cursor = ler.rawQuery(sql, null);
 
         Viagens viagens = new Viagens();
@@ -149,7 +149,7 @@ public class ViagensDAO implements IViagensDAO {
     public List<Viagens> listar() {
         List<Viagens> lista = new ArrayList<>();
 
-        String sql = "SELECT * FROM " + BDHelper.TABELA_VIAGENS;
+        String sql = "SELECT * FROM " + BDHelper.TABELA_VIAGENS+";";
         Cursor cursor = ler.rawQuery(sql, null);
 
         while(cursor.moveToNext()){

@@ -8,9 +8,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dominandoandroid.example.hercules.e_moto.dao.BDHelper;
+import com.dominandoandroid.example.hercules.e_moto.dao.DadosPessoaisDAO;
 import com.dominandoandroid.example.hercules.e_moto.dao.MotoTaxiDAO;
 import com.dominandoandroid.example.hercules.e_moto.model.MotoTaxi;
 
@@ -19,60 +21,47 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private MotoTaxi motoTaxi;
-    private Button buttonLogin, buttonCreate;
-    private RadioGroup radioGroup;
-    private RadioButton radioUsuario, radioMotoTaxi;
+    private Button buttonLogin;
     private EditText txtTelefone, textSenhaCpf;
+    private TextView textBtRegistre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttonLogin = findViewById(R.id.buttonLogin);
-        radioGroup = findViewById(R.id.radioGroup);
-        radioUsuario = findViewById(R.id.radioButtonUsuario);
-        radioMotoTaxi = findViewById(R.id.radioButtonMotoTaxi);
-        buttonCreate = findViewById(R.id.buttonCreate);
+        BDHelper db = new BDHelper(MainActivity.this);
+
+        //buttonLogin = findViewById(R.id.buttonLogin);
+        textBtRegistre = findViewById(R.id.id_registre_se);
 
         txtTelefone = findViewById(R.id.id_txt_login_telefone);
-        textSenhaCpf = findViewById(R.id.id_txt_login_senha_cpf);
-
-        this.verificaRadioButton();
-
-        BDHelper db = new BDHelper(getApplicationContext());
+        //textSenhaCpf = findViewById(R.id.id_txt_login_senha_cpf);
 
         // nao apagar esta linha. Codigos comentados daqui e colocado la embaixo
 
-    }
-    /**
-     * Verificação do radioButton
-     *
-     * */
-    private void verificaRadioButton(){
-        radioGroup.setOnCheckedChangeListener(
-                new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup radioGroup, int idClicado) {
+        // teste
+        MotoTaxiDAO  motoTaxiDAO = new MotoTaxiDAO(MainActivity.this);
+        List<MotoTaxi> lista = motoTaxiDAO.listar();
 
-                        if(R.id.radioButtonMotoTaxi == idClicado){
-                            buttonCreate.setVisibility(View.VISIBLE);
-                            textSenhaCpf.setHint("Senha");
-                        } else {
-                            buttonCreate.setVisibility(View.GONE);
-                            textSenhaCpf.setHint("CPF");
-                        }
-                    }
-                }
-        );
+        System.out.println("helloooo");
+        for (MotoTaxi m: lista){
+            System.out.println(m.toString());
+        }
+
+        // teste
+        DadosPessoaisDAO dadosPessoaisDAO = new DadosPessoaisDAO(getApplicationContext());
+        dadosPessoaisDAO.pegarIDDoCpf("109");
+
+
     }
 
     /**
      * Verifica se o mototaxi estah cadastrado
      * */
-    private boolean verificaMotoTaxista(){
+    private boolean validaDados(){
 
-        MotoTaxiDAO  motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());
+        MotoTaxiDAO  motoTaxiDAO = new MotoTaxiDAO(MainActivity.this);
         List<MotoTaxi> lista = motoTaxiDAO.listar();
 
         for (MotoTaxi m: lista){
@@ -97,55 +86,31 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    /**
-     * Quando clicar em criar usuario-mototaxista
-     * */
-    public void clickCreateAvancar(View view){
-        // Logar
-        if (view.getId() == buttonLogin.getId()){
+    public void logar(View view) {
+        System.out.print("Its me");
+        if (validaDados()) { // os dados estiverem OK
 
-            // se for mototaxista e os dados estiverem OK
-            if (radioMotoTaxi.isChecked()){
-                if (verificaMotoTaxista()) { // os dados estiverem OK
+            // .class eh a activity que desejamos ir
+            Intent intencao = new Intent(MainActivity.this, HomeActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("mototaxi", motoTaxi);
+            intencao.putExtras(bundle);
 
-                    // .class eh a activity que desejamos ir
-                    Intent intencao = new Intent(MainActivity.this, HomeActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("mototaxi", motoTaxi);
-                    intencao.putExtras(bundle);
+            startActivity(intencao);
+            finish();                   // finalizar activity
 
-                    startActivity(intencao);
-                    finish();                   // finalizar activity
-
-                } else {    // senao
-                    Toast.makeText(getApplicationContext(), "Telefone ou CPF não encontrado",Toast.LENGTH_LONG).show();
-                }
-
-            } else{     // É cliente
-
-                // se nao tiver campo vazio
-                //if (!temCamposVazios()){
-
-                    Intent intent = new Intent(
-                            getApplicationContext(), HomeActivity.class);
-
-                    startActivity(intent);
-                    //finish();               // finalizar activity
-
-                //} else {
-                //    Toast.makeText(getApplicationContext(), "Informe o Telefone e CPF",Toast.LENGTH_LONG).show();
-                //}
-            }
-
-            // Criar conta
-        } else if (view.getId() == buttonCreate.getId()){
-            Intent intent = new Intent(getApplicationContext(), CadastroTaxi.class);
-            startActivity(intent);
-
+        } else {    // senao
+            Toast.makeText(getApplicationContext(), "Telefone ou senha inválido(s)", Toast.LENGTH_SHORT).show();
         }
-
     }
 
+    /**
+     * Ir para a tela de cadastro do mototaxista
+     * */
+    public void registrar(View view){
+            Intent intent = new Intent(getApplicationContext(), CadastroTaxi.class);
+            startActivity(intent);
+    }
 }
 
 //db.createTable();

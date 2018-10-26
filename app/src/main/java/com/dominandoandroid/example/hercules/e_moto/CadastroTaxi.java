@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.dominandoandroid.example.hercules.e_moto.dao.MotoTaxiDAO;
 import com.dominandoandroid.example.hercules.e_moto.model.DadosPessoais;
+import com.dominandoandroid.example.hercules.e_moto.model.Endereco;
 import com.dominandoandroid.example.hercules.e_moto.model.MotoTaxi;
 import com.dominandoandroid.example.hercules.e_moto.model.Veiculo;
 
@@ -33,6 +34,8 @@ public class CadastroTaxi extends AppCompatActivity {
         getSupportActionBar().hide(); //aqui a mágica
         setContentView(R.layout.activity_cadastro_taxi);
 
+        motoTaxi = new MotoTaxi();
+
         btAvancar = findViewById(R.id.bt_cadastro_Avancar);
         editTextNome = findViewById(R.id.cadastro_dados_nome);
         editTextSobrenome = findViewById(R.id.cadastro_dados_sobrenome);
@@ -52,12 +55,14 @@ public class CadastroTaxi extends AppCompatActivity {
                 //if (!camposEstaoVazios()){
 
                 // pegar os dados das editText's
-                motoTaxi = pegarDasEditText();
-                Intent intencao = new Intent(CadastroTaxi.this, CadastroVeiculo.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("mototaxi", motoTaxi);
-                intencao.putExtras(bundle);
-                startActivity(intencao);
+                //motoTaxi = pegarDasEditText();
+
+                    teste();
+                    Intent intencao = new Intent(CadastroTaxi.this, CadastroVeiculo.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("mototaxi", motoTaxi);
+                    intencao.putExtras(bundle);
+                    startActivity(intencao);
 
                 //}
             }
@@ -107,6 +112,7 @@ public class CadastroTaxi extends AppCompatActivity {
         return false;
     }
 
+    @Deprecated
     public void cadastrarMotoTaxi(View view){
 
         List<MotoTaxi> listaMotoTaxistas = new ArrayList<>();
@@ -152,7 +158,7 @@ public class CadastroTaxi extends AppCompatActivity {
                         motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());
 
                         // setando dados para a variavel motoTaxi
-                        motoTaxi = pegarDasEditText();
+                        //motoTaxi = pegarDasEditText();
 
                         // mandar  dados para a a proxima tela
                         intent.putExtra("cpf", motoTaxi.getDadosPessoais().getCpf());
@@ -183,7 +189,7 @@ public class CadastroTaxi extends AppCompatActivity {
     /**
      * Recupera das editText
      * */
-    private MotoTaxi pegarDasEditText(){
+    private void pegarDasEditText(){
 
         // pegar dados
         String nome = editTextNome.getText().toString();
@@ -198,9 +204,46 @@ public class CadastroTaxi extends AppCompatActivity {
 
         //String nome, String sobrenome, String cpf, String rg, String telefone, String senha, String email
         DadosPessoais dadosPessoais = new DadosPessoais();
-        motoTaxi.setDisponivel(1);
-        return motoTaxi;
 
+        dadosPessoais.setNome(nome+" "+sobrenome);
+        dadosPessoais.setRg(rg);
+        dadosPessoais.setCpf(cpf);
+
+        Endereco endereco = new Endereco();
+        endereco.setEstado(estado);
+        endereco.setCidade(cidade);
+        endereco.setRua(rua);
+        endereco.setNumero(numero);
+        endereco.setBairro(bairro);
+
+        motoTaxi.setDadosPessoais(dadosPessoais);
+        motoTaxi.setEndereco(endereco);
+
+        motoTaxi.setDisponivel(1);
+
+    }
+
+    private void teste(){
+        DadosPessoais dadosPessoais = new DadosPessoais();
+
+        //dadosPessoais.setNome("Hércules Silva");
+        //dadosPessoais.setRg("1345");
+        //dadosPessoais.setCpf("109");
+        dadosPessoais.setNome("Mario Quintana");
+        dadosPessoais.setRg("678");
+        dadosPessoais.setCpf("110");
+
+        Endereco endereco = new Endereco();
+        endereco.setEstado("PB");
+        endereco.setCidade("Mamanguape");
+        endereco.setRua("Rua Teonor monoglorio");
+        endereco.setNumero("17D");
+        endereco.setBairro("Centro");
+
+        motoTaxi.setDadosPessoais(dadosPessoais);
+        motoTaxi.setEndereco(endereco);
+
+        motoTaxi.setDisponivel(1);
     }
 
 }

@@ -98,7 +98,7 @@ public class EnderecoDAO implements IEnderecoDAO {
 
     public Endereco encontrarDe(int idEndereco){
 
-        String sql = "SELECT * FROM " + BDHelper.TABELA_ENDERECO;
+        String sql = "SELECT * FROM " + BDHelper.TABELA_ENDERECO+";";
         Cursor cursor = ler.rawQuery(sql, null);
 
         Endereco endereco = new Endereco();
@@ -130,7 +130,7 @@ public class EnderecoDAO implements IEnderecoDAO {
     public List<Endereco> listar() {
         List<Endereco> lista = new ArrayList<>();
 
-        String sql = "SELECT * FROM " + BDHelper.TABELA_ENDERECO;
+        String sql = "SELECT * FROM " + BDHelper.TABELA_ENDERECO+";";
         Cursor cursor = ler.rawQuery(sql, null);
 
         while(cursor.moveToNext()){

@@ -13,91 +13,109 @@ import android.widget.Toast;
 
 import com.dominandoandroid.example.hercules.e_moto.dao.MotoTaxiDAO;
 import com.dominandoandroid.example.hercules.e_moto.model.DadosPessoais;
+import com.dominandoandroid.example.hercules.e_moto.model.Endereco;
 import com.dominandoandroid.example.hercules.e_moto.model.MotoTaxi;
 import com.dominandoandroid.example.hercules.e_moto.model.Veiculo;
 
 public class EditarMotoTaxista extends AppCompatActivity {
 
-    private static Context ctx;
-    private static  MotoTaxi motoTaxi;
+    private MotoTaxi motoTaxi;
     private Button buttonAlterarDados;
-    private static MotoTaxiDAO motoTaxiDAO;
-    private static TextInputEditText editTextNome, editTextSobrenome, editTextCpf, editTextRg,
-            editTextCidade, editTextTelefone, editTextEmail;
+    private MotoTaxiDAO motoTaxiDAO;
+    private TextInputEditText editTextNome, editTextSobrenome, editTextCpf, editTextRg,
+            editTextEstado, editTextCidade, editTextRua, editTextNumero, editTextBairro, editTextTelefone, editTextEmail;
 
-//    , editTextSenha,
-//            inputEditTextMarca, inputEditTextModelo, inputEditTextPlaca;
-
-    private static DadosPessoais dadosPessoais;
-    private static Veiculo veiculo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_moto_taxista);
+        getSupportActionBar().hide();
 
-        ctx = getApplication();
-        Bundle dados = getIntent().getExtras();
+        // recuperando dados passado da outra tela
+        Bundle objetoEnviado = getIntent().getExtras();
 
-        motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());
-        String cpf = dados.getString("cpf");
-
-        for(MotoTaxi o : motoTaxiDAO.listar()){
-
-            if (o.getDadosPessoais().getCpf().equals(cpf)){
-                motoTaxi = o;
-                break;
-            }
+        if (objetoEnviado != null){
+            motoTaxi = (MotoTaxi) objetoEnviado.getSerializable("mototaxi");
         }
-
 
         buttonAlterarDados = findViewById(R.id.buttonAlterarDados);
         editTextNome = findViewById(R.id.editar_dados_nome);
         editTextSobrenome = findViewById(R.id.editar_dados_sobrenome);
         editTextRg = findViewById(R.id.editar_dados_rg);
         editTextCpf = findViewById(R.id.editar_dados_cpf);
+        editTextEstado= findViewById(R.id.editar_dados_estado);
         editTextCidade = findViewById(R.id.editar_dados_cidade);
+        editTextRua = findViewById(R.id.editar_dados_rua);
+        editTextNumero = findViewById(R.id.editar_dados_numero);
+        editTextBairro = findViewById(R.id.editar_dados_bairro);
         editTextTelefone = findViewById(R.id.editar_dados_telefone);
         editTextEmail = findViewById(R.id.editar_dados_email);
 
         carregaDadosNosCampos();
     }
+
+    /**
+     * Recupera as informacoes mototaxi e coloca nos editTexts
+     * */
     private void carregaDadosNosCampos(){
+
+        // alterar dasdos
         editTextNome.setText(motoTaxi.getDadosPessoais().getNome());
-        editTextSobrenome.setText(motoTaxi.getDadosPessoais().getSobrenome());
+        String nomeCompleto = motoTaxi.getDadosPessoais().getNome();
+        for (int i=0;i<nomeCompleto.length();i++){
+            if(nomeCompleto.charAt(i) == ' '){ // encontrou o espaco
+                editTextSobrenome.setText(nomeCompleto.substring(i));
+                break;
+            }
+        }
         editTextRg.setText(motoTaxi.getDadosPessoais().getRg());
         editTextCpf.setText(motoTaxi.getDadosPessoais().getCpf());
-        //editTextCidade.setText(motoTaxi.getDadosPessoais().getCidade());
-        //editTextTelefone.setText(motoTaxi.getDadosPessoais().getTelefone());
-        //editTextEmail.setText(motoTaxi.getDadosPessoais().getEmail());
-//        editTextSenha.setText(motoTaxi.getDadosPessoais().getSenha());
-//        inputEditTextMarca.setText(motoTaxi.getVeiculo().getMarca());
-//        inputEditTextModelo.setText(motoTaxi.getVeiculo().getModelo());
-//        inputEditTextPlaca.setText(motoTaxi.getVeiculo().getPlaca());
+
+        // localizacao
+        editTextEstado.setText(motoTaxi.getEndereco().getEstado());
+        editTextCidade.setText(motoTaxi.getEndereco().getCidade());
+        editTextRua.setText(motoTaxi.getEndereco().getRua());
+        editTextNumero.setText(motoTaxi.getEndereco().getNumero());
+        editTextBairro.setText(motoTaxi.getEndereco().getBairro());
+
+
+        // dados acesso
+        editTextTelefone.setText(motoTaxi.getNumeroCelular());
+        editTextEmail.setText(motoTaxi.getEmail());
+
     }
 
-    private static MotoTaxi recuperaDados(){
 
-        motoTaxiDAO = new MotoTaxiDAO(ctx);
+    /**
+     * Recupera os dados das texts e seta no mototaxi
+     * */
+    private void recuperaDados(){
         // pegar dados
         String nome = editTextNome.getText().toString();
         String sobrenome = editTextSobrenome.getText().toString();
         String rg = editTextRg.getText().toString();
         String cpf = editTextCpf.getText().toString();
+        String estado = editTextEstado.getText().toString();
         String cidade = editTextCidade.getText().toString();
+        String rua = editTextRua.getText().toString();
+        String numero = editTextNumero.getText().toString();
+        String bairro = editTextBairro.getText().toString();
         String telefone = editTextTelefone.getText().toString();
         String email = editTextEmail.getText().toString();
-//        String senha = editTextSenha.getText().toString();
-//        String marca = inputEditTextMarca.getText().toString();
-//        String modelo = inputEditTextModelo.getText().toString();
-//        String placa = inputEditTextPlaca.getText().toString();
 
-        //String nome, String sobrenome, String cpf, String rg, String telefone, String senha, String email
-//        dadosPessoais = new DadosPessoais(nome, sobrenome,cpf,rg,telefone,senha,email,cidade);
-//        veiculo = new Veiculo(marca,modelo,placa);
-//        motoTaxi = new MotoTaxi(dadosPessoais,true,0,0, 0.0, 0.0, veiculo);
+        motoTaxi.getDadosPessoais().setNome(nome+sobrenome);
+        motoTaxi.getDadosPessoais().setCpf(cpf);
+        motoTaxi.getDadosPessoais().setRg(rg);
 
-        return motoTaxi;
+        motoTaxi.getEndereco().setEstado(estado);
+        motoTaxi.getEndereco().setCidade(cidade);
+        motoTaxi.getEndereco().setRua(rua);
+        motoTaxi.getEndereco().setNumero(numero);
+        motoTaxi.getEndereco().setBairro(bairro);
+
+        motoTaxi.setNumeroCelular(telefone);
+        motoTaxi.setEmail(email);
     }
 
     private boolean camposEstaoVazios(){
@@ -121,6 +139,14 @@ public class EditarMotoTaxista extends AppCompatActivity {
             editTextCidade.setError("Campo obrigatório");
             return true;
         }
+        if (editTextRua.getText().toString().length() == 0){
+            editTextRua.setError("Campo obrigatório");
+            return true;
+        }
+        if (editTextBairro.getText().toString().length() == 0){
+            editTextBairro.setError("Campo obrigatório");
+            return true;
+        }
         if (editTextTelefone.getText().toString().length() == 0){
             editTextTelefone.setError("Campo obrigatório");
             return true;
@@ -129,33 +155,11 @@ public class EditarMotoTaxista extends AppCompatActivity {
             editTextEmail.setError("Campo obrigatório");
             return true;
         }
-//        if (editTextSenha.getText().toString().length() == 0){
-//            editTextSenha.setError("Campo obrigatório");
-//            return true;
-//        }
-//        if (inputEditTextMarca.getText().toString().length() == 0){
-//            inputEditTextMarca.setError("Campo obrigatório");
-//            return true;
-//        }
-//        if (inputEditTextModelo.getText().toString().length() == 0){
-//            inputEditTextModelo.setError("Campo obrigatório");
-//            return true;
-//        }
-//        if (inputEditTextPlaca.getText().toString().length() == 0){
-//            inputEditTextPlaca.setError("Campo obrigatório");
-//            return true;
-//        }
 
         return false;
     }
 
     public void alterarMotoTaxi(View view){
-
-//        List<MotoTaxi> listaMotoTaxistas = new ArrayList<>();
-//
-//        listaMotoTaxistas = motoTaxiDAO.listar();
-
-        // validacao dos campos
         if (!camposEstaoVazios()){
 
             // pergunta se deseja salvar realmente
@@ -184,21 +188,22 @@ public class EditarMotoTaxista extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //Toast.makeText(getApplicationContext(),"Foi em Sim",Toast.LENGTH_SHORT).show();
 
-                        motoTaxi = recuperaDados();
+                        recuperaDados();    // colocando os dados ds text's
                         if (motoTaxiDAO.atualizar(motoTaxi)){
-                            Toast.makeText(getApplicationContext(),"Alterado com sucesso ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"Alterado com sucesso ", Toast.LENGTH_SHORT).show();
 
-                            // vai para outra tela
-                            Intent intent = new Intent(getApplicationContext(), MotoTaxistaActivity.class);
+                            // .class eh a activity que desejamos ir
+                            Intent intencao = new Intent(getApplicationContext(), HomeActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("mototaxi", motoTaxi);
+                            intencao.putExtras(bundle);
 
-                            intent.putExtra("cpf",motoTaxi.getDadosPessoais().getCpf());
-                            startActivity(intent);
-                            finish();
+                            startActivity(intencao);
+                            finish();                   // finalizar activity
 
                         } else {
-                            Toast.makeText(getApplicationContext(),"Erro ao alterar mototaxista", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"Erro ao alterar mototaxista", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }

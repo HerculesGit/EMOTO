@@ -25,6 +25,10 @@ public class HomeActivity extends AppCompatActivity
     private  NavigationView navigationView;
     private Dialog customDialog;
 
+    // a header nao eh inflada automaticamente, sendo assim
+    // faz se necessario o uso dessa header
+    private View header;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,23 +39,38 @@ public class HomeActivity extends AppCompatActivity
 
         drawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
-
         // apareceu as 3 barrinhas para abrir o menu
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //txtNomeHeader = ;
+        //textTelefoneHeader = findViewById(R.id.id_telefone_header);
+
+        //System.out.println(">>>> "+txtNomeHeader.getText().toString());
+
+        //txtNomeHeader.setText("Maria antonieta");
+        //textTelefoneHeader.setText("(83)9999999");
 
         // recuperando dados passado da outra tela
         Bundle objetoEnviado = getIntent().getExtras();
         if (objetoEnviado != null){
             motoTaxi = (MotoTaxi) objetoEnviado.getSerializable("mototaxi");
+            //adicionarInformacoesAoTextView();
+            System.out.println("HOME" + motoTaxi.toString());
+
+        } else{
+            System.out.println("HOME NÃO RECUPEROU DADOS");
         }
 
         // eventos de click
         navigationView = findViewById(R.id.nav_navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        txtNomeHeader = findViewById(R.id.id_nome_header);
-        textTelefoneHeader = findViewById(R.id.id_telefone_header);
-
+        //you need to inflate the header view as it is not inflated automatically
+        header = navigationView.getHeaderView(0);
+        txtNomeHeader = header.findViewById(R.id.id_nome_header);
+        textTelefoneHeader = header.findViewById(R.id.id_telefone_header);
+        txtNomeHeader.setText(motoTaxi.getDadosPessoais().getNome());
+        textTelefoneHeader.setText(motoTaxi.getNumeroCelular());
     }
 
     // revolveu o problema de quando clicar nas 3 barrinhas

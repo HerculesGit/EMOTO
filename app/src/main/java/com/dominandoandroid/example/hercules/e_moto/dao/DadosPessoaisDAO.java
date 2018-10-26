@@ -96,7 +96,7 @@ public class DadosPessoaisDAO implements IDadosPessoaisDAO {
 
     public DadosPessoais encontrarDe(int idDadosPessoais){
 
-        String sql = "SELECT * FROM " + BDHelper.TABELA_DADOS_PESSOAIS;
+        String sql = "SELECT * FROM " + BDHelper.TABELA_DADOS_PESSOAIS+";";
         Cursor cursor = ler.rawQuery(sql, null);
 
         DadosPessoais dadosPessoais = new DadosPessoais();
@@ -120,7 +120,7 @@ public class DadosPessoaisDAO implements IDadosPessoaisDAO {
     }
     public DadosPessoais encontrarComCpf(String cpf){
 
-        String sql = "SELECT * FROM " + BDHelper.TABELA_DADOS_PESSOAIS;
+        String sql = "SELECT * FROM " + BDHelper.TABELA_DADOS_PESSOAIS+";";
         Cursor cursor = ler.rawQuery(sql, null);
 
         DadosPessoais dadosPessoais = new DadosPessoais();
@@ -149,7 +149,7 @@ public class DadosPessoaisDAO implements IDadosPessoaisDAO {
     public List<DadosPessoais> listar() {
         List<DadosPessoais> lista = new ArrayList<>();
 
-        String sql = "SELECT * FROM " + BDHelper.TABELA_DADOS_PESSOAIS;
+        String sql = "SELECT * FROM " + BDHelper.TABELA_DADOS_PESSOAIS+";";
         Cursor cursor = ler.rawQuery(sql, null);
 
         while(cursor.moveToNext()){
@@ -170,5 +170,21 @@ public class DadosPessoaisDAO implements IDadosPessoaisDAO {
         }
 
         return lista;
+    }
+
+    public int pegarIDDoCpf(String cpf){
+        String sql = "SELECT idMototaxista FROM "+BDHelper.TABELA_MOTOTAXISTA
+                +" INNER JOIN " + BDHelper.TABELA_DADOS_PESSOAIS
+                +" WHERE "+BDHelper.TABELA_MOTOTAXISTA+".idDadosPessoais="+BDHelper.TABELA_DADOS_PESSOAIS+".idDadosPessoais;";
+        Cursor cursor = ler.rawQuery(sql, null);
+
+
+        System.out.println("Chamou metodo" + cursor.getColumnIndex("idMototaxista"));
+        if(cursor.moveToNext()){
+            int idMototaxista = cursor.getInt(cursor.getColumnIndex("idMototaxista"));
+            return idMototaxista;
+        }
+
+        return 0;
     }
 }

@@ -26,6 +26,7 @@
         <activity android:name=".CadastroVeiculo" />
         <activity android:name=".MotoTaxistaActivity" />
         <activity android:name=".EditarMotoTaxista" />
+        <activity android:name=".FinalizarCadastro"/>
         <activity android:name=".HomeActivity"></activity>
     </application>
 

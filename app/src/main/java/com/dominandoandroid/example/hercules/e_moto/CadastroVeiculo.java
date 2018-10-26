@@ -31,6 +31,9 @@ public class CadastroVeiculo extends AppCompatActivity {
 
         if (objetoEnviado != null){
             motoTaxi = (MotoTaxi) objetoEnviado.getSerializable("mototaxi");
+            System.out.println(motoTaxi.toString());
+        } else {
+            System.out.println("NÃO CONSEGUIU PEGAR OS DADOS PASSADOS");
         }
 
         btAvancar.setOnClickListener(
@@ -41,8 +44,9 @@ public class CadastroVeiculo extends AppCompatActivity {
                         // se os campos nao estiverem vazios
                         //if(!camposEstaoVazios()){
                             // pegar os dados das editText's
-                            motoTaxi.setMoto(pegarDasEditText());
-                            Intent intencao = new Intent(CadastroVeiculo.this, FinalizarCadastro.class);
+                            //motoTaxi.setMoto(pegarDasEditText());
+                        teste();
+                        Intent intencao = new Intent(CadastroVeiculo.this, FinalizarCadastro.class);
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("mototaxi", motoTaxi);
                             intencao.putExtras(bundle);
@@ -76,6 +80,15 @@ public class CadastroVeiculo extends AppCompatActivity {
         moto.setModelo(inputEditTextModelo.getText().toString());
         moto.setPlaca(inputEditTextPlaca.getText().toString());
         return moto;
+    }
+
+    private void teste(){
+        Veiculo moto = new Veiculo();
+        moto.setMarca("Honda");
+        moto.setModelo("Fan 150");
+        moto.setPlaca("mng1234");
+
+        motoTaxi.setMoto(moto);
     }
 
 

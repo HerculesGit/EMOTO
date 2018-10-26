@@ -10,7 +10,7 @@ import com.dominandoandroid.example.hercules.e_moto.model.DadosPessoais;
 public class BDHelper extends SQLiteOpenHelper {
 
     public static int VERSION = 1;                      // primeira versão do App
-    public static String NOME_BD = "emoto";
+    public static String NOME_BD = "emoto.db";
     public static String TABELA_MOTOTAXISTA = "mototaxista";
     public static String TABELA_DADOS_PESSOAIS = "dadospessoais";
     public static String TABELA_MOTO = "moto";
@@ -43,6 +43,7 @@ public class BDHelper extends SQLiteOpenHelper {
      * */
     @Override
     public void onCreate(SQLiteDatabase db) {
+        System.out.print("Criou banco");
 
         // criar tabela mototaxistas
         String sqlDadosPessoais = "CREATE TABLE IF NOT EXISTS "+TABELA_DADOS_PESSOAIS
@@ -68,7 +69,8 @@ public class BDHelper extends SQLiteOpenHelper {
         String sqlMotoTaxista = "CREATE TABLE IF NOT EXISTS "+TABELA_MOTOTAXISTA
                 +" (idMototaxista INTEGER PRIMARY KEY AUTOINCREMENT,"
                 +" email VARCHAR NOT NULL UNIQUE,"
-                +" senha VARCHAR NOT NULL UNIQUE,"
+                +" senha VARCHAR NOT NULL,"
+                + "numeroCelular VARCHAR NOT NULL UNIQUE,"
                 +" idEndereco INTEGER,"
                 +" idMoto INTEGER,"
                 +" idDadosPessoais INTEGER,"

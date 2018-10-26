@@ -42,6 +42,10 @@ public class FinalizarCadastro extends AppCompatActivity {
 
         if (objetoEnviado != null){
             motoTaxi = (MotoTaxi) objetoEnviado.getSerializable("mototaxi");
+            System.out.println("TELA FINALIZAR \n"+motoTaxi.toString());
+
+        } else{
+            System.out.println("Não recuperou os dados TELA FINALIZAR");
         }
     }
 
@@ -75,7 +79,8 @@ public class FinalizarCadastro extends AppCompatActivity {
 
                         MotoTaxiDAO motoTaxiDAO = new MotoTaxiDAO(getApplicationContext()); // carreganod banco
 
-                        pegarDasEditText();                 // setando dados para a variavel motoTaxi
+                        //pegarDasEditText();                 // setando dados para a variavel motoTaxi
+                        teste();
                         motoTaxiDAO.salvar(motoTaxi);       // salvando no banco de dados
 
                         Bundle bundle = new Bundle();
@@ -108,4 +113,12 @@ public class FinalizarCadastro extends AppCompatActivity {
         dialog.show();
     }
 
+    private void teste(){
+        //motoTaxi.setNumeroCelular("83"+"99999999");
+        //motoTaxi.setEmail("hercules@gmail.com");
+        motoTaxi.setNumeroCelular("83"+"88888888");
+        motoTaxi.setEmail("mario@gmail.com");
+        motoTaxi.setSenha("123");
+
+    }
 }

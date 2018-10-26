@@ -94,7 +94,7 @@ public class VeiculoDAO implements IVeiculoDAO {
 
     public Veiculo encontrarDe(int idVeiculo){
 
-        String sql = "SELECT * FROM " + BDHelper.TABELA_MOTO;
+        String sql = "SELECT * FROM " + BDHelper.TABELA_MOTO+";";
         Cursor cursor = ler.rawQuery(sql, null);
 
         Veiculo veiculo = new Veiculo();

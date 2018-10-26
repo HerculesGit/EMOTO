@@ -66,6 +66,7 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
         //cv.put("idMototaxista",motoTaxi.getIdMototaxista());
         cv.put("email",motoTaxi.getEmail());
         cv.put("senha",motoTaxi.getSenha());
+        cv.put("numeroCelular",motoTaxi.getNumeroCelular());
         cv.put("idDadosPessoais",motoTaxi.getDadosPessoais().getIdDadosPessoais());
         cv.put("idEndereco",motoTaxi.getEndereco().getIdEndereco());
         cv.put("idMoto",motoTaxi.getMoto().getIdVeiculo());
@@ -86,7 +87,7 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
             Log.i("INFO", "Exito ao salvar mototaxista");
 
         } catch (Exception e){
-            Log.i("INFO", "Erro ai salvar usuário mototaxista: "+e.getMessage());
+            Log.i("INFO", "Erro ai salvar mototaxista: "+e.getMessage());
             return false;           // indica se houve problema
         }
 
@@ -101,6 +102,7 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
         cv.put("idMototaxista",motoTaxi.getIdMototaxista());
         cv.put("email",motoTaxi.getEmail());
         cv.put("senha",motoTaxi.getSenha());
+        cv.put("numeroCelular",motoTaxi.getNumeroCelular());
         cv.put("idDadosPessoais",motoTaxi.getDadosPessoais().getIdDadosPessoais());
         cv.put("idEndereco",motoTaxi.getEndereco().getIdEndereco());
         cv.put("idMoto",motoTaxi.getMoto().getIdVeiculo());
@@ -141,7 +143,7 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
     public List<MotoTaxi> listar() {
         List<MotoTaxi> lista = new ArrayList<>();
 
-        String sql = "SELECT * FROM " + BDHelper.TABELA_MOTOTAXISTA;
+        String sql = "SELECT * FROM " + BDHelper.TABELA_MOTOTAXISTA+";";
         Cursor cursor = ler.rawQuery(sql, null);
 
         while(cursor.moveToNext()){
@@ -150,6 +152,7 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
 
             String email = cursor.getString(cursor.getColumnIndex("email"));
             String senha = cursor.getString(cursor.getColumnIndex("senha"));
+            String numeroCelular = cursor.getString(cursor.getColumnIndex("numeroCelular"));
 
             int idMototaxista = cursor.getInt(cursor.getColumnIndex("idMototaxista"));
             int idDadosPessoais = cursor.getInt(cursor.getColumnIndex("idDadosPessoais"));
@@ -177,9 +180,15 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
             mototaxista.setMoto(veiculo);
             mototaxista.setViagens(viagens);
             mototaxista.setDisponivel(disponibilidade);
+            mototaxista.setNumeroCelular(numeroCelular);
+
+            System.out.println("tralala");
 
             lista.add(mototaxista);
         }
+        cursor.close();
+
+        System.out.println("SIZE:" + lista.size());
 
         return lista;
     }
