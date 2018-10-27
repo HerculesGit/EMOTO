@@ -45,15 +45,16 @@ public class BDHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         System.out.print("Criou banco");
 
-        // criar tabela mototaxistas
         String sqlDadosPessoais = "CREATE TABLE IF NOT EXISTS "+TABELA_DADOS_PESSOAIS
-                +" (idDadosPessoais INTEGER PRIMARY KEY AUTOINCREMENT,"
+                //+" (idDadosPessoais INTEGER PRIMARY KEY AUTOINCREMENT,"
+                +" (idDadosPessoais INTEGER PRIMARY KEY,"
                 +" nome VARCHAR(80) NOT NULL,"
                 +" rg VARCHAR NOT NULL UNIQUE,"
                 +" cpf VARCHAR NOT NULL UNIQUE)";
 
         String sqlEndereco = "CREATE TABLE IF NOT EXISTS "+TABELA_ENDERECO
-                +" (idEndereco INTEGER PRIMARY KEY AUTOINCREMENT,"
+                //+" (idEndereco INTEGER PRIMARY KEY AUTOINCREMENT,"
+                +" (idEndereco INTEGER PRIMARY KEY,"
                 +" estado VARCHAR NOT NULL,"
                 +" cidade VARCHAR NOT NULL,"
                 +" rua VARCHAR NOT NULL,"
@@ -61,7 +62,8 @@ public class BDHelper extends SQLiteOpenHelper {
                 +" bairro VARCHAR NOT NULL)";
 
         String sqlMoto = "CREATE TABLE IF NOT EXISTS "+TABELA_MOTO
-                +" (idMoto INTEGER PRIMARY KEY AUTOINCREMENT,"
+                //+" (idMoto INTEGER PRIMARY KEY AUTOINCREMENT,"
+                +" (idMoto INTEGER PRIMARY KEY,"
                 +" marca VARCHAR NOT NULL,"
                 +" modelo VARCHAR NOT NULL,"
                 +" placa VARCHAR NOT NULL)";

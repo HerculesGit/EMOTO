@@ -10,11 +10,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.dominandoandroid.example.hercules.e_moto.dao.DadosPessoaisDAO;
+import com.dominandoandroid.example.hercules.e_moto.dao.EnderecoDAO;
 import com.dominandoandroid.example.hercules.e_moto.dao.MotoTaxiDAO;
+import com.dominandoandroid.example.hercules.e_moto.dao.VeiculoDAO;
+import com.dominandoandroid.example.hercules.e_moto.dao.ViagensDAO;
 import com.dominandoandroid.example.hercules.e_moto.model.MotoTaxi;
 
 public class FinalizarCadastro extends AppCompatActivity {
     private MotoTaxi motoTaxi;
+
+    private MotoTaxiDAO motoTaxiDAO;
+    private VeiculoDAO veiculoDAO;
+    private EnderecoDAO enderecoDAO;
+    private DadosPessoaisDAO dadosPessoaisDAO;
+
     private TextInputEditText operadora, numero, email, senha;
     private Button btConfirmar;
 
@@ -77,11 +87,29 @@ public class FinalizarCadastro extends AppCompatActivity {
                         // vai para outra tela
                         Intent intencao = new Intent(getApplicationContext(), HomeActivity.class);
 
-                        MotoTaxiDAO motoTaxiDAO = new MotoTaxiDAO(getApplicationContext()); // carreganod banco
-
                         //pegarDasEditText();                 // setando dados para a variavel motoTaxi
                         teste();
-                        motoTaxiDAO.salvar(motoTaxi);       // salvando no banco de dados
+
+                        // Inicializando
+                        dadosPessoaisDAO = new DadosPessoaisDAO(getApplicationContext());
+                        enderecoDAO = new EnderecoDAO(getApplicationContext());
+                        veiculoDAO = new VeiculoDAO(getApplicationContext());
+                        motoTaxiDAO = new MotoTaxiDAO(getApplicationContext());
+
+                        // salvando no banco de dados
+                        motoTaxiDAO.salvar(motoTaxi);
+
+                        System.out.println("OLHA O ID MINHA GENTE"+ (int) motoTaxiDAO.ID_RECENTE_INSERIDO);
+                        motoTaxi.getDadosPessoais().setIdDadosPessoais((int) motoTaxiDAO.ID_RECENTE_INSERIDO);
+                        motoTaxi.getEndereco().setIdEndereco((int) motoTaxiDAO.ID_RECENTE_INSERIDO);
+                        motoTaxi.getMoto().setIdVeiculo((int) motoTaxiDAO.ID_RECENTE_INSERIDO);
+
+                        dadosPessoaisDAO.salvar(motoTaxi.getDadosPessoais());
+                        enderecoDAO.salvar(motoTaxi.getEndereco());
+                        veiculoDAO.salvar(motoTaxi.getMoto());
+
+                        motoTaxi.setIdMototaxista(((int) motoTaxiDAO.ID_RECENTE_INSERIDO));
+                        motoTaxiDAO.adicionarIds(((int) motoTaxiDAO.ID_RECENTE_INSERIDO));
 
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("mototaxi", motoTaxi);
@@ -114,10 +142,10 @@ public class FinalizarCadastro extends AppCompatActivity {
     }
 
     private void teste(){
-        //motoTaxi.setNumeroCelular("83"+"99999999");
-        //motoTaxi.setEmail("hercules@gmail.com");
-        motoTaxi.setNumeroCelular("83"+"88888888");
-        motoTaxi.setEmail("mario@gmail.com");
+        motoTaxi.setNumeroCelular("83"+"99999999");
+        motoTaxi.setEmail("hercules@gmail.com");
+        //motoTaxi.setNumeroCelular("83"+"88888888");
+        //motoTaxi.setEmail("mario@gmail.com");
         motoTaxi.setSenha("123");
 
     }

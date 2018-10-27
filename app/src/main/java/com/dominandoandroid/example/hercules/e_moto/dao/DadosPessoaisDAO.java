@@ -33,6 +33,7 @@ public class DadosPessoaisDAO implements IDadosPessoaisDAO {
         ContentValues cv = new ContentValues();
 
         // nome do campo e valor para o campo
+        cv.put("idDadosPessoais",dadosPessoais.getIdDadosPessoais());
         cv.put("nome",dadosPessoais.getNome());
         cv.put("rg",dadosPessoais.getRg());
         cv.put("cpf",dadosPessoais.getCpf());
@@ -44,7 +45,7 @@ public class DadosPessoaisDAO implements IDadosPessoaisDAO {
                     null,
                     cv);
 
-            Log.i("INFO", "Exito ao salvar dados pessoais");
+            Log.i("INFO", "Exito ao salvar dados pessoais" + dadosPessoais.getNome() + " " + dadosPessoais.getCpf());
 
         } catch (Exception e){
             Log.i("INFO", "Erro ai salvar dados pessoais: "+e.getMessage());
@@ -95,7 +96,6 @@ public class DadosPessoaisDAO implements IDadosPessoaisDAO {
     }
 
     public DadosPessoais encontrarDe(int idDadosPessoais){
-
         String sql = "SELECT * FROM " + BDHelper.TABELA_DADOS_PESSOAIS+";";
         Cursor cursor = ler.rawQuery(sql, null);
 
@@ -128,7 +128,7 @@ public class DadosPessoaisDAO implements IDadosPessoaisDAO {
             int idDadosPessoaisConsuta = cursor.getInt(cursor.getColumnIndex("idDadosPessoais"));
 
             String cpfConsulta = cursor.getString(cursor.getColumnIndex("cpf"));
-
+            System.out.println("cpfs encontrado" + cpfConsulta);
             if (cpfConsulta.equals(cpf)){
                 String nome = cursor.getString(cursor.getColumnIndex("nome"));
                 String rg = cursor.getString(cursor.getColumnIndex("rg"));
@@ -153,7 +153,6 @@ public class DadosPessoaisDAO implements IDadosPessoaisDAO {
         Cursor cursor = ler.rawQuery(sql, null);
 
         while(cursor.moveToNext()){
-
             DadosPessoais dadosPessoais = new DadosPessoais();
 
             int idDadosPessoais = cursor.getInt(cursor.getColumnIndex("idDadosPessoais"));
@@ -168,23 +167,40 @@ public class DadosPessoaisDAO implements IDadosPessoaisDAO {
 
             lista.add(dadosPessoais);
         }
-
+        cursor.close();
         return lista;
     }
 
     public int pegarIDDoCpf(String cpf){
-        String sql = "SELECT idMototaxista FROM "+BDHelper.TABELA_MOTOTAXISTA
-                +" INNER JOIN " + BDHelper.TABELA_DADOS_PESSOAIS
-                +" WHERE "+BDHelper.TABELA_MOTOTAXISTA+".idDadosPessoais="+BDHelper.TABELA_DADOS_PESSOAIS+".idDadosPessoais;";
-        Cursor cursor = ler.rawQuery(sql, null);
+        String sql = "SELECT * FROM " + BDHelper.TABELA_DADOS_PESSOAIS + ";";
+        Cursor cursor = ler.rawQuery(sql,null);
+        int idDadosPessoais = -1;
+        while(cursor.moveToNext()){
+            String cpfConsulta = cursor.getString(cursor.getColumnIndex("cpf"));
 
+            System.out.println("cpf's achados " + cpfConsulta + "-"+cpf + "->>"+cursor.getColumnIndex("idDadosPessoais"));
 
-        System.out.println("Chamou metodo" + cursor.getColumnIndex("idMototaxista"));
-        if(cursor.moveToNext()){
-            int idMototaxista = cursor.getInt(cursor.getColumnIndex("idMototaxista"));
-            return idMototaxista;
+            if (cpfConsulta.equals(cpf)){
+                idDadosPessoais = cursor.getInt(cursor.getColumnIndex("idDadosPessoais"));
+                break;
+            }
+        }
+        cursor.close();
+
+        String sqlMototaxista = "SELECT * FROM "+BDHelper.TABELA_MOTOTAXISTA+";";
+        Cursor c = ler.rawQuery(sqlMototaxista,null);
+        while (c.moveToNext()){
+
+            int idDadosPessoaisM = c.getInt(c.getColumnIndex("idDadosPessoais"));
+            System.out.println("entrei while" + idDadosPessoaisM + " " + idDadosPessoais);
+            if(idDadosPessoais == idDadosPessoaisM){
+                System.out.println("encontrou");
+                int idMotoTaxista = c.getInt(c.getColumnIndex("idMototaxista"));
+                return idMotoTaxista;
+            }
         }
 
-        return 0;
+
+        return -1;
     }
 }

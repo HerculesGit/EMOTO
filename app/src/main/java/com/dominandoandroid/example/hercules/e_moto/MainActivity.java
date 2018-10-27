@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private MotoTaxi motoTaxi;
     private Button buttonLogin;
-    private EditText txtTelefone, textSenhaCpf;
+    private EditText editTextTelefone, editTextSenha;
     private TextView textBtRegistre;
 
     @Override
@@ -32,11 +32,48 @@ public class MainActivity extends AppCompatActivity {
 
         BDHelper db = new BDHelper(MainActivity.this);
 
-        //buttonLogin = findViewById(R.id.buttonLogin);
+        buttonLogin = findViewById(R.id.buttonLogar);
         textBtRegistre = findViewById(R.id.id_registre_se);
 
-        txtTelefone = findViewById(R.id.id_txt_login_telefone);
-        //textSenhaCpf = findViewById(R.id.id_txt_login_senha_cpf);
+        editTextTelefone = findViewById(R.id.id_txt_login_telefone);
+        editTextSenha = findViewById(R.id.id_txt_login_senha);
+
+
+        // click bt login
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // verificar se os campos nao estao vazios
+                if(!camposEstaoVazios()){
+
+                    if (validaDados()) { // os dados estiverem OK
+
+                        // .class eh a activity que desejamos ir
+                        Intent intencao = new Intent(MainActivity.this, HomeActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("mototaxi", motoTaxi);
+                        intencao.putExtras(bundle);
+
+                        startActivity(intencao);
+                        finish();                   // finalizar activity
+
+                    } else {    // senao
+                        Toast.makeText(getApplicationContext(), "Telefone ou senha inválido(s)", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            }
+        });
+
+        // click txt registre-se
+        textBtRegistre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
 
         // nao apagar esta linha. Codigos comentados daqui e colocado la embaixo
 
@@ -46,12 +83,15 @@ public class MainActivity extends AppCompatActivity {
 
         System.out.println("helloooo");
         for (MotoTaxi m: lista){
-            System.out.println(m.toString());
+            System.out.println("->"+m.toString());
         }
 
         // teste
         DadosPessoaisDAO dadosPessoaisDAO = new DadosPessoaisDAO(getApplicationContext());
-        dadosPessoaisDAO.pegarIDDoCpf("109");
+        int id = dadosPessoaisDAO.pegarIDDoCpf("109");
+
+        System.out.println("Olha o id"+id);
+        //dadosPessoaisDAO.listar();
 
 
     }
@@ -65,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
         List<MotoTaxi> lista = motoTaxiDAO.listar();
 
         for (MotoTaxi m: lista){
-            if (m.getNumeroCelular().equals(txtTelefone.getText().toString())
-                    && m.getSenha().equals(textSenhaCpf.getText().toString())){
+            if (m.getNumeroCelular().equals(editTextTelefone.getText().toString())
+                    && m.getSenha().equals(editTextSenha.getText().toString())){
 
                 motoTaxi = m;
                 return true;
@@ -78,30 +118,15 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Verifica se tem campos vazios
      * */
-    private boolean temCamposVazios(){
-        if (txtTelefone.getText().length() == 0
-                || textSenhaCpf.getText().length() == 0){
+    private boolean camposEstaoVazios(){
+        if (editTextTelefone.getText().length() == 0){
+            editTextTelefone.setError("Campo obrigatório");
+            return true;
+        } else if(editTextSenha.getText().length() == 0){
+            editTextSenha.setError("Campo obrigatório");
             return true;
         }
         return false;
-    }
-
-    public void logar(View view) {
-        System.out.print("Its me");
-        if (validaDados()) { // os dados estiverem OK
-
-            // .class eh a activity que desejamos ir
-            Intent intencao = new Intent(MainActivity.this, HomeActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("mototaxi", motoTaxi);
-            intencao.putExtras(bundle);
-
-            startActivity(intencao);
-            finish();                   // finalizar activity
-
-        } else {    // senao
-            Toast.makeText(getApplicationContext(), "Telefone ou senha inválido(s)", Toast.LENGTH_SHORT).show();
-        }
     }
 
     /**

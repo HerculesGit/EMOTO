@@ -24,6 +24,7 @@ import java.util.List;
  * */
 public class MotoTaxiDAO implements IMotoTaxiDAO {
 
+    public long ID_RECENTE_INSERIDO=0;
     private BDHelper db;
     private SQLiteDatabase escreve;         // escrever dados na tabela/ salvar
     private SQLiteDatabase ler;             // ler as tabelas
@@ -46,21 +47,6 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
     @Override
     public boolean salvar(MotoTaxi motoTaxi) {
 
-
-        /*(DadosPessoais dadosPessoais, boolean disponivel, int qtdViagensDiaria,
-                    int qtdEncomendas, Double dinheiro, Double valorViagem, Veiculo veiculo) {
-        this.dadosPessoais = dadosPessoais;*/
-
-        /*public DadosPessoais(String nome, String sobrenome, String cpf, String rg, String telefone, String senha, String email) {*/
-//        motoTaxi = new MotoTaxi(new DadosPessoais("Hercules", "Silva",
-//                "109","333","83999999999","herco123","email@email")
-//                , true, 0, 0, 0.0,
-//                0.0,
-//                new Veiculo("Honda", "fan 150", "mno4545")
-//
-//        );
-//        System.out.println(motoTaxi.toString());
-
         ContentValues cv = new ContentValues();
         // nome do campo e valor para o campo
         //cv.put("idMototaxista",motoTaxi.getIdMototaxista());
@@ -73,7 +59,7 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
         cv.put("disponibilidade",motoTaxi.getDisponivel());
 
         try{
-            escreve.insert(
+            ID_RECENTE_INSERIDO = escreve.insert(
                     // nome da tabela
                     BDHelper.TABELA_MOTOTAXISTA,
 
@@ -86,9 +72,13 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
             );
             Log.i("INFO", "Exito ao salvar mototaxista");
 
+            System.out.println("Id recente "+ID_RECENTE_INSERIDO);
+
         } catch (Exception e){
             Log.i("INFO", "Erro ai salvar mototaxista: "+e.getMessage());
             return false;           // indica se houve problema
+        } finally {
+
         }
 
         return true;
@@ -191,5 +181,27 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
         System.out.println("SIZE:" + lista.size());
 
         return lista;
+    }
+
+    /**
+     * Atualiza os ids da tabela mototaxita a partir do idMototaxista passado
+     * */
+    public boolean adicionarIds(int id){
+        ContentValues cv = new ContentValues();
+        cv.put("idDadosPessoais", id);
+        cv.put("idEndereco", id);
+        cv.put("idMoto", id);
+
+        try {
+            String[] args = {String.valueOf(id)};
+            escreve.update(BDHelper.TABELA_MOTOTAXISTA, cv, "idMototaxista=?", args );
+            Log.i("INFO", "id's adicionados com sucesso!");
+        }catch (Exception e){
+            Log.e("INFO", "Erro ao atualizada id's " + e.getMessage() );
+            return false;
+        }
+
+        return true;
+
     }
 }

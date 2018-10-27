@@ -33,6 +33,7 @@ public class VeiculoDAO implements IVeiculoDAO {
         ContentValues cv = new ContentValues();
 
         // nome do campo e valor para o campo
+        cv.put("idMoto",veiculo.getIdVeiculo());
         cv.put("marca",veiculo.getMarca());
         cv.put("modelo",veiculo.getModelo());
         cv.put("placa",veiculo.getPlaca());

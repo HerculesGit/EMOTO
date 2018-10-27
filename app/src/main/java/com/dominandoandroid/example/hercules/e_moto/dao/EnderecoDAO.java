@@ -33,6 +33,7 @@ public class EnderecoDAO implements IEnderecoDAO {
         ContentValues cv = new ContentValues();
 
         // nome do campo e valor para o campo
+        cv.put("idEndereco",endereco.getIdEndereco());
         cv.put("estado",endereco.getEstado());
         cv.put("cidade",endereco.getCidade());
         cv.put("rua",endereco.getRua());

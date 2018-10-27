@@ -25,7 +25,7 @@ public class CadastroTaxi extends AppCompatActivity {
     private Button btAvancar;
     private TextInputEditText editTextNome, editTextSobrenome, editTextCpf, editTextRg,
             editTextEstado, editTextCidade, editTextRua, editTextNumero, editTextBairro;
-    private MotoTaxiDAO motoTaxiDAO;
+    //private MotoTaxiDAO motoTaxiDAO;
     private MotoTaxi motoTaxi;
 
     @Override
@@ -112,6 +112,68 @@ public class CadastroTaxi extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * Recupera das editText
+     * */
+    private void pegarDasEditText(){
+
+        // pegar dados
+        String nome = editTextNome.getText().toString();
+        String sobrenome = editTextSobrenome.getText().toString();
+        String rg = editTextRg.getText().toString();
+        String cpf = editTextCpf.getText().toString();
+        String estado = editTextEstado.getText().toString();
+        String cidade = editTextCidade.getText().toString();
+        String rua= editTextRua.getText().toString();
+        String numero = editTextNumero.getText().toString();
+        String bairro = editTextBairro.getText().toString();
+
+        //String nome, String sobrenome, String cpf, String rg, String telefone, String senha, String email
+        DadosPessoais dadosPessoais = new DadosPessoais();
+
+        dadosPessoais.setNome(nome+" "+sobrenome);
+        dadosPessoais.setRg(rg);
+        dadosPessoais.setCpf(cpf);
+
+        Endereco endereco = new Endereco();
+        endereco.setEstado(estado);
+        endereco.setCidade(cidade);
+        endereco.setRua(rua);
+        endereco.setNumero(numero);
+        endereco.setBairro(bairro);
+
+        motoTaxi.setDadosPessoais(dadosPessoais);
+        motoTaxi.setEndereco(endereco);
+
+        motoTaxi.setDisponivel(1);
+
+    }
+
+    private void teste(){
+        DadosPessoais dadosPessoais = new DadosPessoais();
+
+        dadosPessoais.setNome("Hércules Silva");
+        dadosPessoais.setRg("1345");
+        dadosPessoais.setCpf("109");
+        //dadosPessoais.setNome("Mario Quintana");
+        //dadosPessoais.setRg("678");
+        //dadosPessoais.setCpf("108");
+
+        Endereco endereco = new Endereco();
+        endereco.setEstado("PB");
+        endereco.setCidade("Mamanguape");
+        endereco.setRua("Rua Teonor monoglorio");
+        endereco.setNumero("17D");
+        endereco.setBairro("Centro");
+
+        motoTaxi.setDadosPessoais(dadosPessoais);
+        motoTaxi.setEndereco(endereco);
+
+        motoTaxi.setDisponivel(1);
+    }
+
+}
+/*
     @Deprecated
     public void cadastrarMotoTaxi(View view){
 
@@ -127,13 +189,14 @@ public class CadastroTaxi extends AppCompatActivity {
         //}
 
     }
-
+*/
+ /*
     @Deprecated
     private void desejaSalvar(){
 
         /**
          * Criar AlertDialog
-         * */
+         *
         AlertDialog.Builder dialog  = new AlertDialog.Builder(
                 this
         );
@@ -185,65 +248,4 @@ public class CadastroTaxi extends AppCompatActivity {
         dialog.create();
         dialog.show();
     }
-
-    /**
-     * Recupera das editText
-     * */
-    private void pegarDasEditText(){
-
-        // pegar dados
-        String nome = editTextNome.getText().toString();
-        String sobrenome = editTextSobrenome.getText().toString();
-        String rg = editTextRg.getText().toString();
-        String cpf = editTextCpf.getText().toString();
-        String estado = editTextEstado.getText().toString();
-        String cidade = editTextCidade.getText().toString();
-        String rua= editTextRua.getText().toString();
-        String numero = editTextNumero.getText().toString();
-        String bairro = editTextBairro.getText().toString();
-
-        //String nome, String sobrenome, String cpf, String rg, String telefone, String senha, String email
-        DadosPessoais dadosPessoais = new DadosPessoais();
-
-        dadosPessoais.setNome(nome+" "+sobrenome);
-        dadosPessoais.setRg(rg);
-        dadosPessoais.setCpf(cpf);
-
-        Endereco endereco = new Endereco();
-        endereco.setEstado(estado);
-        endereco.setCidade(cidade);
-        endereco.setRua(rua);
-        endereco.setNumero(numero);
-        endereco.setBairro(bairro);
-
-        motoTaxi.setDadosPessoais(dadosPessoais);
-        motoTaxi.setEndereco(endereco);
-
-        motoTaxi.setDisponivel(1);
-
-    }
-
-    private void teste(){
-        DadosPessoais dadosPessoais = new DadosPessoais();
-
-        //dadosPessoais.setNome("Hércules Silva");
-        //dadosPessoais.setRg("1345");
-        //dadosPessoais.setCpf("109");
-        dadosPessoais.setNome("Mario Quintana");
-        dadosPessoais.setRg("678");
-        dadosPessoais.setCpf("110");
-
-        Endereco endereco = new Endereco();
-        endereco.setEstado("PB");
-        endereco.setCidade("Mamanguape");
-        endereco.setRua("Rua Teonor monoglorio");
-        endereco.setNumero("17D");
-        endereco.setBairro("Centro");
-
-        motoTaxi.setDadosPessoais(dadosPessoais);
-        motoTaxi.setEndereco(endereco);
-
-        motoTaxi.setDisponivel(1);
-    }
-
-}
+*/
