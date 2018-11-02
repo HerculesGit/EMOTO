@@ -6,7 +6,8 @@
     android:id="@+id/activity_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    android:orientation="vertical"
+    tools:context=".activity.HomeActivity">
 
 
     <ScrollView
@@ -24,46 +25,37 @@
 
             <TextView
                 android:id="@+id/home_text_saudacoes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="Bom dia!"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/include_informacoes"
-                app:layout_constraintTop_toTopOf="@+id/include_informacoes" />
-
-
-            <include
-                android:id="@+id/include_informacoes"
-                layout="@layout/layout_home_quadrado_informacoes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Bom dia!"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_height="324dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="60dp"
                 android:src="@drawable/mapsicon"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/include_informacoes" />
+                app:layout_constraintStart_toStartOf="parent" />
+
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 
+    <!-- A forma como  ele ficou estruturado limita que essa barra de-->
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -78,6 +70,7 @@
             app:layout_constraintStart_toStartOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
+    <!--Navigation view, nao editar-->
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_navigation_view"
         android:layout_width="wrap_content"

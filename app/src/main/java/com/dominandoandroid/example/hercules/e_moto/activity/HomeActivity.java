@@ -1,4 +1,4 @@
-package com.dominandoandroid.example.hercules.e_moto;
+package com.dominandoandroid.example.hercules.e_moto.activity;
 
 import android.app.Dialog;
 import android.support.annotation.NonNull;
@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dominandoandroid.example.hercules.e_moto.R;
 import com.dominandoandroid.example.hercules.e_moto.model.MotoTaxi;
 
 public class HomeActivity extends AppCompatActivity

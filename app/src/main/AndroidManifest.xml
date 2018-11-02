@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,13 +21,15 @@
         <activity android:name=".Encomenda" />
         <activity android:name=".ConfiguracaoViagem" />
         <activity android:name=".ConfirmacaoPiloto" />
-        <activity android:name=".CadastroTaxi" />
+        <activity android:name=".activity.CadastroTaxi" />
         <activity android:name=".Status" />
-        <activity android:name=".CadastroVeiculo" />
-        <activity android:name=".MotoTaxistaActivity" />
-        <activity android:name=".EditarMotoTaxista" />
-        <activity android:name=".FinalizarCadastro"/>
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".activity.CadastroVeiculo" />
+        <activity android:name=".activity.MotoTaxistaActivity" />
+        <activity android:name=".activity.EditarMotoTaxista" />
+        <activity android:name=".activity.FinalizarCadastro"/>
+        <activity android:name=".activity.HomeActivity"
+            android:screenOrientation="portrait"
+            ></activity>
     </application>
 
 </manifest>

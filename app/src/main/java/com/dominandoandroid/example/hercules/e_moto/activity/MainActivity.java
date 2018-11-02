@@ -1,16 +1,16 @@
-package com.dominandoandroid.example.hercules.e_moto;
+package com.dominandoandroid.example.hercules.e_moto.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dominandoandroid.example.hercules.e_moto.R;
 import com.dominandoandroid.example.hercules.e_moto.dao.BDHelper;
 import com.dominandoandroid.example.hercules.e_moto.dao.DadosPessoaisDAO;
 import com.dominandoandroid.example.hercules.e_moto.dao.MotoTaxiDAO;
@@ -20,6 +20,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final String ARQUIVO_PREFERENCIA_LOGIN = "loginPreferencial";
+
+    private String numero = "";
+    private String senha = "";
     private MotoTaxi motoTaxi;
     private Button buttonLogin;
     private EditText editTextTelefone, editTextSenha;
@@ -38,16 +42,23 @@ public class MainActivity extends AppCompatActivity {
         editTextTelefone = findViewById(R.id.id_txt_login_telefone);
         editTextSenha = findViewById(R.id.id_txt_login_senha);
 
+        recuperarPreferencia();
 
         // click bt login
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // colocar os valores nas variaveis
+                numero = editTextTelefone.getText().toString();
+                senha = editTextSenha.getText().toString();
+
                 // verificar se os campos nao estao vazios
                 if(!camposEstaoVazios()){
 
                     if (validaDados()) { // os dados estiverem OK
 
+                        salvarPreferencia();
                         // .class eh a activity que desejamos ir
                         Intent intencao = new Intent(MainActivity.this, HomeActivity.class);
                         Bundle bundle = new Bundle();
@@ -65,11 +76,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // click txt registre-se
+        /**
+         * Ir para a tela de cadastro do mototaxista
+         * */
         textBtRegistre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // click txt registre-se
+                Intent intent = new Intent(getApplicationContext(), CadastroTaxi.class);
+                startActivity(intent);
             }
         });
 
@@ -81,10 +96,10 @@ public class MainActivity extends AppCompatActivity {
         MotoTaxiDAO  motoTaxiDAO = new MotoTaxiDAO(MainActivity.this);
         List<MotoTaxi> lista = motoTaxiDAO.listar();
 
-        System.out.println("helloooo");
-        for (MotoTaxi m: lista){
-            System.out.println("->"+m.toString());
-        }
+        //System.out.println("helloooo");
+        //for (MotoTaxi m: lista){
+        //    System.out.println("->"+m.toString());
+        //}
 
         // teste
         DadosPessoaisDAO dadosPessoaisDAO = new DadosPessoaisDAO(getApplicationContext());
@@ -104,9 +119,13 @@ public class MainActivity extends AppCompatActivity {
         MotoTaxiDAO  motoTaxiDAO = new MotoTaxiDAO(MainActivity.this);
         List<MotoTaxi> lista = motoTaxiDAO.listar();
 
+        for(int i=0;i<lista.size();i++){
+            System.out.println("Encontratos> "+lista.get(i).toString());
+        }
+
         for (MotoTaxi m: lista){
-            if (m.getNumeroCelular().equals(editTextTelefone.getText().toString())
-                    && m.getSenha().equals(editTextSenha.getText().toString())){
+            if (m.getNumeroCelular().equals(numero)
+                    && m.getSenha().equals(senha)){
 
                 motoTaxi = m;
                 return true;
@@ -129,13 +148,48 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    /**
-     * Ir para a tela de cadastro do mototaxista
-     * */
-    public void registrar(View view){
-            Intent intent = new Intent(getApplicationContext(), CadastroTaxi.class);
-            startActivity(intent);
+
+    private void recuperarPreferencia(){
+        MotoTaxiDAO  motoTaxiDAO = new MotoTaxiDAO(MainActivity.this);
+        List<MotoTaxi> lista = motoTaxiDAO.listar();
+
+        SharedPreferences preferences = getSharedPreferences(ARQUIVO_PREFERENCIA_LOGIN,0 );
+
+        if (preferences.contains("telefone")) {
+
+            // jogar os valores nas variaveis
+            numero = preferences.getString("telefone", "");
+            senha = preferences.getString("senha", "");
+
+            if (validaDados()) {
+                Intent intencao = new Intent(MainActivity.this, HomeActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("mototaxi", motoTaxi);
+                intencao.putExtras(bundle);
+
+                startActivity(intencao);
+                finish();                   // finalizar activity
+                return;
+            }
+
+        }
     }
+
+    private void salvarPreferencia(){
+        // name -> nome do arquivo |mode:0 modo privado com 0 so nosso app pode mudar no arquivo
+        SharedPreferences preferences = getSharedPreferences(ARQUIVO_PREFERENCIA_LOGIN,0 );
+        SharedPreferences.Editor editor = preferences.edit(); // para poder editar,
+
+        // com o objeto editor podemos editar o arquivo de preferencia
+        String telefone = this.editTextTelefone.getText().toString();
+        String senha = this.editTextSenha.getText().toString();
+
+        editor.putString("telefone", telefone); //chave ; valor
+        editor.putString("senha", senha);
+
+        editor.commit(); // salvar
+    }
+
 }
 
 //db.createTable();

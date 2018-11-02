@@ -1,5 +1,5 @@
 
-package com.dominandoandroid.example.hercules.e_moto;
+package com.dominandoandroid.example.hercules.e_moto.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dominandoandroid.example.hercules.e_moto.R;
 import com.dominandoandroid.example.hercules.e_moto.dao.MotoTaxiDAO;
 import com.dominandoandroid.example.hercules.e_moto.model.MotoTaxi;
 

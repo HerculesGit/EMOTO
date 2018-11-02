@@ -1,7 +1,8 @@
-package com.dominandoandroid.example.hercules.e_moto;
+package com.dominandoandroid.example.hercules.e_moto.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,11 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.dominandoandroid.example.hercules.e_moto.R;
 import com.dominandoandroid.example.hercules.e_moto.dao.DadosPessoaisDAO;
 import com.dominandoandroid.example.hercules.e_moto.dao.EnderecoDAO;
 import com.dominandoandroid.example.hercules.e_moto.dao.MotoTaxiDAO;
 import com.dominandoandroid.example.hercules.e_moto.dao.VeiculoDAO;
-import com.dominandoandroid.example.hercules.e_moto.dao.ViagensDAO;
 import com.dominandoandroid.example.hercules.e_moto.model.MotoTaxi;
 
 public class FinalizarCadastro extends AppCompatActivity {
@@ -24,6 +25,7 @@ public class FinalizarCadastro extends AppCompatActivity {
     private VeiculoDAO veiculoDAO;
     private EnderecoDAO enderecoDAO;
     private DadosPessoaisDAO dadosPessoaisDAO;
+    private final String ARQUIVO_PREFERENCIA_LOGIN = "loginPreferencial";
 
     private TextInputEditText operadora, numero, email, senha;
     private Button btConfirmar;
@@ -114,7 +116,7 @@ public class FinalizarCadastro extends AppCompatActivity {
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("mototaxi", motoTaxi);
                         intencao.putExtras(bundle);
-
+                        salvarPreferencia();
                         startActivity(intencao);
                         finish();
                     }
@@ -148,5 +150,19 @@ public class FinalizarCadastro extends AppCompatActivity {
         //motoTaxi.setEmail("mario@gmail.com");
         motoTaxi.setSenha("123");
 
+    }
+    private void salvarPreferencia(){
+        // name -> nome do arquivo |mode:0 modo privado com 0 so nosso app pode mudar no arquivo
+        SharedPreferences preferences = getSharedPreferences(ARQUIVO_PREFERENCIA_LOGIN,0 );
+        SharedPreferences.Editor editor = preferences.edit(); // para poder editar,
+
+        // com o objeto editor podemos editar o arquivo de preferencia
+        String telefone = motoTaxi.getNumeroCelular();
+        String senha = motoTaxi.getSenha();
+
+        editor.putString("telefone", telefone); //chave ; valor
+        editor.putString("senha", senha);
+
+        editor.commit(); // salvar
     }
 }

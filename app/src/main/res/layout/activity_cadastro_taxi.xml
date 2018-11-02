@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CadastroTaxi">
+    tools:context=".activity.CadastroTaxi">
 
    <ScrollView
        android:layout_width="match_parent"
@@ -15,6 +15,8 @@
       <android.support.constraint.ConstraintLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent">
+
+      <!--</android.support.constraint.ConstraintLayout>-->
 
          <TextView
              android:id="@+id/textView6"
@@ -74,14 +76,42 @@
                 android:inputType="text" />
          </android.support.design.widget.TextInputLayout>
 
+          <!--
+          <RadioGroup
+              android:orientation="vertical"
+              android:id="@+id/radioGroupMain"
+              android:layout_width="match_parent"
+              android:layout_height="66dp"
+              android:layout_marginStart="16dp"
+              android:layout_marginLeft="16dp"
+              android:layout_marginEnd="16dp"
+              android:layout_marginRight="16dp"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@+id/input2">
+
+              <RadioButton
+                    android:text="M"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1" />
+
+              <RadioButton
+                  android:text="F"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="2" />
+
+          </RadioGroup>
+-->
          <android.support.design.widget.TextInputLayout
              android:id="@+id/editText_login_cpf"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:layout_marginEnd="16dp"
-             android:layout_marginLeft="16dp"
-             android:layout_marginRight="16dp"
              android:layout_marginStart="16dp"
+             android:layout_marginLeft="16dp"
+             android:layout_marginEnd="16dp"
+             android:layout_marginRight="16dp"
              app:layout_constraintEnd_toEndOf="parent"
              app:layout_constraintStart_toStartOf="parent"
              app:layout_constraintTop_toBottomOf="@+id/input2">
@@ -93,6 +123,8 @@
                 android:hint="CPF"
                 android:inputType="number" />
          </android.support.design.widget.TextInputLayout>
+
+
 
          <android.support.design.widget.TextInputLayout
              android:id="@+id/input4"
@@ -300,10 +332,7 @@
              app:layout_constraintEnd_toEndOf="parent"
              app:layout_constraintTop_toBottomOf="@+id/textView"
              app:layout_constraintVertical_bias="0.0" />
-
-
       </android.support.constraint.ConstraintLayout>
-
    </ScrollView>
 </android.support.constraint.ConstraintLayout>
 

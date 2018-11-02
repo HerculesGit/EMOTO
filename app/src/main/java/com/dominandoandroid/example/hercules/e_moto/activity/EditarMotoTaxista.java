@@ -1,6 +1,5 @@
-package com.dominandoandroid.example.hercules.e_moto;
+package com.dominandoandroid.example.hercules.e_moto.activity;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
@@ -11,11 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.dominandoandroid.example.hercules.e_moto.R;
 import com.dominandoandroid.example.hercules.e_moto.dao.MotoTaxiDAO;
-import com.dominandoandroid.example.hercules.e_moto.model.DadosPessoais;
-import com.dominandoandroid.example.hercules.e_moto.model.Endereco;
 import com.dominandoandroid.example.hercules.e_moto.model.MotoTaxi;
-import com.dominandoandroid.example.hercules.e_moto.model.Veiculo;
 
 public class EditarMotoTaxista extends AppCompatActivity {
 
