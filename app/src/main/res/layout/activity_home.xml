@@ -27,8 +27,10 @@
 
             <!--Pilotar-->
             <android.support.v7.widget.CardView
+                android:id="@+id/home_cardview_pilotar"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:clickable="true"
+                android:onClick="clickCardView"
                 android:layout_width="150dp"
                 android:layout_height="170dp"
                 android:layout_margin="10dp">
@@ -69,8 +71,10 @@
 
             <!-- ganhos do dia -->
             <android.support.v7.widget.CardView
+                android:id="@+id/home_cardview_ganhos_diarios"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:clickable="true"
+                android:onClick="clickCardView"
                 android:layout_width="150dp"
                 android:layout_height="170dp"
                 android:layout_margin="10dp">
@@ -121,8 +125,10 @@
 
             <!-- Depositar Pagar para o eh moto -->
             <android.support.v7.widget.CardView
+                android:id="@+id/home_cardview_depositar"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:clickable="true"
+                android:onClick="clickCardView"
                 android:layout_width="150dp"
                 android:layout_height="170dp"
                 android:layout_margin="10dp">
@@ -163,8 +169,10 @@
 
             <!-- Lista de viagens -->
             <android.support.v7.widget.CardView
+                android:id="@+id/home_cardview_lista_viagens"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:clickable="true"
+                android:onClick="clickCardView"
                 android:layout_width="150dp"
                 android:layout_height="170dp"
                 android:layout_margin="10dp">
@@ -215,8 +223,10 @@
 
             <!-- Editar foto e nome -->
             <android.support.v7.widget.CardView
+                android:id="@+id/home_cardview_editar_usuario"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:clickable="true"
+                android:onClick="clickCardView"
                 android:layout_width="320dp"
                 android:layout_height="170dp"
                 android:layout_margin="10dp">

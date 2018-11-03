@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -132,5 +133,32 @@ public class HomeActivity extends AppCompatActivity
         textTelefoneHeader.setText(motoTaxi.getNumeroCelular());
     }
 
+    /**
+     *  Verifica qual foi o cardview que foi clicado
+     * */
+    public void clickCardView(View view){
+        switch (view.getId()){
+
+            case R.id.home_cardview_pilotar:            // pilotar
+                Toast.makeText(getApplicationContext(),"Pilotar",Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.home_cardview_ganhos_diarios:     // ganhos diarios
+                Toast.makeText(getApplicationContext(),"Ganhos do dia",Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.home_cardview_depositar:          // depositar
+                Toast.makeText(getApplicationContext(),"Depositar",Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.home_cardview_lista_viagens:      // lista de viagens
+                Toast.makeText(getApplicationContext(),"Lista de Viagens",Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.home_cardview_editar_usuario:     // editar usuario
+                Toast.makeText(getApplicationContext(),"editar usuario",Toast.LENGTH_SHORT).show();
+
+        }
+    }
 
 }
