@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,10 +26,12 @@
         <activity android:name=".activity.CadastroVeiculo" />
         <activity android:name=".activity.MotoTaxistaActivity" />
         <activity android:name=".activity.EditarMotoTaxista" />
-        <activity android:name=".activity.FinalizarCadastro"/>
-        <activity android:name=".activity.HomeActivity"
-            android:screenOrientation="portrait"
-            ></activity>
+        <activity android:name=".activity.FinalizarCadastro" />
+        <activity
+            android:name=".activity.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.ConfiguracoesActivity"></activity>
     </application>
 
 </manifest>

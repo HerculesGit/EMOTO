@@ -18,6 +18,12 @@ public class BDHelper extends SQLiteOpenHelper {
     //public static String TABELA_CLIENTES = "clientes";
     public static String TABELA_VIAGENS = "viagens";
 
+    public static String TABELA_IMAGEM = "imagem";
+    public static String IMAGEM_ID = "idImagens";
+    public static String IMAGEM_DADOS= "imagem_dados";
+    public static String IMAGEM_DESCRICAO= "imagem_descricao";
+    public static String IMAGEM_IDMOTOTAXISTA = "idMototaxista";
+
     private Context context;
     private SQLiteDatabase db;
 
@@ -43,7 +49,13 @@ public class BDHelper extends SQLiteOpenHelper {
      * */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        System.out.print("Criou banco");
+
+        String sqlFoto = "CREATE TABLE IF NOT EXISTS "+ TABELA_IMAGEM
+                +" ("+IMAGEM_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + IMAGEM_DADOS + " BLOB NOT NULL, "
+                + IMAGEM_DESCRICAO + " TEXT NOT NULL,"
+                + IMAGEM_IDMOTOTAXISTA + " INTEGER NOT NULL,"
+                + " FOREIGN KEY ("+IMAGEM_IDMOTOTAXISTA+") REFERENCES "+BDHelper.TABELA_MOTOTAXISTA+"(idMototaxista))";
 
         String sqlDadosPessoais = "CREATE TABLE IF NOT EXISTS "+TABELA_DADOS_PESSOAIS
                 //+" (idDadosPessoais INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -95,26 +107,12 @@ public class BDHelper extends SQLiteOpenHelper {
                 +" data VARCHAR NOT NULL,"
                 +" FOREIGN KEY (idMototaxista) REFERENCES "+TABELA_MOTOTAXISTA+"(idMototaxista))";
 
-
-
-//        // criando primeira tabela
-//        String sqlMototaxi = "CREATE TABLE IF NOT EXISTS "+TABELA_MOTOTAXI+
-//                // incrementar automaticamente
-//                " (id INTEGER PRIMARY KEY AUTOINCREMENT," +
-//                " nome VARCHAR NOT NULL, sobrenome VARCHAR NOT NULL," +
-//                " rg VARCHAR NOT NULL, cpf VARCHAR NOT NULL, telefone VARCHAR(11) NOT NULL, email VARCHAR NOT NULL, senha VARCHAR NOT NULL," +
-//                " dinheiro DOUBLE(6)," +
-//                " cidade VARCHAR, "+
-//                " marca VARCHAR NOT NULL, modelo VARCHAR NOT NULL, placa VARCHAR NOT NULL," +
-//                " disponivel INT(1), qtdviagens INT(3), qtdencomendas INT(3) )";
-//
-//        String sqlCliente = "CREATE TABLE IF NOT EXISTS "+TABELA_CLIENTE+
-//                " (id INTEGER PRIMARY KEY AUTOINCREMENT," +
-//                " cpf VARCHAR NOT NULL, telefone VARCHAR(11) NOT NULL )";
-
         try{
             db.execSQL(sqlDadosPessoais);
             Log.i("INFO", "Sucesso ao criar "+TABELA_DADOS_PESSOAIS);
+
+            db.execSQL(sqlFoto);
+            Log.i("INFO", "Sucessoao criar "+ TABELA_IMAGEM);
 
             db.execSQL(sqlEndereco);
             Log.i("INFO", "Sucesso ao criar "+TABELA_ENDERECO);
@@ -149,44 +147,4 @@ public class BDHelper extends SQLiteOpenHelper {
         // Lógica para atualizar DB
 
     }
-
-    public boolean createTable(){
-        openBD();
-
-        String createTable = "CREATE TABLE IF NOT EXISTS teste"+
-                " (nome TEXT, idade INTEGER, CASADA TEXT)";
-
-        try{
-            db.execSQL(createTable);
-            Log.i("INFO", "Sucesso ao criar tabela teste");
-
-            return true;
-        } catch (Exception e){
-            e.printStackTrace();
-
-            return false;
-        } finally {
-            // fechar banco independente do que aconteca
-            db.close();
-        }
-    }
-
-
-    /**
-     * Checkar se tá aberto, e abrir caso necessário
-     * */
-    private void openBD(){
-        if (!db.isOpen()){
-            db = context.openOrCreateDatabase(NOME_BD,
-
-                    // ler e escrever
-                    SQLiteDatabase.OPEN_READWRITE,
-
-                    // cursor
-                    null
-            );
-        }
-    }
-
-
 }

@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dominandoandroid.example.hercules.e_moto.R;
-import com.dominandoandroid.example.hercules.e_moto.dao.BDHelper;
 import com.dominandoandroid.example.hercules.e_moto.dao.DadosPessoaisDAO;
 import com.dominandoandroid.example.hercules.e_moto.dao.MotoTaxiDAO;
 import com.dominandoandroid.example.hercules.e_moto.model.MotoTaxi;
@@ -29,12 +28,12 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextTelefone, editTextSenha;
     private TextView textBtRegistre;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        BDHelper db = new BDHelper(MainActivity.this);
+        getSupportActionBar().hide();
 
         buttonLogin = findViewById(R.id.buttonLogar);
         textBtRegistre = findViewById(R.id.id_registre_se);
@@ -162,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
             senha = preferences.getString("senha", "");
 
             if (validaDados()) {
-                Intent intencao = new Intent(MainActivity.this, HomeActivity.class);
+                Intent intencao = new Intent(MainActivity.this, ConfiguracoesActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("mototaxi", motoTaxi);
                 intencao.putExtras(bundle);
