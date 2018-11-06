@@ -113,12 +113,15 @@
         android:background="@drawable/circlebackgroundprimarycolor"
         android:src="@drawable/ic_imagem_alt_24dp"
         app:layout_constraintBottom_toBottomOf="@+id/configuracao_imagem_perfil"
-        app:layout_constraintEnd_toEndOf="@+id/configuracao_imagem_perfil" />
+        app:layout_constraintEnd_toEndOf="@+id/configuracao_imagem_perfil"
+
+        android:onClick="clickImage"
+        />
 
     <ImageView
         android:id="@+id/configuracao_icone_background_button"
         android:layout_width="50dp"
-        android:layout_height="51dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
@@ -126,7 +129,10 @@
         android:padding="10dp"
         android:src="@drawable/ic_imagem_alt_24dp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout" />
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+
+        android:onClick="clickImage"
+        />
 
 
     <TextView
@@ -243,6 +249,23 @@
             android:text="Alterar Telefone"
             android:textSize="18sp" />
     </LinearLayout>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_margin="16dp"
+
+        android:text="Salvar alteracões"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+
+        android:background="@drawable/buttons_foto_gray_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutTelefone"
+
+        android:onClick="clickButtonAlterar"
+        />
 
 
 

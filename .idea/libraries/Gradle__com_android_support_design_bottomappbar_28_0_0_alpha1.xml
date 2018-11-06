@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.android.support:design-bottomappbar-28.0.0-alpha1">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/design-bottomappbar-28.0.0-alpha1.aar/c71a0a01c8f9708d0e1cbd03c3a51dcc/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/design-bottomappbar-28.0.0-alpha1.aar/03f766e3200a2bc2e23b7b9bf4aca036/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/design-bottomappbar-28.0.0-alpha1.aar/c71a0a01c8f9708d0e1cbd03c3a51dcc/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/design-bottomappbar-28.0.0-alpha1.aar/c71a0a01c8f9708d0e1cbd03c3a51dcc/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/design-bottomappbar-28.0.0-alpha1.aar/03f766e3200a2bc2e23b7b9bf4aca036/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/design-bottomappbar-28.0.0-alpha1.aar/03f766e3200a2bc2e23b7b9bf4aca036/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

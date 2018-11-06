@@ -1,4 +1,4 @@
-*.idea/
+.idea/
 settings.gradle
 local.properties
 grade.properties

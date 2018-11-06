@@ -34,8 +34,10 @@ public class ImagemDAO {
         ler = db.getReadableDatabase();         // permite ler os dados de uma tabela
     }
 
-    //@Override
-    public boolean salvar(Imagem img) {
+    /**
+     * Add image
+     * */
+    public boolean addImage(Imagem img) {
 
         ContentValues cv = new ContentValues();
 
@@ -47,7 +49,7 @@ public class ImagemDAO {
         try{
             escreve.insert(
                     // nome da tabela
-                    BDHelper.TABELA_IMAGEM,
+                    TABELA_IMAGEM,
                     null,
                     cv);
 
@@ -132,6 +134,39 @@ public class ImagemDAO {
         }
 
         return imagens;
+    }
+
+
+    public Imagem getImage(int idMototaxista, String descricao){
+        String sql = "SELECT * FROM " + BDHelper.TABELA_IMAGEM+";";
+
+        try {
+            Cursor cursor = ler.rawQuery(sql, null);
+
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndex(IMAGEM_ID_MOTOTAXITA));
+                String desc = cursor.getString(cursor.getColumnIndex(IMAGEM_DESCRICAO));
+
+                if (id == idMototaxista
+                        && desc.equalsIgnoreCase(descricao)) {
+
+                    // convert blob to byte array
+                    byte[] blob = cursor.getBlob(cursor.getColumnIndex(IMAGEM_DADOS));
+
+                    Imagem imagem = new Imagem();
+                    imagem.setIdImagem(cursor.getInt(cursor.getColumnIndex(IMAGEM_ID)));
+                    imagem.setDescricao(cursor.getString(cursor.getColumnIndex(IMAGEM_DESCRICAO)));
+                    imagem.setIdMototaxista(cursor.getInt(cursor.getColumnIndex(IMAGEM_ID_MOTOTAXITA)));
+                    imagem.setDados(blob);
+
+                    return  imagem;
+                }
+            }
+        } catch (SQLException e) {
+            Log.i("Erro", "Erro ao listar Imagens do id"+idMototaxista+": " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**

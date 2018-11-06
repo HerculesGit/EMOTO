@@ -1,19 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.android.support:support-fragment-28.0.0">
     <ANNOTATIONS>
-<<<<<<< HEAD
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/486e76f988c86016fddf1fa098d7262c/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/f8206335ac6eea2e58257e4669a6d150/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/486e76f988c86016fddf1fa098d7262c/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/486e76f988c86016fddf1fa098d7262c/res" />
-=======
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/7642ee5a70b7edab10fe70eca5224b40/annotations.zip!/" />
-    </ANNOTATIONS>
-    <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/7642ee5a70b7edab10fe70eca5224b40/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/7642ee5a70b7edab10fe70eca5224b40/jars/classes.jar!/" />
->>>>>>> fb5170ee4509c575f0cf8979f0fe5b3ec0aac9dc
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/f8206335ac6eea2e58257e4669a6d150/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/f8206335ac6eea2e58257e4669a6d150/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
