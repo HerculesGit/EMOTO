@@ -1,11 +1,16 @@
 package com.dominandoandroid.example.hercules.e_moto.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.dominandoandroid.example.hercules.e_moto.R;
 import com.dominandoandroid.example.hercules.e_moto.model.DadosPessoais;
@@ -14,11 +19,16 @@ import com.dominandoandroid.example.hercules.e_moto.model.MotoTaxi;
 
 public class CadastroTaxi extends AppCompatActivity {
 
-    private Button btAvancar;
+    private static final int TIRAR_FOTO = 3;
+
+    private Button btAvancar, btSelecionarFotoPerfil, btSelecionarFotoFundo;
     private TextInputEditText editTextNome, editTextSobrenome, editTextCpf, editTextRg,
             editTextEstado, editTextCidade, editTextRua, editTextNumero, editTextBairro;
     //private MotoTaxiDAO motoTaxiDAO;
     private MotoTaxi motoTaxi;
+    private Dialog myPopupDialog;
+    private ImageView imageViewCamera, imageViewGaleria;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +48,10 @@ public class CadastroTaxi extends AppCompatActivity {
         editTextRua = findViewById(R.id.cadastro_dados_rua);
         editTextNumero = findViewById(R.id.cadastro_dados_numero);
         editTextBairro = findViewById(R.id.cadastro_dados_bairro);
+
+        imageViewCamera = findViewById(R.id.popup_opcao_foto_camera);
+        imageViewGaleria = findViewById(R.id.popup_opcao_foto_galeria);
+        btSelecionarFotoPerfil = findViewById(R.id.cadastro_button_selecionar_imagem_perfil);
 
         // listener
         btAvancar.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +74,47 @@ public class CadastroTaxi extends AppCompatActivity {
             }
         });
 
+        btSelecionarFotoPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myPopupDialog = new Dialog(CadastroTaxi.this);
+
+                myPopupDialog.setCanceledOnTouchOutside(true);  // se clicar fora do dialog ele fecharah
+                myPopupDialog.setContentView(R.layout.popup_photo);
+                myPopupDialog.show();
+            }
+        });
+
+    }
+
+    public void clickImageCameraGaleria(View view){
+        if (view.getId() == R.id.popup_opcao_foto_camera){
+            // para camera
+            tirarFoto();
+            myPopupDialog.dismiss();
+
+        } else if (view.getId() == R.id.popup_opcao_foto_galeria){
+            // para galeria
+
+        }
+
+
+    }
+
+    private void tirarFoto(){
+
+        // minha intencao e captura com a camera
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager())!=null){
+            startActivityForResult(takePictureIntent, TIRAR_FOTO);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Bundle dadosRecuperados = data.getExtras();
+        Bitmap imageBitmap = (Bitmap) dadosRecuperados.get("data");
 
     }
 
