@@ -6,35 +6,51 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.dominandoandroid.example.hercules.e_moto.R;
-import com.dominandoandroid.example.hercules.e_moto.dao.DbBitmapUtility;
+import com.dominandoandroid.example.hercules.e_moto.utilitario.DbBitmapUtility;
 import com.dominandoandroid.example.hercules.e_moto.dao.ImagemDAO;
 import com.dominandoandroid.example.hercules.e_moto.model.Imagem;
+import com.dominandoandroid.example.hercules.e_moto.model.MotoTaxi;
+import com.dominandoandroid.example.hercules.e_moto.utilitario.StringUtility;
+
+import java.util.List;
 
 public class ConfiguracoesActivity extends AppCompatActivity {
 
     private Imagem imagem;
-    private ImageView imageView;
+    private ImageView imageViewPerfil, imageViewBackground;
     private ImagemDAO imagemDAO;
+    private TextView textViewNomeSobrenome, textViewNumeroCel;
+    private MotoTaxi motoTaxi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracoes);
 
+        imageViewPerfil = findViewById(R.id.configuracao_imagem_perfil);
+        imageViewBackground = findViewById(R.id.configuracao_imagem_background);
+        textViewNomeSobrenome = findViewById(R.id.configuracao_nome);
+        textViewNumeroCel = findViewById(R.id.configuracao_numero_telefone);
+
         imagemDAO = new ImagemDAO(getApplicationContext());
-        imageView = findViewById(R.id.configuracao_imagem_perfil);
+        imagem = new Imagem();
 
-        // imagem a partir de um drawable
-        //imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.girlperfil2));
+        // recuperando objeto
+        Bundle objetoEnviado = getIntent().getExtras();
+        if (objetoEnviado != null){
+            motoTaxi = (MotoTaxi) objetoEnviado.getSerializable("mototaxi");
 
-
+            setarInformacoesNosComponentes();
+            System.out.println("ConfiguracoesActivity" + motoTaxi.toString());
+        } else{
+            System.out.println("ConfiguracoesActivity NÃO RECUPEROU DADOS");
+        }
 
         //Para criar um Drawable a partir de um Bitmap use:
         //Drawable drawable = new BitmapDrawable(getResources(), bitmap);
-
-
     }
 
     public void clickImage(View view){
@@ -54,7 +70,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
             byte[] buffer = imagem.getDados();
 
             // convertendo o array de byte para um bitmap
-            imageView.setImageBitmap(DbBitmapUtility.getImage(buffer));
+            imageViewPerfil.setImageBitmap(DbBitmapUtility.getImage(buffer));
 
 
         } else if (view.getId() == R.id.configuracao_icone_background_button){
@@ -67,7 +83,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
 
             byte[] buffer = imagem.getDados();
 
-            imageView.setImageBitmap(DbBitmapUtility.getImage(buffer));
+            imageViewPerfil.setImageBitmap(DbBitmapUtility.getImage(buffer));
 
         }
     }
@@ -91,7 +107,6 @@ public class ConfiguracoesActivity extends AppCompatActivity {
 
         outState.putSerializable("my_image", imagem);
 
-
     }
 
     /**
@@ -107,7 +122,34 @@ public class ConfiguracoesActivity extends AppCompatActivity {
         byte[] buffer = imagem.getDados();
 
         // convertendo o array de byte para um bitmap
-        imageView.setImageBitmap(DbBitmapUtility.getImage(buffer));
+        imageViewPerfil.setImageBitmap(DbBitmapUtility.getImage(buffer));
+
+    }
+
+    private void setarInformacoesNosComponentes(){
+        String temp = "";
+
+        temp = StringUtility.getFirstAndLastName(motoTaxi.getDadosPessoais().getNome());
+        textViewNomeSobrenome.setText(temp);
+        temp = motoTaxi.getNumeroCelular();
+        textViewNumeroCel.setText(temp);
+
+        List<Imagem> imagens = imagemDAO.listar(motoTaxi.getIdMototaxista());
+        if (imagens.size() > 1){
+            for (Imagem img : imagens) {
+                if (img.getDescricao().equalsIgnoreCase("perfil")){
+
+                    imageViewPerfil.setImageBitmap(DbBitmapUtility.getImage(img.getDados()));
+
+                    // apenas para carregar a de perfil
+                    imagem = img;
+
+                } else if (img.getDescricao().equalsIgnoreCase("background")){
+                    imageViewBackground.setImageBitmap(DbBitmapUtility.getImage(img.getDados()));
+                }
+
+            }
+        }
 
     }
 }

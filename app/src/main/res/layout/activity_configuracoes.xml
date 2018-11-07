@@ -85,18 +85,22 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="Nome do Mototaxi"
-            android:textSize="18sp"
+            android:textSize="22sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/configuracao_imagem_perfil"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <TextView
+            android:id="@+id/configuracao_numero_telefone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="2dp"
             android:text="Telefone"
-            android:textSize="16sp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/configuracao_imagem_perfil"
             app:layout_constraintTop_toBottomOf="@+id/configuracao_nome" />
 

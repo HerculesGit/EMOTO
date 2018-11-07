@@ -1,4 +1,4 @@
-package com.dominandoandroid.example.hercules.e_moto.dao;
+package com.dominandoandroid.example.hercules.e_moto.utilitario;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
