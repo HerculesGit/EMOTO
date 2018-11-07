@@ -1,273 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    tools:context=".activity.ConfiguracoesActivity">
+    android:fillViewport="true">
 
-    <!--Foto e configs -->
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <android.support.constraint.ConstraintLayout
+
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageBackground">
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        tools:context=".activity.ConfiguracoesActivity">
+
+        <!--Foto e configs -->
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageBackground">
+
+            <ImageView
+                android:id="@+id/configuracao_imagem_background"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/imagem_background" />
+
+        </LinearLayout>
 
         <ImageView
-            android:id="@+id/configuracao_imagem_background"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/imagem_background" />
+            android:id="@+id/configuracao_imagem_perfil"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/girlperfil"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    </LinearLayout>
+        <!-- icone -->
+        <ImageView
+            android:id="@+id/configuracao_icone_perfil_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginBottom="3dp"
+            android:padding="10dp"
+            android:background="@drawable/circlebackgroundprimarycolor"
+            android:src="@drawable/ic_imagem_alt_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/configuracao_imagem_perfil"
+            app:layout_constraintEnd_toEndOf="@+id/configuracao_imagem_perfil"
 
-    <!--
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_margin="8dp"
-        android:orientation="vertical"
-        android:padding="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/configuracao_imagem_perfil"
-        tools:layout_editor_absoluteX="8dp">
+            android:onClick="clickImage"
+            />
 
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
+        <ImageView
+            android:id="@+id/configuracao_icone_background_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@color/darkgray" />
+            android:background="@drawable/circlebackgroundprimarycolor"
+            android:padding="10dp"
+            android:src="@drawable/ic_imagem_alt_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+
+            android:onClick="clickImage"
+            />
+
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/configuracao_nome"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Alterar Nome" />
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Nome do Mototaxi"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/configuracao_imagem_perfil"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="2dp"
+            android:text="Telefone"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/configuracao_imagem_perfil"
+            app:layout_constraintTop_toBottomOf="@+id/configuracao_nome" />
+
 
         <View
-            android:layout_width="wrap_content"
+            android:id="@+id/view"
+            android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/darkgray" />
+            android:background="@color/darkgray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/configuracao_imagem_perfil" />
 
 
-        <TextView
+        <!--Alterar nome-->
+        <LinearLayout
+            android:id="@+id/linearLayoutNome"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view">
+
+            <ImageView
+
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/circlebackgroundprimarycolor"
+                android:padding="8dp"
+                android:src="@drawable/ic_mode_edit_white_24dp" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:text="Alterar nome"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutNome">
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/darkgray" />
+
+        </LinearLayout>
+
+        <!--Altera telefone-->
+        <LinearLayout
+            android:id="@+id/linearLayoutTelefone"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <ImageView
+                android:id="@+id/item_list_icone"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/circlebackgroundprimarycolor"
+                android:padding="8dp"
+                android:src="@drawable/ic_phone_white_24dp" />
+
+            <TextView
+                android:id="@+id/item_list_texto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:text="Alterar Telefone"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+
+        <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Alterar Telefone" />
+            android:layout_height="30dp"
+            android:layout_margin="16dp"
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@color/darkgray" />
+            android:background="@drawable/buttons_foto_gray_black"
+
+            android:onClick="clickButtonAlterar"
+            android:text="Salvar alteracões"
+
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutTelefone" />
 
 
-    </LinearLayout>
-    -->
+    </android.support.constraint.ConstraintLayout>
 
-
-    <!--
-    <ImageView
-        android:id="@+id/imageBackground"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="16:11"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/imagem_background" />
-    -->
-    <ImageView
-        android:id="@+id/configuracao_imagem_perfil"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:src="@drawable/girlperfil"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <!-- icone -->
-    <ImageView
-        android:id="@+id/configuracao_icone_perfil_button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginRight="3dp"
-        android:layout_marginBottom="3dp"
-        android:padding="10dp"
-        android:background="@drawable/circlebackgroundprimarycolor"
-        android:src="@drawable/ic_imagem_alt_24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/configuracao_imagem_perfil"
-        app:layout_constraintEnd_toEndOf="@+id/configuracao_imagem_perfil"
-
-        android:onClick="clickImage"
-        />
-
-    <ImageView
-        android:id="@+id/configuracao_icone_background_button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/circlebackgroundprimarycolor"
-        android:padding="10dp"
-        android:src="@drawable/ic_imagem_alt_24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-
-        android:onClick="clickImage"
-        />
-
-
-    <TextView
-        android:id="@+id/configuracao_nome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Nome do Mototaxi"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/configuracao_imagem_perfil"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="2dp"
-        android:text="Telefone"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/configuracao_imagem_perfil"
-        app:layout_constraintTop_toBottomOf="@+id/configuracao_nome" />
-
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/darkgray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/configuracao_imagem_perfil" />
-
-
-    <!--Alterar nome-->
-    <LinearLayout
-        android:id="@+id/linearLayoutNome"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view">
-
-        <ImageView
-
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/circlebackgroundprimarycolor"
-            android:padding="8dp"
-            android:src="@drawable/ic_mode_edit_white_24dp" />
-
-        <TextView
-
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp"
-            android:text="Alterar nome"
-            android:textSize="18sp" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/darkgray"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutNome" />
-
-    <!--Altera telefone-->
-    <LinearLayout
-        android:id="@+id/linearLayoutTelefone"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2">
-
-        <ImageView
-            android:id="@+id/item_list_icone"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/circlebackgroundprimarycolor"
-            android:padding="8dp"
-            android:src="@drawable/ic_phone_white_24dp" />
-
-        <TextView
-            android:id="@+id/item_list_texto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp"
-            android:text="Alterar Telefone"
-            android:textSize="18sp" />
-    </LinearLayout>
-
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_margin="16dp"
-
-        android:text="Salvar alteracões"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-
-        android:background="@drawable/buttons_foto_gray_black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutTelefone"
-
-        android:onClick="clickButtonAlterar"
-        />
-
-
-
-
-</android.support.constraint.ConstraintLayout>
+</ScrollView>

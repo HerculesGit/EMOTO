@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.dominandoandroid.example.hercules.e_moto.R;
 import com.dominandoandroid.example.hercules.e_moto.dao.DbBitmapUtility;
@@ -83,4 +82,32 @@ public class ConfiguracoesActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Salvar estado
+     * */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putSerializable("my_image", imagem);
+
+
+    }
+
+    /**
+     * Recuperar estado
+     * */
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        imagem = (Imagem) savedInstanceState.getSerializable("my_image");
+
+        // buffer com o array de byte
+        byte[] buffer = imagem.getDados();
+
+        // convertendo o array de byte para um bitmap
+        imageView.setImageBitmap(DbBitmapUtility.getImage(buffer));
+
+    }
 }

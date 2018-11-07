@@ -1,8 +1,9 @@
 package com.dominandoandroid.example.hercules.e_moto.model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Imagem {
+public class Imagem implements Serializable {
     private int idImagem;
     private String descricao;
     private byte[] dados;
