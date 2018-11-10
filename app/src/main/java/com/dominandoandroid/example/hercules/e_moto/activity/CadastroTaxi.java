@@ -1,30 +1,21 @@
 package com.dominandoandroid.example.hercules.e_moto.activity;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.dominandoandroid.example.hercules.e_moto.R;
 import com.dominandoandroid.example.hercules.e_moto.model.DadosPessoais;
@@ -42,7 +33,6 @@ public class CadastroTaxi extends AppCompatActivity {
     };
 
     private Button btAvancar, btSelecionarFotoPerfil, btSelecionarFotoFundo, btConfirmarImagem;
-    private ImageView imagemEscolhida;
     private TextInputEditText editTextNome, editTextSobrenome, editTextCpf, editTextRg,
             editTextEstado, editTextCidade, editTextRua, editTextNumero, editTextBairro;
 
@@ -51,6 +41,10 @@ public class CadastroTaxi extends AppCompatActivity {
     private Dialog myPopupDialogChosenImage;
 
     private ImageView imageViewCamera, imageViewGaleria;
+    private Bitmap bitmapPerfil;
+    private Bitmap bitmapBackground;
+    private Bitmap bitmapImagemEscolhida;
+    private boolean isPerfil = true;
 
 
     @Override
@@ -87,26 +81,38 @@ public class CadastroTaxi extends AppCompatActivity {
         btSelecionarFotoPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myPopupDialog = new Dialog(CadastroTaxi.this);
-
-                myPopupDialog.setCanceledOnTouchOutside(true);  // se clicar fora do dialog ele fecharah
-                myPopupDialog.setContentView(R.layout.popup_photo);
-                myPopupDialog.show();
+                popupCameraOrGaleria();          // mostrar opcao de camera ou galeria
+                isPerfil = true;
             }
         });
 
         btSelecionarFotoFundo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myPopupDialog = new Dialog(CadastroTaxi.this);
-
-                myPopupDialog.setCanceledOnTouchOutside(true);  // se clicar fora do dialog ele fecharah
-                myPopupDialog.setContentView(R.layout.popup_photo);
-                myPopupDialog.show();
-
+                popupCameraOrGaleria();         // mostrar opcao de camera ou galeria
+                isPerfil = false;
             }
         });
+    }
 
+
+    /**
+     * Mostra a opcao do usuario selecionar camera ou galeria
+     * */
+    private void popupCameraOrGaleria(){
+        myPopupDialog = new Dialog(CadastroTaxi.this);
+
+        myPopupDialog.setCanceledOnTouchOutside(true);  // se clicar fora do dialog ele fecharah
+        myPopupDialog.setContentView(R.layout.popup_photo);
+        myPopupDialog.show();
+    }
+
+    public void onClickButtonConfirmar(View view){
+        if (isPerfil) {
+            bitmapPerfil = bitmapImagemEscolhida;
+        } else {
+            bitmapBackground = bitmapImagemEscolhida;
+        }
     }
 
     /**
@@ -161,11 +167,6 @@ public class CadastroTaxi extends AppCompatActivity {
         if (resultCode == RESULT_OK){
             if (requestCode == LOAD_IMAGE_RESULT && data != null){      // carregar da galeria
                 Uri selectedImage = data.getData();
-                try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(CadastroTaxi.this.getContentResolver(), selectedImage);
-                } catch(IOException e){
-                    e.printStackTrace();
-                }
 
                 String[] filePath = {MediaStore.Images.Media.DATA};
                 Cursor cursor = getContentResolver().query(selectedImage,filePath,null,null,null);
@@ -173,13 +174,18 @@ public class CadastroTaxi extends AppCompatActivity {
 
                 String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
                 cursor.close();
-                displayPopupImage(BitmapFactory.decodeFile(imagePath));
+
+                Bitmap img = BitmapFactory.decodeFile(imagePath);
+                displayPopupImage(img);
+                bitmapImagemEscolhida = img;
 
             } else if (requestCode == TIRAR_FOTO && data != null) {     // tirar foto
 
                 Bundle dadosRecuperados = data.getExtras();
-                Bitmap imageBitmap = (Bitmap) dadosRecuperados.get("data");
-                displayPopupImage(imageBitmap);
+                Bitmap img = (Bitmap) dadosRecuperados.get("data");
+                displayPopupImage(img);
+                bitmapImagemEscolhida = img;
+
             }
         }
     }
@@ -330,9 +336,9 @@ public class CadastroTaxi extends AppCompatActivity {
 
         imageViewCamera = findViewById(R.id.popup_opcao_foto_camera);
         imageViewGaleria = findViewById(R.id.popup_opcao_foto_galeria);
-        imagemEscolhida = findViewById(R.id.popup_chosen_image_image_escolhida);
 
         btSelecionarFotoPerfil = findViewById(R.id.cadastro_button_selecionar_imagem_perfil);
+        btSelecionarFotoFundo = findViewById(R.id.cadastro_button_selecionar_imagem_fundo);
         btConfirmarImagem = findViewById(R.id.popup_chosen_image_bt_confirmar);
     }
 }
