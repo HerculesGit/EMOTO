@@ -2,4 +2,6 @@
 settings.gradle
 local.properties
 grade.properties
+*.bin
+*.lock
 
