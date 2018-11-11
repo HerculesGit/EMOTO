@@ -16,21 +16,74 @@
           android:layout_width="match_parent"
           android:layout_height="match_parent">
 
-         <TextView
-             android:id="@+id/textView6"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginEnd="8dp"
-             android:layout_marginLeft="8dp"
-             android:layout_marginRight="8dp"
-             android:layout_marginStart="8dp"
-             android:layout_marginTop="60dp"
-             android:text="Faça seu cadastro"
-             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-             android:textSize="32sp"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toTopOf="parent" />
+         <android.support.constraint.ConstraintLayout
+             android:id="@+id/cLnotUse1"
+             android:layout_width="match_parent"
+             android:layout_height="220dp"
+             android:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="Faça seu cadastro"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/cadastro_profile_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/girlperfil"
+                app:civ_border_color="#FF000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+            <!-- icone -->
+            <ImageView
+                android:id="@+id/cadastro_icon_foto"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/circlebackgroundblue"
+                android:padding="10dp"
+                android:src="@drawable/ic_imagem_alt_24dp"
+                app:layout_constraintBottom_toTopOf="@+id/cadastro_nome_sobrenome"
+                app:layout_constraintEnd_toEndOf="@+id/cadastro_profile_image"
+                android:clickable="true"
+                android:onClick="onClickImageIconCamera"/>
+
+            <TextView
+                android:id="@+id/cadastro_nome_sobrenome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Nome sobrenome"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cadastro_profile_image" />
+
+         </android.support.constraint.ConstraintLayout>
+
 
          <android.support.design.widget.TextInputLayout
              android:id="@+id/input1"
@@ -43,7 +96,7 @@
              android:layout_marginTop="8dp"
              app:layout_constraintEnd_toEndOf="parent"
              app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toBottomOf="@+id/textView6">
+             app:layout_constraintTop_toBottomOf="@+id/cLnotUse1">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/cadastro_dados_nome"
@@ -144,17 +197,28 @@
                 android:inputType="number" />
          </android.support.design.widget.TextInputLayout>
 
+
+         <View
+             android:id="@+id/viewNotUse1"
+             android:layout_width="match_parent"
+             android:layout_height="2dp"
+             android:layout_marginTop="16dp"
+             android:background="@color/darkgray"
+             app:layout_constraintTop_toBottomOf="@+id/input4"
+             />
+
          <android.support.design.widget.TextInputLayout
              android:id="@+id/inputEstado"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:layout_marginEnd="16dp"
-             android:layout_marginLeft="16dp"
-             android:layout_marginRight="16dp"
+             android:layout_marginTop="8dp"
              android:layout_marginStart="16dp"
+             android:layout_marginLeft="16dp"
+             android:layout_marginEnd="16dp"
+             android:layout_marginRight="16dp"
              app:layout_constraintEnd_toEndOf="parent"
              app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toBottomOf="@+id/input4">
+             app:layout_constraintTop_toBottomOf="@+id/viewNotUse1">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/cadastro_dados_estado"
@@ -229,7 +293,7 @@
 
 
          <android.support.design.widget.TextInputLayout
-             android:id="@+id/editText_login_telefone"
+             android:id="@+id/editText_login_bairro"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:layout_marginEnd="16dp"
@@ -248,70 +312,6 @@
          </android.support.design.widget.TextInputLayout>
 
 
-         <TextView
-             android:id="@+id/textView2"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginEnd="8dp"
-             android:layout_marginLeft="16dp"
-             android:layout_marginRight="8dp"
-             android:layout_marginStart="16dp"
-             android:layout_marginTop="16dp"
-             android:text="Imagem de perfil"
-             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-             android:textSize="18sp"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintHorizontal_bias="0.0"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toBottomOf="@+id/editText_login_telefone" />
-
-         <Button
-             android:id="@+id/cadastro_button_selecionar_imagem_perfil"
-             android:layout_width="wrap_content"
-             android:layout_height="20dp"
-             android:layout_marginEnd="24dp"
-             android:layout_marginRight="24dp"
-             android:layout_marginTop="16dp"
-             android:background="@drawable/buttons_foto_gray_black"
-             android:text="Selecionar"
-             android:textColor="#ffffff"
-             android:textAllCaps="false"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintTop_toBottomOf="@+id/editText_login_telefone" />
-
-         <TextView
-             android:id="@+id/textView"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginEnd="8dp"
-             android:layout_marginLeft="16dp"
-             android:layout_marginRight="8dp"
-             android:layout_marginStart="16dp"
-             android:layout_marginTop="16dp"
-             android:text="Imagem de fundo"
-             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-             android:textSize="18sp"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintHorizontal_bias="0.0"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-
-         <Button
-             android:id="@+id/cadastro_button_selecionar_imagem_fundo"
-             android:layout_width="wrap_content"
-             android:layout_height="20dp"
-             android:layout_marginEnd="24dp"
-             android:layout_marginRight="24dp"
-             android:layout_marginTop="16dp"
-             android:background="@drawable/buttons_foto_gray_black"
-             android:text="Selecionar"
-             android:textAllCaps="false"
-             android:textColor="#ffffff"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-
          <Button
              android:id="@+id/bt_cadastro_Avancar"
              android:layout_width="wrap_content"
@@ -328,7 +328,7 @@
              android:textColor="#ffffff"
              app:layout_constraintBottom_toBottomOf="parent"
              app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintTop_toBottomOf="@+id/textView"
+             app:layout_constraintTop_toBottomOf="@+id/editText_login_bairro"
              app:layout_constraintVertical_bias="0.0" />
       </android.support.constraint.ConstraintLayout>
    </ScrollView>

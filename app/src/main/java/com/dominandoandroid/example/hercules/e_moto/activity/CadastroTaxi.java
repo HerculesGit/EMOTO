@@ -13,14 +13,16 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.dominandoandroid.example.hercules.e_moto.R;
 import com.dominandoandroid.example.hercules.e_moto.model.DadosPessoais;
 import com.dominandoandroid.example.hercules.e_moto.model.Endereco;
+import com.dominandoandroid.example.hercules.e_moto.model.Imagem;
 import com.dominandoandroid.example.hercules.e_moto.model.MotoTaxi;
+import com.dominandoandroid.example.hercules.e_moto.utilitario.DbBitmapUtility;
 
 import java.io.IOException;
 
@@ -28,23 +30,26 @@ public class CadastroTaxi extends AppCompatActivity {
 
     private static final int LOAD_IMAGE_RESULT = 1;
     private static final int TIRAR_FOTO = 3;
+    private final String MY_IMAGE = "my_image";
     private String[] galleryPermissions = {
             Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
-    private Button btAvancar, btSelecionarFotoPerfil, btSelecionarFotoFundo, btConfirmarImagem;
+    private Button btAvancar, btConfirmarImagem;
     private TextInputEditText editTextNome, editTextSobrenome, editTextCpf, editTextRg,
             editTextEstado, editTextCidade, editTextRua, editTextNumero, editTextBairro;
 
     private MotoTaxi motoTaxi;
     private Dialog myPopupDialog;
-    private Dialog myPopupDialogChosenImage;
+    //private Dialog myPopupDialogChosenImage;
 
-    private ImageView imageViewCamera, imageViewGaleria;
-    private Bitmap bitmapPerfil;
-    private Bitmap bitmapBackground;
+    private TextView tvNomeSobreNome;
+    private Imagem imagem;
+    private ImageView imageViewCamera, imageViewGaleria, iconFoto, profileImage;
+    //private Bitmap bitmapPerfil;
+    //private Bitmap bitmapBackground;
     private Bitmap bitmapImagemEscolhida;
-    private boolean isPerfil = true;
+    //private boolean isPerfil = true;
 
 
     @Override
@@ -78,23 +83,70 @@ public class CadastroTaxi extends AppCompatActivity {
             }
         });
 
-        btSelecionarFotoPerfil.setOnClickListener(new View.OnClickListener() {
+        editTextNome.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View v) {
-                popupCameraOrGaleria();          // mostrar opcao de camera ou galeria
-                isPerfil = true;
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus){ // perdeu foco
+                    runThread();
+                }
             }
         });
 
-        btSelecionarFotoFundo.setOnClickListener(new View.OnClickListener() {
+        editTextSobrenome.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View v) {
-                popupCameraOrGaleria();         // mostrar opcao de camera ou galeria
-                isPerfil = false;
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus){ // perdeu foco
+                    runThread();
+                }
             }
         });
+
     }
 
+
+    /**
+     * Salvar estado, este metodo eh chamado antes da activity ser re-criada
+     * */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        imagem = new Imagem();
+        if(bitmapImagemEscolhida !=null){
+            imagem.setDados(DbBitmapUtility.getBytes(bitmapImagemEscolhida));
+            outState.putSerializable(MY_IMAGE, imagem);
+        }
+
+    }
+    /**
+     * Recuperar estado
+     * */
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        imagem = (Imagem) savedInstanceState.getSerializable(MY_IMAGE);
+
+        if (imagem !=null){
+
+            // buffer com o array de byte
+            byte[] buffer = imagem.getDados();
+
+            // convertendo o array de byte para um bitmap
+            Bitmap bitmap = DbBitmapUtility.getImage(buffer);
+
+            setImagePerfil(bitmap);
+            bitmapImagemEscolhida = bitmap;
+        }
+    }
+
+    public void onClickImageIconCamera(View view){
+        popupCameraOrGaleria();
+    }
+
+    private void setImagePerfil(Bitmap bitmap){
+        profileImage.setImageBitmap(bitmap);
+    }
 
     /**
      * Mostra a opcao do usuario selecionar camera ou galeria
@@ -107,13 +159,13 @@ public class CadastroTaxi extends AppCompatActivity {
         myPopupDialog.show();
     }
 
-    public void onClickButtonConfirmar(View view){
-        if (isPerfil) {
-            bitmapPerfil = bitmapImagemEscolhida;
-        } else {
-            bitmapBackground = bitmapImagemEscolhida;
-        }
-    }
+//    public void onClickButtonConfirmar(View view){
+//        if (isPerfil) {
+//            bitmapPerfil = bitmapImagemEscolhida;
+//        } else {
+//            bitmapBackground = bitmapImagemEscolhida;
+//        }
+//    }
 
     /**
      * Clique na imagem camera ou galeria do popup Dialog
@@ -145,17 +197,17 @@ public class CadastroTaxi extends AppCompatActivity {
         startActivityForResult(i,LOAD_IMAGE_RESULT);
     }
 
-    private void displayPopupImage(Bitmap bitmapImage){
-        myPopupDialogChosenImage = new Dialog(CadastroTaxi.this);
-        myPopupDialogChosenImage.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        myPopupDialogChosenImage.setContentView(R.layout.popup_chosen_image);
-        myPopupDialogChosenImage.setTitle("Imagem Selecionada");
-
-        ImageView v = myPopupDialogChosenImage.findViewById(R.id.popup_chosen_image_image_escolhida);
-        v.setImageBitmap(bitmapImage);
-
-        myPopupDialogChosenImage.show();
-    }
+//    private void displayPopupImage(Bitmap bitmapImage){
+//        myPopupDialogChosenImage = new Dialog(CadastroTaxi.this);
+//        myPopupDialogChosenImage.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        myPopupDialogChosenImage.setContentView(R.layout.popup_chosen_image);
+//        myPopupDialogChosenImage.setTitle("Imagem Selecionada");
+//
+//        ImageView v = myPopupDialogChosenImage.findViewById(R.id.popup_chosen_image_image_escolhida);
+//        v.setImageBitmap(bitmapImage);
+//
+//        myPopupDialogChosenImage.show();
+//    }
 
 
     @Override
@@ -176,14 +228,14 @@ public class CadastroTaxi extends AppCompatActivity {
                 cursor.close();
 
                 Bitmap img = BitmapFactory.decodeFile(imagePath);
-                displayPopupImage(img);
+                setImagePerfil(img);
                 bitmapImagemEscolhida = img;
 
             } else if (requestCode == TIRAR_FOTO && data != null) {     // tirar foto
 
                 Bundle dadosRecuperados = data.getExtras();
                 Bitmap img = (Bitmap) dadosRecuperados.get("data");
-                displayPopupImage(img);
+                setImagePerfil(img);
                 bitmapImagemEscolhida = img;
 
             }
@@ -262,6 +314,56 @@ public class CadastroTaxi extends AppCompatActivity {
         return false;
     }
 
+
+    /**
+     * */
+    private void runThread(){
+
+        String nome = editTextNome.getText().toString();
+        String sobrenome = editTextSobrenome.getText().toString();
+        if (nome.length() > 0) {
+            nome = nome.trim();
+            sobrenome = sobrenome.trim();
+
+            tvNomeSobreNome.setText("");
+            tvNomeSobreNome.setText(nome +" "+ sobrenome);
+
+        }
+
+    }
+//    private void runThread() {
+//
+//        Thread t1 = new Thread() {
+//            public void run() {
+//                while (true) {
+//                    try {
+//                        runOnUiThread(new Runnable() {
+//
+//                            @Override
+//                            public void run() {
+//                                String nome = editTextNome.getText().toString();
+//                                String sobrenome = editTextSobrenome.getText().toString();
+//                                System.out.println("Verificando");
+//                                if (nome.length() > 0) {
+//                                    nome = nome.trim();
+//                                    sobrenome = sobrenome.trim();
+//
+//                                    tvNomeSobreNome.setText("");
+//                                    tvNomeSobreNome.setText(nome + sobrenome);
+//
+//                                }
+//                            }
+//                        });
+//                        Thread.sleep(2000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        };
+//        t1.start();
+//    }
+
     /**
      * Recupera das editText
      * */
@@ -334,11 +436,13 @@ public class CadastroTaxi extends AppCompatActivity {
         editTextNumero = findViewById(R.id.cadastro_dados_numero);
         editTextBairro = findViewById(R.id.cadastro_dados_bairro);
 
+        tvNomeSobreNome = findViewById(R.id.cadastro_nome_sobrenome);
+
         imageViewCamera = findViewById(R.id.popup_opcao_foto_camera);
         imageViewGaleria = findViewById(R.id.popup_opcao_foto_galeria);
+        iconFoto = findViewById(R.id.cadastro_icon_foto);
+        profileImage = findViewById(R.id.cadastro_profile_image);
 
-        btSelecionarFotoPerfil = findViewById(R.id.cadastro_button_selecionar_imagem_perfil);
-        btSelecionarFotoFundo = findViewById(R.id.cadastro_button_selecionar_imagem_fundo);
         btConfirmarImagem = findViewById(R.id.popup_chosen_image_bt_confirmar);
     }
 }
