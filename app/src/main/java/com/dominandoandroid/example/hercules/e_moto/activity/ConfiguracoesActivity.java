@@ -56,7 +56,6 @@ public class ConfiguracoesActivity extends AppCompatActivity {
     public void clickImage(View view){
 
         imagem = new Imagem();
-        imagem.setIdMototaxista(1);
 
         if (view.getId() == R.id.configuracao_icone_perfil_button){
             // perfil
@@ -89,7 +88,6 @@ public class ConfiguracoesActivity extends AppCompatActivity {
     }
 
     public void clickButtonAlterar(View view){
-        imagem.setIdMototaxista(1);
         imagem.setDescricao("perfil");
 
         System.out.println("Clicou em ClickButtonAlterar");

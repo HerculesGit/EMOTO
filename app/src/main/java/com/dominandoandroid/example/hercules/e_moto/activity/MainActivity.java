@@ -95,12 +95,6 @@ public class MainActivity extends AppCompatActivity {
         MotoTaxiDAO  motoTaxiDAO = new MotoTaxiDAO(MainActivity.this);
         List<MotoTaxi> lista = motoTaxiDAO.listar();
 
-        //System.out.println("helloooo");
-        //for (MotoTaxi m: lista){
-        //    System.out.println("->"+m.toString());
-        //}
-
-        // teste
         DadosPessoaisDAO dadosPessoaisDAO = new DadosPessoaisDAO(getApplicationContext());
         int id = dadosPessoaisDAO.pegarIDDoCpf("109");
 
@@ -161,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
             senha = preferences.getString("senha", "");
 
             if (validaDados()) {
-                Intent intencao = new Intent(MainActivity.this, ConfiguracoesActivity.class);
+                Intent intencao = new Intent(MainActivity.this, HomeActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("mototaxi", motoTaxi);
                 intencao.putExtras(bundle);

@@ -104,15 +104,15 @@ public class EnderecoDAO implements IEnderecoDAO {
 
         Endereco endereco = new Endereco();
         while(cursor.moveToNext()){
-            int idEnderecoConsulta = cursor.getInt(cursor.getColumnIndex("idEndereco"));
+            int idEnderecoConsulta = cursor.getInt(cursor.getColumnIndex(BDHelper.ENDERECO_ID));
 
             if (idEndereco == idEnderecoConsulta){
 
-                String estado = cursor.getString(cursor.getColumnIndex("estado"));
-                String cidade = cursor.getString(cursor.getColumnIndex("cidade"));
-                String rua = cursor.getString(cursor.getColumnIndex("rua"));
-                String numero = cursor.getString(cursor.getColumnIndex("numero"));
-                String bairro = cursor.getString(cursor.getColumnIndex("bairro"));
+                String estado = cursor.getString(cursor.getColumnIndex(BDHelper.ENDERECO_ESTADO));
+                String cidade = cursor.getString(cursor.getColumnIndex(BDHelper.ENDERECO_CIDADE));
+                String rua = cursor.getString(cursor.getColumnIndex(BDHelper.ENDERECO_RUA));
+                String numero = cursor.getString(cursor.getColumnIndex(BDHelper.ENDERECO_NUMERO));
+                String bairro = cursor.getString(cursor.getColumnIndex(BDHelper.ENDERECO_BAIRRO));
 
                 endereco.setIdEndereco(idEndereco);
                 endereco.setEstado(estado);
@@ -138,12 +138,12 @@ public class EnderecoDAO implements IEnderecoDAO {
 
             Endereco endereco = new Endereco();
 
-            int idEndereco = cursor.getInt(cursor.getColumnIndex("idEndereco"));
-            String estado = cursor.getString(cursor.getColumnIndex("estado"));
-            String cidade = cursor.getString(cursor.getColumnIndex("cidade"));
-            String rua = cursor.getString(cursor.getColumnIndex("rua"));
-            String numero = cursor.getString(cursor.getColumnIndex("numero"));
-            String bairro = cursor.getString(cursor.getColumnIndex("bairro"));
+            int idEndereco = cursor.getInt(cursor.getColumnIndex(BDHelper.ENDERECO_ID));
+            String estado = cursor.getString(cursor.getColumnIndex(BDHelper.ENDERECO_ESTADO));
+            String cidade = cursor.getString(cursor.getColumnIndex(BDHelper.ENDERECO_CIDADE));
+            String rua = cursor.getString(cursor.getColumnIndex(BDHelper.ENDERECO_RUA));
+            String numero = cursor.getString(cursor.getColumnIndex(BDHelper.ENDERECO_NUMERO));
+            String bairro = cursor.getString(cursor.getColumnIndex(BDHelper.ENDERECO_BAIRRO));
 
             endereco.setIdEndereco(idEndereco);
             endereco.setEstado(estado);

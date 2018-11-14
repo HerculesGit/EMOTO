@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dominandoandroid.example.hercules.e_moto.R;
+import com.dominandoandroid.example.hercules.e_moto.dao.ImagemDAO;
 import com.dominandoandroid.example.hercules.e_moto.model.DadosPessoais;
 import com.dominandoandroid.example.hercules.e_moto.model.Endereco;
 import com.dominandoandroid.example.hercules.e_moto.model.Imagem;
@@ -73,6 +75,7 @@ public class CadastroTaxi extends AppCompatActivity {
                 //motoTaxi = pegarDasEditText();
 
                     teste();
+                    configAndSaveImage();
                     Intent intencao = new Intent(CadastroTaxi.this, CadastroVeiculo.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("mototaxi", motoTaxi);
@@ -194,6 +197,7 @@ public class CadastroTaxi extends AppCompatActivity {
     private void irPraGaleria(){
         // intent para iniciar a galeria
         Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        ActivityCompat.requestPermissions(CadastroTaxi.this, galleryPermissions,1);
         startActivityForResult(i,LOAD_IMAGE_RESULT);
     }
 
@@ -214,8 +218,6 @@ public class CadastroTaxi extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        //ActivityCompat.requestPermissions(CadastroTaxi.this, galleryPermissions,1);
-
         if (resultCode == RESULT_OK){
             if (requestCode == LOAD_IMAGE_RESULT && data != null){      // carregar da galeria
                 Uri selectedImage = data.getData();
@@ -230,6 +232,7 @@ public class CadastroTaxi extends AppCompatActivity {
                 Bitmap img = BitmapFactory.decodeFile(imagePath);
                 setImagePerfil(img);
                 bitmapImagemEscolhida = img;
+                imagem.setDados(DbBitmapUtility.getBytes(bitmapImagemEscolhida));
 
             } else if (requestCode == TIRAR_FOTO && data != null) {     // tirar foto
 
@@ -237,6 +240,7 @@ public class CadastroTaxi extends AppCompatActivity {
                 Bitmap img = (Bitmap) dadosRecuperados.get("data");
                 setImagePerfil(img);
                 bitmapImagemEscolhida = img;
+                imagem.setDados(DbBitmapUtility.getBytes(bitmapImagemEscolhida));
 
             }
         }
@@ -444,5 +448,14 @@ public class CadastroTaxi extends AppCompatActivity {
         profileImage = findViewById(R.id.cadastro_profile_image);
 
         btConfirmarImagem = findViewById(R.id.popup_chosen_image_bt_confirmar);
+    }
+
+    private void configAndSaveImage(){
+        imagem.setDados(DbBitmapUtility.getBytes(bitmapImagemEscolhida));
+        imagem.setIdImagem(0);
+        imagem.setDescricao("perfil");
+
+        ImagemDAO imagemDAO = new ImagemDAO(CadastroTaxi.this);
+        imagemDAO.addImage(imagem);
     }
 }

@@ -11,6 +11,7 @@ public class MotoTaxi implements Serializable {
     private Veiculo moto;
     private DadosPessoais dadosPessoais;
     private Viagens viagens;
+    private Imagem imagem;
     private int disponivel;
     private String numeroCelular;
 
@@ -94,6 +95,14 @@ public class MotoTaxi implements Serializable {
         this.viagens = viagens;
     }
 
+    public Imagem getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(Imagem imagem) {
+        this.imagem = imagem;
+    }
+
     public int getDisponivel() {
         return disponivel;
     }
@@ -112,9 +121,17 @@ public class MotoTaxi implements Serializable {
 
     @Override
     public String toString() {
-        return "idMototaxista: "+getIdMototaxista()+" email:"+getEmail()+ " senha:"+getSenha()+"\nDados pessoais ["+getDadosPessoais().toString()+"]\n"
-                +" Endereco["+getEndereco().toString()+"]\n"
-                +" Moto["+getMoto().toString()+"]"
-                +" disponivel: "+getDisponivel() +" numeroCell:"+getNumeroCelular()+ " viagens "+getViagens().toString();
+        return "MotoTaxi{" +
+                "idMototaxista=" + idMototaxista +
+                ", email='" + email + '\'' +
+                ", senha='" + senha + '\'' +
+                ", endereco=" + endereco +
+                ", moto=" + moto +
+                ", dadosPessoais=" + dadosPessoais +
+                ", viagens=" + viagens +
+                ", imagem=" + imagem +
+                ", disponivel=" + disponivel +
+                ", numeroCelular='" + numeroCelular + '\'' +
+                '}';
     }
 }

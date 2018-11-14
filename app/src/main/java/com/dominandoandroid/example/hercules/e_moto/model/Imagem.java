@@ -7,7 +7,6 @@ public class Imagem implements Serializable {
     private int idImagem;
     private String descricao;
     private byte[] dados;
-    private int idMototaxista;
 
     /**
      * @autor hercules
@@ -17,7 +16,6 @@ public class Imagem implements Serializable {
         this.idImagem = 0;
         this.descricao = "";
         this.dados = null;
-        this.idMototaxista = 0;
     }
 
     public int getIdImagem() {
@@ -44,13 +42,6 @@ public class Imagem implements Serializable {
         this.dados = dados;
     }
 
-    public int getIdMototaxista() {
-        return idMototaxista;
-    }
-
-    public void setIdMototaxista(int idMototaxista) {
-        this.idMototaxista = idMototaxista;
-    }
 
     @Override
     public String toString() {
@@ -58,7 +49,6 @@ public class Imagem implements Serializable {
                 "idImagem=" + idImagem +
                 ", descricao='" + descricao + '\'' +
                 ", dados=" + Arrays.toString(dados) +
-                ", idMototaxista=" + idMototaxista +
                 '}';
     }
 }

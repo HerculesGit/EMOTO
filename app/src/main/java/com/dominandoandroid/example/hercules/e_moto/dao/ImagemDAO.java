@@ -21,7 +21,6 @@ public class ImagemDAO {
     public static String IMAGEM_ID =BDHelper.IMAGEM_ID;
     public static String IMAGEM_DADOS= BDHelper.IMAGEM_DADOS;
     public static String IMAGEM_DESCRICAO= BDHelper.IMAGEM_DESCRICAO;
-    public static String IMAGEM_ID_MOTOTAXITA = BDHelper.IMAGEM_IDMOTOTAXISTA;
 
     private BDHelper db;
     private SQLiteDatabase escreve;         // escrever dados na tabela/ salvar
@@ -44,7 +43,6 @@ public class ImagemDAO {
         // nome do campo e valor para o campo
         cv.put(IMAGEM_DADOS,img.getDados());
         cv.put(IMAGEM_DESCRICAO, img.getDescricao());
-        cv.put(IMAGEM_ID_MOTOTAXITA, img.getIdMototaxista());
 
         try{
             escreve.insert(
@@ -68,13 +66,45 @@ public class ImagemDAO {
         ContentValues cv = new ContentValues();
 
         // nome do campo e valor para o campo
+        cv.put(IMAGEM_ID,img.getIdImagem());
         cv.put(IMAGEM_DADOS,img.getDados());
         cv.put(IMAGEM_DESCRICAO, img.getDescricao());
-        cv.put(IMAGEM_ID_MOTOTAXITA, img.getIdMototaxista());
 
         try{
             String[] argumentos = {
                     String.valueOf(img.getIdImagem())};
+
+            escreve.update(
+                    BDHelper.TABELA_MOTO,
+                    cv,
+                    // clausula where - caracter coringa
+                    IMAGEM_ID+"=?",
+
+                    // argumentos
+                    argumentos
+            );
+
+            Log.i("INFO", "Exito ao atualizar Imagem");
+
+        } catch (Exception e){
+            Log.i("Erro", "Erro ao atualizar Imagem: "+e.getMessage());
+            return false;           // indica se houve problema
+        }
+
+        return true;
+    }
+
+    public boolean atualizar(Imagem img, int oldId) {
+        ContentValues cv = new ContentValues();
+
+        // nome do campo e valor para o campo
+        cv.put(IMAGEM_ID,img.getIdImagem());
+        cv.put(IMAGEM_DADOS,img.getDados());
+        cv.put(IMAGEM_DESCRICAO, img.getDescricao());
+
+        try{
+            String[] argumentos = {
+                    String.valueOf(oldId)};
 
             escreve.update(
                     BDHelper.TABELA_MOTO,
@@ -123,7 +153,6 @@ public class ImagemDAO {
                 Imagem imagem = new Imagem();
                 imagem.setIdImagem(cursor.getInt(cursor.getColumnIndex(IMAGEM_ID)));
                 imagem.setDescricao(cursor.getString(cursor.getColumnIndex(IMAGEM_DESCRICAO)));
-                imagem.setIdMototaxista(cursor.getInt(cursor.getColumnIndex(IMAGEM_ID_MOTOTAXITA)));
                 imagem.setDados(blob);
 
                 imagens.add(imagem);
@@ -144,8 +173,9 @@ public class ImagemDAO {
             Cursor cursor = ler.rawQuery(sql, null);
 
             while (cursor.moveToNext()) {
-                int id = cursor.getInt(cursor.getColumnIndex(IMAGEM_ID_MOTOTAXITA));
+                int id = cursor.getInt(cursor.getColumnIndex(IMAGEM_ID));
                 String desc = cursor.getString(cursor.getColumnIndex(IMAGEM_DESCRICAO));
+                System.out.println(id + "?" + desc);
 
                 if (id == idMototaxista
                         && desc.equalsIgnoreCase(descricao)) {
@@ -156,7 +186,6 @@ public class ImagemDAO {
                     Imagem imagem = new Imagem();
                     imagem.setIdImagem(cursor.getInt(cursor.getColumnIndex(IMAGEM_ID)));
                     imagem.setDescricao(cursor.getString(cursor.getColumnIndex(IMAGEM_DESCRICAO)));
-                    imagem.setIdMototaxista(cursor.getInt(cursor.getColumnIndex(IMAGEM_ID_MOTOTAXITA)));
                     imagem.setDados(blob);
 
                     return  imagem;
@@ -181,7 +210,7 @@ public class ImagemDAO {
             Cursor cursor = ler.rawQuery(sql, null);
 
             while (cursor.moveToNext()) {
-                int id = cursor.getInt(cursor.getColumnIndex(IMAGEM_ID_MOTOTAXITA));
+                int id =cursor.getInt(cursor.getColumnIndex(IMAGEM_ID));
                 if (id == idMototaxista) {
 
                     // convert blob to byte array
@@ -190,7 +219,6 @@ public class ImagemDAO {
                     Imagem imagem = new Imagem();
                     imagem.setIdImagem(cursor.getInt(cursor.getColumnIndex(IMAGEM_ID)));
                     imagem.setDescricao(cursor.getString(cursor.getColumnIndex(IMAGEM_DESCRICAO)));
-                    imagem.setIdMototaxista(cursor.getInt(cursor.getColumnIndex(IMAGEM_ID_MOTOTAXITA)));
                     imagem.setDados(blob);
 
                     imagens.add(imagem);

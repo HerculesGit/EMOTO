@@ -14,8 +14,10 @@ import android.widget.Toast;
 import com.dominandoandroid.example.hercules.e_moto.R;
 import com.dominandoandroid.example.hercules.e_moto.dao.DadosPessoaisDAO;
 import com.dominandoandroid.example.hercules.e_moto.dao.EnderecoDAO;
+import com.dominandoandroid.example.hercules.e_moto.dao.ImagemDAO;
 import com.dominandoandroid.example.hercules.e_moto.dao.MotoTaxiDAO;
 import com.dominandoandroid.example.hercules.e_moto.dao.VeiculoDAO;
+import com.dominandoandroid.example.hercules.e_moto.model.Imagem;
 import com.dominandoandroid.example.hercules.e_moto.model.MotoTaxi;
 
 public class FinalizarCadastro extends AppCompatActivity {
@@ -25,6 +27,7 @@ public class FinalizarCadastro extends AppCompatActivity {
     private VeiculoDAO veiculoDAO;
     private EnderecoDAO enderecoDAO;
     private DadosPessoaisDAO dadosPessoaisDAO;
+    private ImagemDAO imagemDAO;
     private final String ARQUIVO_PREFERENCIA_LOGIN = "loginPreferencial";
 
     private TextInputEditText operadora, numero, email, senha;
@@ -108,7 +111,13 @@ public class FinalizarCadastro extends AppCompatActivity {
 
                         dadosPessoaisDAO.salvar(motoTaxi.getDadosPessoais());
                         enderecoDAO.salvar(motoTaxi.getEndereco());
+                        System.out.println("Id Do veiculo: " + motoTaxi.getMoto().getIdVeiculo());
                         veiculoDAO.salvar(motoTaxi.getMoto());
+
+                        //Imagem img = imagemDAO.listar(0).get(0);
+                        //img.setIdImagem((int)motoTaxiDAO.ID_RECENTE_INSERIDO);
+
+                        //imagemDAO.atualizar(img, 0);
 
                         motoTaxi.setIdMototaxista(((int) motoTaxiDAO.ID_RECENTE_INSERIDO));
                         motoTaxiDAO.adicionarIds(((int) motoTaxiDAO.ID_RECENTE_INSERIDO));

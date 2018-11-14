@@ -11,11 +11,19 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dominandoandroid.example.hercules.e_moto.R;
+import com.dominandoandroid.example.hercules.e_moto.dao.ImagemDAO;
+import com.dominandoandroid.example.hercules.e_moto.model.Imagem;
 import com.dominandoandroid.example.hercules.e_moto.model.MotoTaxi;
+import com.dominandoandroid.example.hercules.e_moto.utilitario.DbBitmapUtility;
+
+import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -26,6 +34,8 @@ public class HomeActivity extends AppCompatActivity
     private ActionBarDrawerToggle mToggle;
     private  NavigationView navigationView;
     private Dialog customDialog;
+
+    private ImageView ivImagemPerfil;
 
     // a header nao eh inflada automaticamente, sendo assim
     // faz se necessario o uso dessa header
@@ -44,25 +54,6 @@ public class HomeActivity extends AppCompatActivity
         // apareceu as 3 barrinhas para abrir o menu
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //txtNomeHeader = ;
-        //textTelefoneHeader = findViewById(R.id.id_telefone_header);
-
-        //System.out.println(">>>> "+txtNomeHeader.getText().toString());
-
-        //txtNomeHeader.setText("Maria antonieta");
-        //textTelefoneHeader.setText("(83)9999999");
-
-        // recuperando dados passado da outra tela
-        Bundle objetoEnviado = getIntent().getExtras();
-        if (objetoEnviado != null){
-            motoTaxi = (MotoTaxi) objetoEnviado.getSerializable("mototaxi");
-            //adicionarInformacoesAoTextView();
-            System.out.println("HOME" + motoTaxi.toString());
-
-        } else{
-            System.out.println("HOME NÃO RECUPEROU DADOS");
-        }
-
         // eventos de click
         navigationView = findViewById(R.id.nav_navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -71,8 +62,20 @@ public class HomeActivity extends AppCompatActivity
         header = navigationView.getHeaderView(0);
         txtNomeHeader = header.findViewById(R.id.id_nome_header);
         textTelefoneHeader = header.findViewById(R.id.id_telefone_header);
-        txtNomeHeader.setText(motoTaxi.getDadosPessoais().getNome());
-        textTelefoneHeader.setText(motoTaxi.getNumeroCelular());
+        ivImagemPerfil = header.findViewById(R.id.header_id_foto_perfil);
+
+        // recuperando dados passado da outra tela
+        Bundle objetoEnviado = getIntent().getExtras();
+        if (objetoEnviado != null){
+            motoTaxi = (MotoTaxi) objetoEnviado.getSerializable("mototaxi");
+            //adicionarInformacoesAoTextView();
+            System.out.println("HOME " + motoTaxi.toString());
+
+            autoCompletarHeader();
+
+        } else{
+            System.out.println("HOME NÃO RECUPEROU DADOS");
+        }
     }
 
     // revolveu o problema de quando clicar nas 3 barrinhas
@@ -128,9 +131,20 @@ public class HomeActivity extends AppCompatActivity
         //customDialog.cancel();
     }
 
-    private void adicionarInformacoesAoTextView(){
+    private void autoCompletarHeader(){
         txtNomeHeader.setText(motoTaxi.getDadosPessoais().getNome());
         textTelefoneHeader.setText(motoTaxi.getNumeroCelular());
+
+        ImagemDAO imagemDAO = new ImagemDAO(HomeActivity.this);
+
+        /*List<Imagem> l = imagemDAO.listar();
+        for (int i=0;i<l.size();i++){
+            System.out.println(l.get(i).toString());
+            imagemDAO.getImage(1,"perfil");
+            System.out.println("haha"+imagemDAO.getImage(1,"perfil"));
+        }*/
+        Imagem img = imagemDAO.getImage(1,"perfil");
+        ivImagemPerfil.setImageBitmap(DbBitmapUtility.getImage(img.getDados()));
     }
 
     /**

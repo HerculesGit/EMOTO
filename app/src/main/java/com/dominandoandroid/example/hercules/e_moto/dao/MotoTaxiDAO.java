@@ -50,13 +50,13 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
         ContentValues cv = new ContentValues();
         // nome do campo e valor para o campo
         //cv.put("idMototaxista",motoTaxi.getIdMototaxista());
-        cv.put("email",motoTaxi.getEmail());
-        cv.put("senha",motoTaxi.getSenha());
-        cv.put("numeroCelular",motoTaxi.getNumeroCelular());
-        cv.put("idDadosPessoais",motoTaxi.getDadosPessoais().getIdDadosPessoais());
-        cv.put("idEndereco",motoTaxi.getEndereco().getIdEndereco());
-        cv.put("idMoto",motoTaxi.getMoto().getIdVeiculo());
-        cv.put("disponibilidade",motoTaxi.getDisponivel());
+        cv.put(BDHelper.MOTOTAXISTA_EMAIL,motoTaxi.getEmail());
+        cv.put(BDHelper.MOTOTAXISTA_SENHA,motoTaxi.getSenha());
+        cv.put(BDHelper.MOTOTAXISTA_NUMERO_CELULAR,motoTaxi.getNumeroCelular());
+        cv.put(BDHelper.MOTOTAXISTA_ID_DADOS_PESSOAIS,motoTaxi.getDadosPessoais().getIdDadosPessoais());
+        cv.put(BDHelper.MOTOTAXISTA_ID_ENDERECO,motoTaxi.getEndereco().getIdEndereco());
+        cv.put(BDHelper.MOTOTAXISTA_ID_MOTO,motoTaxi.getMoto().getIdVeiculo());
+        cv.put(BDHelper.MOTOTAXISTA_DISPONIBILIDADE,motoTaxi.getDisponivel());
 
         try{
             ID_RECENTE_INSERIDO = escreve.insert(
@@ -89,14 +89,14 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
         ContentValues cv = new ContentValues();
 
         // nome do campo e valor para o campo
-        cv.put("idMototaxista",motoTaxi.getIdMototaxista());
-        cv.put("email",motoTaxi.getEmail());
-        cv.put("senha",motoTaxi.getSenha());
-        cv.put("numeroCelular",motoTaxi.getNumeroCelular());
-        cv.put("idDadosPessoais",motoTaxi.getDadosPessoais().getIdDadosPessoais());
-        cv.put("idEndereco",motoTaxi.getEndereco().getIdEndereco());
-        cv.put("idMoto",motoTaxi.getMoto().getIdVeiculo());
-        cv.put("disponibilidade",motoTaxi.getDisponivel());
+        cv.put(BDHelper.MOTOTAXISTA_ID,motoTaxi.getIdMototaxista());
+        cv.put(BDHelper.MOTOTAXISTA_EMAIL,motoTaxi.getEmail());
+        cv.put(BDHelper.MOTOTAXISTA_SENHA,motoTaxi.getSenha());
+        cv.put(BDHelper.MOTOTAXISTA_NUMERO_CELULAR,motoTaxi.getNumeroCelular());
+        cv.put(BDHelper.MOTOTAXISTA_ID_DADOS_PESSOAIS,motoTaxi.getDadosPessoais().getIdDadosPessoais());
+        cv.put(BDHelper.MOTOTAXISTA_ID_ENDERECO,motoTaxi.getEndereco().getIdEndereco());
+        cv.put(BDHelper.MOTOTAXISTA_ID_MOTO,motoTaxi.getMoto().getIdVeiculo());
+        cv.put(BDHelper.MOTOTAXISTA_DISPONIBILIDADE,motoTaxi.getDisponivel());
 
         try{
 
@@ -108,7 +108,7 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
                     cv,
 
                     // clausula where - caracter coringa
-                    "idMototaxista=?",
+                    BDHelper.MOTOTAXISTA_ID+"=?",
 
                     // argumentos
                     argumentos
@@ -140,15 +140,15 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
 
             MotoTaxi mototaxista = new MotoTaxi();
 
-            String email = cursor.getString(cursor.getColumnIndex("email"));
-            String senha = cursor.getString(cursor.getColumnIndex("senha"));
-            String numeroCelular = cursor.getString(cursor.getColumnIndex("numeroCelular"));
+            String email = cursor.getString(cursor.getColumnIndex(BDHelper.MOTOTAXISTA_EMAIL));
+            String senha = cursor.getString(cursor.getColumnIndex(BDHelper.MOTOTAXISTA_SENHA));
+            String numeroCelular = cursor.getString(cursor.getColumnIndex(BDHelper.MOTOTAXISTA_NUMERO_CELULAR));
 
-            int idMototaxista = cursor.getInt(cursor.getColumnIndex("idMototaxista"));
-            int idDadosPessoais = cursor.getInt(cursor.getColumnIndex("idDadosPessoais"));
-            int idEndereco = cursor.getInt(cursor.getColumnIndex("idEndereco"));
-            int idVeiculo = cursor.getInt(cursor.getColumnIndex("idMoto"));
-            int disponibilidade = cursor.getInt(cursor.getColumnIndex("disponibilidade"));
+            int idMototaxista = cursor.getInt(cursor.getColumnIndex(BDHelper.MOTOTAXISTA_ID));
+            int idDadosPessoais = cursor.getInt(cursor.getColumnIndex(BDHelper.MOTOTAXISTA_ID_DADOS_PESSOAIS));
+            int idEndereco = cursor.getInt(cursor.getColumnIndex(BDHelper.MOTOTAXISTA_ID_ENDERECO));
+            int idVeiculo = cursor.getInt(cursor.getColumnIndex(BDHelper.MOTOTAXISTA_ID_MOTO));
+            int disponibilidade = cursor.getInt(cursor.getColumnIndex(BDHelper.MOTOTAXISTA_DISPONIBILIDADE));
 
             // pesquisar dados pelo id
             DadosPessoais dadosPessoais = dadosPessoaisDAO.encontrarDe(idDadosPessoais);
@@ -172,9 +172,9 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
             mototaxista.setDisponivel(disponibilidade);
             mototaxista.setNumeroCelular(numeroCelular);
 
-            System.out.println("tralala");
-
             lista.add(mototaxista);
+
+            System.out.println("/;/;"+mototaxista.toString());
         }
         cursor.close();
 
@@ -188,13 +188,14 @@ public class MotoTaxiDAO implements IMotoTaxiDAO {
      * */
     public boolean adicionarIds(int id){
         ContentValues cv = new ContentValues();
-        cv.put("idDadosPessoais", id);
-        cv.put("idEndereco", id);
-        cv.put("idMoto", id);
+        cv.put(BDHelper.MOTOTAXISTA_ID_DADOS_PESSOAIS, id);
+        cv.put(BDHelper.MOTOTAXISTA_ID_ENDERECO, id);
+        cv.put(BDHelper.MOTOTAXISTA_ID_MOTO, id);
+        cv.put(BDHelper.MOTOTAXISTA_ID_IMAGEM, id);
 
         try {
             String[] args = {String.valueOf(id)};
-            escreve.update(BDHelper.TABELA_MOTOTAXISTA, cv, "idMototaxista=?", args );
+            escreve.update(BDHelper.TABELA_MOTOTAXISTA, cv, BDHelper.MOTOTAXISTA_ID+"=?", args );
             Log.i("INFO", "id's adicionados com sucesso!");
         }catch (Exception e){
             Log.e("INFO", "Erro ao atualizada id's " + e.getMessage() );

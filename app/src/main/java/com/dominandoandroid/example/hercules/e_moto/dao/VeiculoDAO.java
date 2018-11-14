@@ -33,10 +33,10 @@ public class VeiculoDAO implements IVeiculoDAO {
         ContentValues cv = new ContentValues();
 
         // nome do campo e valor para o campo
-        cv.put("idMoto",veiculo.getIdVeiculo());
-        cv.put("marca",veiculo.getMarca());
-        cv.put("modelo",veiculo.getModelo());
-        cv.put("placa",veiculo.getPlaca());
+        cv.put(BDHelper.MOTO_ID,veiculo.getIdVeiculo());
+        cv.put(BDHelper.MOTO_MARCA,veiculo.getMarca());
+        cv.put(BDHelper.MOTO_MODELO,veiculo.getModelo());
+        cv.put(BDHelper.MOTO_PLACA,veiculo.getPlaca());
 
         try{
             escreve.insert(
@@ -60,9 +60,9 @@ public class VeiculoDAO implements IVeiculoDAO {
         ContentValues cv = new ContentValues();
 
         // nome do campo e valor para o campo
-        cv.put("marca",veiculo.getMarca());
-        cv.put("modelo",veiculo.getModelo());
-        cv.put("placa",veiculo.getPlaca());
+        cv.put(BDHelper.MOTO_MARCA,veiculo.getMarca());
+        cv.put(BDHelper.MOTO_MODELO,veiculo.getModelo());
+        cv.put(BDHelper.MOTO_PLACA,veiculo.getPlaca());
 
         try{
             String[] argumentos = {
@@ -100,13 +100,13 @@ public class VeiculoDAO implements IVeiculoDAO {
 
         Veiculo veiculo = new Veiculo();
         while(cursor.moveToNext()){
-            int idVeiculoConsulta = cursor.getInt(cursor.getColumnIndex("idMoto"));
+            int idVeiculoConsulta = cursor.getInt(cursor.getColumnIndex(BDHelper.MOTO_ID));
 
             if (idVeiculo == idVeiculoConsulta){
 
-                String marca = cursor.getString(cursor.getColumnIndex("marca"));
-                String modelo = cursor.getString(cursor.getColumnIndex("modelo"));
-                String placa = cursor.getString(cursor.getColumnIndex("placa"));
+                String marca = cursor.getString(cursor.getColumnIndex(BDHelper.MOTO_MARCA));
+                String modelo = cursor.getString(cursor.getColumnIndex(BDHelper.MOTO_MODELO));
+                String placa = cursor.getString(cursor.getColumnIndex(BDHelper.MOTO_PLACA));
 
                 veiculo.setIdVeiculo(idVeiculoConsulta);
                 veiculo.setMarca(marca);

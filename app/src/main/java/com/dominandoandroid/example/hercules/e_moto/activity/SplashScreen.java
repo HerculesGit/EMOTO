@@ -8,7 +8,7 @@ import android.os.Bundle;
 import com.dominandoandroid.example.hercules.e_moto.R;
 
 public class SplashScreen extends AppCompatActivity implements Runnable{
-    private final static int DELAY = 2000;
+    private final static int DELAY = 0; //2000
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

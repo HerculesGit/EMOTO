@@ -6,12 +6,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="160dp"
-    android:background="@drawable/cityheaderbg"
+    android:background="@drawable/backgroundpadrao"
     android:padding="20dp"
     >
     <!--Com a ajuda do padding deixou bem melhor-->
     
-    <android.support.v7.widget.AppCompatImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/header_id_foto_perfil"
         android:src="@drawable/girlperfil"
         android:layout_width="75dp"
         android:layout_height="75dp"/>
